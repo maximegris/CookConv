@@ -1,0 +1,97 @@
+<ion-view view-title="Calculator">
+  <ion-content class="padding">
+
+  <!-- From To -->
+  <div id="from-to" class="list">
+    <label class="item item-input">
+      <span class="input-label">From</span>
+      <input type="text" class="right" ng-model="current.from" name="from" disabled>
+      <span class="input-label center" ng-bind="current.getTypeFrom()"></span>
+    </label>
+    <label class="item item-input">
+      <span class="input-label">To</span>
+      <input type="text" class="right" ng-model="current.to" name="to" disabled>
+      <span class="input-label center" ng-bind="current.getTypeTo()"></span>
+    </label>
+  </div>
+
+
+  <!-- Ingedient selected -->
+  <div  class="list">
+
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Ingredient selected
+      </div>
+      <select >
+        <option ng-repeat="ingredient in ingredients">{{ ingredient.name }}</option>
+      </select>
+    </label>
+
+  </div>
+    <!-- Calc keyboard -->
+  <div id="calculator-key">
+    <div class="row">
+      <div class="col">
+        <a class="button button-block button-outline button-dark">1</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-dark">2</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-dark">3</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-assertive ion-ios-arrow-thin-left"></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <a class="button button-block button-outline button-dark">4</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-dark">5</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-dark">6</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-assertive">AC</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <a class="button button-block button-outline button-dark">7</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-dark">8</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-dark">9</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-assertive">Inv.</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <a class="button button-block button-outline button-dark">.</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-dark">0</a>
+      </div>
+      <div class="col">
+        <a class="button button-block " disabled></a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-balanced">Save</a>
+      </div>
+    </div>
+
+  </div>
+
+  </ion-content>
+</ion-view>

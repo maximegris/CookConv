@@ -21,3 +21,33 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.right {
+  text-align:right;
+}
+
+.left {
+  text-align:left;
+}
+
+#from-to {
+
+  span, input {
+    background-color: $light;
+  }
+
+  label {
+    .input-label {
+      width: 50px;
+    }
+  }
+
+}
+
+#calculator-key {
+
+  .button-block, .row, .col {
+    padding: 1px 2px 1px 2px;
+    margin: 0;
+  }
+
+}

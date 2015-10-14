@@ -1,12 +1,12 @@
-angular.module('starter.services', [])
-
-.factory('Chats', function() {
+angular.module('chats.service',
+    []
+).factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
   var chats = [{
     id: 0,
-    name: 'Ben Sparrow',
+    name: 'Ben Sparrow1',
     lastText: 'You on your way?',
     face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
   }, {

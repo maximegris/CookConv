@@ -1,4 +1,13 @@
 {
   "name": "CookConv",
-  "app_id": ""
+  "email": "maxime.gris@gmail.com",
+  "app_id": "",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }
