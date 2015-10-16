@@ -7700,17 +7700,49 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+#loading-spinner .spinner svg {
+  width: 28px;
+  height: 28px;
+  stroke: #FFFFFF;
+  fill: #FFFFFF; }
+#loading-spinner span {
+  position: relative;
+  top: -8px; }
+
+#from-to {
+  margin-top: 10px; }
+  #from-to span, #from-to input {
+    background-color: #fff; }
+  #from-to label .input-label {
+    width: 50px; }
+
 .right {
   text-align: right; }
+
+.center {
+  text-align: center; }
 
 .left {
   text-align: left; }
 
-#from-to span, #from-to input {
-  background-color: #fff; }
-#from-to label .input-label {
-  width: 50px; }
-
+#calculator-key .button {
+  min-height: 38px;
+  line-height: 38px; }
 #calculator-key .button-block, #calculator-key .row, #calculator-key .col {
   padding: 1px 2px 1px 2px;
   margin: 0; }
+#calculator-key .col:last-child {
+  padding: 1px 0px 1px 2px; }
+#calculator-key .col:first-child {
+  padding: 1px 2px 1px 0px; }
+
+#criteria-list .button {
+  min-height: 38px;
+  line-height: 38px; }
+#criteria-list .button-block, #criteria-list .row, #criteria-list .col {
+  padding: 5px 5px 5px 5px;
+  margin: 0; }
+#criteria-list .button-block:last-child, #criteria-list .col:last-child {
+  padding: 5px 0px 5px 5px; }
+#criteria-list .button-block:first-child, #criteria-list .col:first-child {
+  padding: 5px 5px 5px 0px; }

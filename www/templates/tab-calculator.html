@@ -1,4 +1,4 @@
-<ion-view view-title="Calculator">
+<ion-view view-title="Cook Converter - Calculator" hide-tabs="false">
   <ion-content class="padding">
 
   <!-- From To -->
@@ -17,74 +17,85 @@
 
 
   <!-- Ingedient selected -->
-  <div  class="list">
-
+  <div id="criteria-list">
     <label class="item item-input item-select">
       <div class="input-label">
         Ingredient selected
       </div>
-      <select >
-        <option ng-repeat="ingredient in ingredients">{{ ingredient.name }}</option>
-      </select>
+      <select ng-model="current.ingredient" ng-options="ingredient.name for ingredient in ingredients track by ingredient.id"></select>
     </label>
 
+    <!-- Measure -->
+    <div class="row">
+      <div class="col">
+        <button class="button button-block button-dark" ng-click="showFromType()">
+          From {{current.from_type.name}}
+        </button>
+      </div>
+      <div class="col">
+        <button class="button button-block button-dark" ng-click="showToType()">
+          To {{current.to_type.name}}
+        </button>
+      </div>
+    </div>
   </div>
+
     <!-- Calc keyboard -->
   <div id="calculator-key">
     <div class="row">
       <div class="col">
-        <a class="button button-block button-outline button-dark">1</a>
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('1')">1</a>
       </div>
       <div class="col">
-        <a class="button button-block button-outline button-dark">2</a>
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('2')">2</a>
       </div>
       <div class="col">
-        <a class="button button-block button-outline button-dark">3</a>
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('3')">3</a>
       </div>
       <div class="col">
-        <a class="button button-block button-outline button-assertive ion-ios-arrow-thin-left"></a>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <a class="button button-block button-outline button-dark">4</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-outline button-dark">5</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-outline button-dark">6</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-outline button-assertive">AC</a>
+        <a class="button button-block button-outline button-assertive ion-ios-arrow-thin-left" ng-click="removeValCalc(0)"></a>
       </div>
     </div>
 
     <div class="row">
       <div class="col">
-        <a class="button button-block button-outline button-dark">7</a>
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('4')">4</a>
       </div>
       <div class="col">
-        <a class="button button-block button-outline button-dark">8</a>
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('5')">5</a>
       </div>
       <div class="col">
-        <a class="button button-block button-outline button-dark">9</a>
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('6')">6</a>
       </div>
       <div class="col">
-        <a class="button button-block button-outline button-assertive">Inv.</a>
+        <a class="button button-block button-outline button-assertive" ng-click="removeValCalc(1)">AC</a>
       </div>
     </div>
 
     <div class="row">
       <div class="col">
-        <a class="button button-block button-outline button-dark">.</a>
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('7')">7</a>
       </div>
       <div class="col">
-        <a class="button button-block button-outline button-dark">0</a>
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('8')">8</a>
       </div>
       <div class="col">
-        <a class="button button-block " disabled></a>
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('9')">9</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-assertive" ng-click="inverseVal()">Inv.</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('.')">.</a>
+      </div>
+      <div class="col">
+        <a class="button button-block button-outline button-dark" ng-click="addValCalc('0')">0</a>
+      </div>
+      <div class="col">
+        <a class="button button-block " disabled>&nbsp;</a>
       </div>
       <div class="col">
         <a class="button button-block button-balanced">Save</a>

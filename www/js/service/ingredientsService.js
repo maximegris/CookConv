@@ -3,19 +3,19 @@ angular.module('ingredients.service', ['ionic', 'ngCordova']
 ).factory('Ingredients', function($ionicPlatform, $q, $log, $cordovaSQLite) {
 
   // Détection WebView ou non pour utiliser SQLite
-  var _isWebView = ionic.Platform.isWebView();
+  var _isWebView = ionic.Platform.isWebView(),
 
   // Data pour le browser
-  _ingredients = [{
-    name: 'Eau'
+ _ingredients = [{
+    id: 1, name: 'Eau', masse_volumique : '1'
   }, {
-    name: 'Lait'
+    id: 2, name: 'Lait', masse_volumique : '1.030'
   }, {
-    name: 'Chocolat'
+    id: 3, name: 'Chocolat noir', masse_volumique : '1.2'
   }, {
-    name: 'Beurre'
+    id: 4, name: 'Beurre', masse_volumique : '0.91'
   }, {
-    name: 'Farine'
+    id: 5, name: 'Farine de maïs', masse_volumique : '5'
   }];
 
   // Méthodes publiques
@@ -23,48 +23,37 @@ angular.module('ingredients.service', ['ionic', 'ngCordova']
 
       $log.debug("Récupération des ingrédients");
 
+      var q = $q.defer();
+
       if(_isWebView) {
 
       _ingredients = [];
 
-      var dbQuery = "SELECT name_fr FROM ingredients ORDER BY name_fr";
-      //$ionicPlatform.ready(function () { //TODO
+      var dbQuery = "SELECT id, name_fr, masse_volumique FROM ingredients ORDER BY name_fr";
       $cordovaSQLite.execute(_db, dbQuery)
       .then(function(res){
 
           if(res.rows.length > 0) {
             for (var i = 0; i < res.rows.length; i++) {
-                _ingredients.push({ name : res.rows.item(i)["name_fr"] });
+                _ingredients.push({  id : res.rows.item(i)["id"], name : res.rows.item(i)["name_fr"], masse_volumique : res.rows.item(i)["masse_volumique"] });
             }
 
           }
+
+          q.resolve(_ingredients);
         }, function (err) {
-          alert("Error " + err);
+          alert("Error Get ingredients : "  + JSON.stringify(err));
         });
-      //}); //TODO
 
+      } else {
+        q.resolve(_ingredients);
       }
 
-      return _ingredients;
-    };
-
-    var remove = function(ingredient) {
-      ingredients.splice(_ingredients.indexOf(ingredient), 1);
-    };
-
-    var get = function(ingredientId) {
-      for (var i = 0; i < _ingredients.length; i++) {
-        if (_ingredients[i].id === parseInt(ingredientId)) {
-          return _ingredients[i];
-        }
-      }
-      return null;
+      return q.promise;
     };
 
     return {
-        getIngredients:getIngredients,
-        remove:remove,
-        get:get
+        getIngredients:getIngredients
     };
 
 });

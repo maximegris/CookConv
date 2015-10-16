@@ -21,15 +21,26 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-.right {
-  text-align:right;
+#loading-spinner {
+
+  .spinner svg {
+    width: 28px;
+    height: 28px;
+    stroke: #FFFFFF;
+    fill: #FFFFFF;
+  }
+
+  span {
+    position: relative;
+    top: -8px;
+  }
+
 }
 
-.left {
-  text-align:left;
-}
 
 #from-to {
+
+  margin-top: 10px;
 
   span, input {
     background-color: $light;
@@ -43,11 +54,57 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 }
 
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
 #calculator-key {
+
+  .button {
+    min-height: 38px;
+    line-height: 38px;
+  }
 
   .button-block, .row, .col {
     padding: 1px 2px 1px 2px;
     margin: 0;
+  }
+
+  .col:last-child {
+    padding: 1px 0px 1px 2px;
+  }
+
+  .col:first-child {
+    padding: 1px 2px 1px 0px;
+  }
+}
+
+#criteria-list {
+
+  .button {
+    min-height: 38px;
+    line-height: 38px;
+  }
+
+  .button-block, .row, .col {
+    padding: 5px 5px 5px 5px;
+    margin: 0;
+  }
+
+  .button-block:last-child, .col:last-child {
+    padding: 5px 0px 5px 5px;
+  }
+
+  .button-block:first-child, .col:first-child {
+    padding: 5px 5px 5px 0px;
   }
 
 }

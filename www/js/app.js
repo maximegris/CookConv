@@ -6,7 +6,7 @@
 // load ngCordova (used for DB storage ...)
 var _db = null;
 
-angular.module('starter', ['ionic', 'ngCordova',  'db.service', 'calculator.controller', 'save.controller'])
+angular.module('starter', ['ionic', 'ngCordova', 'app.directives', 'db.service', 'calculator.controller', 'savings.controller', 'settings.controller', 'settings.lang.controller'])
 
 .run(function($ionicPlatform, $cordovaSQLite, DBFactory) {
     $ionicPlatform.ready(function() {
@@ -41,7 +41,15 @@ angular.module('starter', ['ionic', 'ngCordova',  'db.service', 'calculator.cont
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($ionicConfigProvider, $logProvider,$compileProvider, $stateProvider, $urlRouterProvider) {
+
+
+  if(ionic.Platform.isWebView()) {
+      $logProvider.debugEnabled(false);
+      $compileProvider.debugInfoEnabled(false);
+  }
+
+  $ionicConfigProvider.tabs.position('bottom');
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -55,10 +63,14 @@ angular.module('starter', ['ionic', 'ngCordova',  'db.service', 'calculator.cont
     resolve: {
       dbReady: function(DBFactory, $log){
         // (1) init the DB
-        return DBFactory.initDB().then(function(success) {
+        return DBFactory.initDB().then(
+          function(success) {
           //alert(success);
           $log.debug('Success: ' + success);
-      });
+        },
+        function(reason) {
+            $log.debug('Failed: ' + reason);
+        });
       }
     }
   })
@@ -70,13 +82,7 @@ angular.module('starter', ['ionic', 'ngCordova',  'db.service', 'calculator.cont
     views: {
       'tab-calculator': {
         templateUrl: 'templates/tab-calculator.html',
-/*        resolve: {
-            // (2) note that we MUST inject the dbReady promise, if we don't this will instantiate immediately
-            ingredients: function(dbReady, Ingredients){
-              // the following call returns a promise
-              return Ingredients.getIngredients();
-          }
-        },*/
+
         controller: 'CalculatorCtrl'
       }
     }
@@ -87,22 +93,42 @@ angular.module('starter', ['ionic', 'ngCordova',  'db.service', 'calculator.cont
     views : {
       'tab-save': {
         templateUrl: 'templates/tab-save.html',
-        controller: 'SaveCtrl'
+        controller: 'SavingsCtrl'
       }
     }
   })
-
   .state('tab.parameters', {
     url: '/parameters',
     views: {
       'tab-parameters': {
         templateUrl: 'templates/tab-parameters.html',
-        controller: 'ParametersCtrl'
+        controller: 'SettingsCtrl'
       }
     }
+  })
+  .state('tab.parameters-lang', {
+
+    url: '/parameter/lang',
+    views: {
+      'tab-parameters': {
+        templateUrl: 'templates/parameters-lang.html',
+        controller: 'SettingsLangCtrl'
+      }
+    }
+
   });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/calculator');
 
+})
+.controller('LoadCtrl', function($rootScope, $ionicLoading) {
+  $rootScope.show = function() {
+    $ionicLoading.show({
+      template: '<div id="loading-spinner"><ion-spinner icon="lines"></ion-spinner> <span>Loading... Please wait</span></div>',
+    });
+  };
+  $rootScope.hide = function(){
+    $ionicLoading.hide();
+  };
 });

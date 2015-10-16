@@ -1,0 +1,10 @@
+<ion-view view-title="Cook Converter - Langue" hide-tabs="true">
+
+  <ion-content>
+
+    <ion-list>
+      <ion-radio ng-model="current" ng-repeat="language in languages track by language.code" ng-value="language" name="radio"> {{language.label}} </ion-radio>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

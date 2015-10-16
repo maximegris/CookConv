@@ -25,6 +25,7 @@
               .then(
                 function(res) {
                 },function (err) {
+                alert("Error create " + table.name +  " " + JSON.stringify(err));
                 $log.debug("Problème création de la BDD");
                 }
               );
@@ -37,7 +38,9 @@
                 $cordovaSQLite.execute(_db, dbQuery)
                 .then(function(res) {
                   },function (err) {
-                    $log.debug("PB insertion nouveau ingrédient");
+                    alert("Error insert " + data.name +  " " + JSON.stringify(err));
+                    $log.debug("PB insertion dans la BDD");
+
                   }
                 );
               });
