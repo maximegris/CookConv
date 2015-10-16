@@ -1,15 +1,15 @@
-<ion-view view-title="Cook Converter - Calculator" hide-tabs="false">
+<ion-view view-title="{{ 'VIEW_CALCULATOR' | translate }}" hide-tabs="false">
   <ion-content class="padding">
 
   <!-- From To -->
   <div id="from-to" class="list">
     <label class="item item-input">
-      <span class="input-label">From</span>
+      <span class="input-label">{{ 'FROM' | translate }}</span>
       <input type="text" class="right" ng-model="current.from" name="from" disabled>
       <span class="input-label center" ng-bind="current.getTypeFrom()"></span>
     </label>
     <label class="item item-input">
-      <span class="input-label">To</span>
+      <span class="input-label">{{ 'TO' | translate }}</span>
       <input type="text" class="right" ng-model="current.to" name="to" disabled>
       <span class="input-label center" ng-bind="current.getTypeTo()"></span>
     </label>
@@ -20,7 +20,7 @@
   <div id="criteria-list">
     <label class="item item-input item-select">
       <div class="input-label">
-        Ingredient selected
+        {{ 'INGREDIENT_SELECTED' | translate }}
       </div>
       <select ng-model="current.ingredient" ng-options="ingredient.name for ingredient in ingredients track by ingredient.id"></select>
     </label>
@@ -29,12 +29,12 @@
     <div class="row">
       <div class="col">
         <button class="button button-block button-dark" ng-click="showFromType()">
-          From {{current.from_type.name}}
+          {{ 'FROM' | translate }} {{current.from_type.name}}
         </button>
       </div>
       <div class="col">
         <button class="button button-block button-dark" ng-click="showToType()">
-          To {{current.to_type.name}}
+          {{ 'TO' | translate }} {{current.to_type.name}}
         </button>
       </div>
     </div>
@@ -83,7 +83,7 @@
         <a class="button button-block button-outline button-dark" ng-click="addValCalc('9')">9</a>
       </div>
       <div class="col">
-        <a class="button button-block button-outline button-assertive" ng-click="inverseVal()">Inv.</a>
+        <a class="button button-block button-outline button-assertive" ng-click="inverseVal()">{{ 'INV' | translate }}</a>
       </div>
     </div>
 
@@ -98,7 +98,7 @@
         <a class="button button-block " disabled>&nbsp;</a>
       </div>
       <div class="col">
-        <a class="button button-block button-balanced">Save</a>
+        <a class="button button-block button-balanced">{{ 'SAVE' | translate }}</a>
       </div>
     </div>
 

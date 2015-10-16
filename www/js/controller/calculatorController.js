@@ -64,19 +64,17 @@ angular.module('calculator.controller', ['ingredients.service', 'types.service']
 
   };
 
-  $q.all([Ingredients.getIngredients(), Types.getTypes("from"), Types.getTypes("to")])
+  $q.all([Ingredients.getIngredients(), Types.getTypes()])
   .then(function(result) {
-    $scope.ingredients = result[0];
-    $scope.typesFrom  = result[1];
-    $scope.typesTo = result[2];
-
+    $rootScope.ingredients = result[0];
+    $rootScope.types  = result[1];
 
     $scope.current = {
       "from" : "0",
-      "from_type": $scope.typesFrom[0],
+      "from_type": $rootScope.types[0],
       "to" : "0",
-      "to_type": $scope.typesTo[3],
-      "ingredient": $scope.ingredients[1],
+      "to_type": $rootScope.types[3],
+      "ingredient": $rootScope.ingredients[1],
 
       getTypeFrom : function() {
         return $scope.current.from_type.code;
@@ -90,12 +88,9 @@ angular.module('calculator.controller', ['ingredients.service', 'types.service']
     $rootScope.hide();
   });
 
-
-
-
   $scope.showFromType = function() {
      var confirmPopup = $ionicPopup.show({
-        template: '<ion-list> <ion-radio ng-model="current.from_type" ng-repeat="type in typesFrom track by type.id" ng-value="type" name="{{type.id_radio}}"> {{type.name}} </ion-radio> </ion-list>',
+        template: '<ion-list> <ion-radio ng-model="current.from_type" ng-repeat="type in types track by type.id" ng-value="type" name="{{type.id}}"> {{type.name}} </ion-radio> </ion-list>',
         title: 'Select a measure (FROM)',
         scope: $scope,
         buttons: [
@@ -112,7 +107,7 @@ angular.module('calculator.controller', ['ingredients.service', 'types.service']
 
    $scope.showToType = function() {
       var confirmPopup = $ionicPopup.show({
-         template: '<ion-list> <ion-radio ng-model="current.to_type" ng-repeat="type in typesTo track by type.id" ng-value="type" name="{{type.id_radio}}"> {{type.name}} </ion-radio> </ion-list>',
+         template: '<ion-list> <ion-radio ng-model="current.to_type" ng-repeat="type in types track by type.id" ng-value="type" name="{{type.id}}"> {{type.name}} </ion-radio> </ion-list>',
          title: 'Select a measure (TO)',
          scope: $scope,
          buttons: [

@@ -1,0 +1,24 @@
+{
+  "TAB_TITLE_CALCULATOR" : "Convertisseur",
+  "TAB_TITLE_SAVINGS" : "Sauvegardes",
+  "TAB_TITLE_PARAMETERS" : "Paramètres",
+
+  "VIEW_CALCULATOR" : "CookConv - Convertisseur",
+  "VIEW_SAVINGS" : "CookConv - Sauvegardes",
+  "VIEW_SETTINGS" : "CookConv - Paramètres",
+  "VIEW_LANGUAGES" : "CookConv - Langues",
+
+  "FROM" : "De",
+  "TO" : "Vers",
+  "INGREDIENT_SELECTED" : "Ingrédient",
+  "SAVE" : "Sauv.",
+  "INV" : "Inv.",
+  "SELECT_LANGUAGE" : "Selectionner une langue",
+  "SELECT_LANGUAGE_LABEL" :" Langue courante : ",
+  "VERSION_APP" : "Version de l'application",
+  "MANAGE_PART" : "Gérer ma liste d'ingrédients (PRO)",
+  "MANAGE_INGREDIENTS" : "Gestion des ingrédients",
+  "MANAGE_INGREDIENTS_LABEL" : "Ajouter, modifier, supprimer",
+  "REINIT_APP" :"Réinitialiser l'application",
+  "REINIT_APP_LABEL" : "Suppression des ingrédients créés"
+}

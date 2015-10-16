@@ -79,9 +79,9 @@ angular.module('db.config', [])
             {
                 name: 'languages',
                 columns : ["'code', 'label'"],
-                rows:[ "'GER', 'Allemand'",
-                       "'ENG', 'Anglais'",
-                       "'FRA', 'Français'",
+                rows:[ "'ge', 'Allemand'",
+                       "'en', 'Anglais'",
+                       "'fr', 'Français'",
                 ]
             },
 

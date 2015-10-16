@@ -1,39 +1,39 @@
-<ion-view view-title="Cook Converter - Settings" hide-tabs="false">
+<ion-view view-title="{{ 'VIEW_SETTINGS' | translate }}" hide-tabs="false">
   <ion-content>
     <ion-list>
 
       <!-- Language -->
       <a class="item item-icon-left item-icon-right" href="#/tab/parameter/lang">
       <i class="icon ion-chatbox-working"></i>
-      <h2>Selectionner une langue</h2>
-      <p>Langue courante : {{settings.lang}}</p>
+      <h2>{{ 'SELECT_LANGUAGE' | translate }}</h2>
+      <p>{{ 'SELECT_LANGUAGE_LABEL' | translate }}{{settings.lang}}</p>
       <i class="icon ion-ios-arrow-forward"></i>
       </a>
 
       <!-- Version -->
       <div class="item item-icon-left">
       <i class="icon"></i>
-      <h2>Version de l'application</h2>
+      <h2>{{ 'VERSION_APP' | translate }}</h2>
       <p><span app-version></span></p>
     </div>
 
       <div class="item item-divider">
-          Gérer ma liste d'ingrédients (PRO)
+          {{ 'MANAGE_PART' | translate }}
       </div>
 
       <!-- Manage ingredient -->
       <a class="item item-icon-left item-icon-right" href="#">
       <i class="icon ion-clipboard"></i>
-      <h2>Gestion des ingrédients</h2>
-      <p>Ajouter, modifier, supprimer</p>
+      <h2>{{ 'MANAGE_INGREDIENTS' | translate }}</h2>
+      <p>{{ 'MANAGE_INGREDIENTS_LABEL' | translate }}</p>
       <i class="icon ion-ios-arrow-forward"></i>
       </a>
 
       <!-- Reset application -->
       <a class="item item-icon-left item-icon-right" href="#">
       <i class="icon ion-arrow-return-left"></i>
-      <h2>Réinitialiser l'application</h2>
-      <p>Suppression des ingrédients créés</p>
+      <h2>{{ 'REINIT_APP' | translate }}</h2>
+      <p>{{ 'REINIT_APP_LABEL' | translate }}</p>
       <i class="icon ion-ios-arrow-forward"></i>
       </a>
 
