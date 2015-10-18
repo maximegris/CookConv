@@ -1,108 +1,104 @@
 <ion-view view-title="{{ 'VIEW_CALCULATOR' | translate }}" hide-tabs="false">
   <ion-content class="padding">
 
-  <!-- From To -->
-  <div id="from-to" class="list">
-    <label class="item item-input">
-      <span class="input-label">{{ 'FROM' | translate }}</span>
-      <input type="text" class="right" ng-model="current.from" name="from" disabled>
-      <span class="input-label center" ng-bind="current.getTypeFrom()"></span>
-    </label>
-    <label class="item item-input">
-      <span class="input-label">{{ 'TO' | translate }}</span>
-      <input type="text" class="right" ng-model="current.to" name="to" disabled>
-      <span class="input-label center" ng-bind="current.getTypeTo()"></span>
-    </label>
-  </div>
-
-
-  <!-- Ingedient selected -->
-  <div id="criteria-list">
-    <label class="item item-input item-select">
-      <div class="input-label">
-        {{ 'INGREDIENT_SELECTED' | translate }}
-      </div>
-      <select ng-model="current.ingredient" ng-options="ingredient.name for ingredient in ingredients track by ingredient.id"></select>
-    </label>
-
-    <!-- Measure -->
-    <div class="row">
-      <div class="col">
-        <button class="button button-block button-dark" ng-click="showFromType()">
-          {{ 'FROM' | translate }} {{current.from_type.name}}
-        </button>
-      </div>
-      <div class="col">
-        <button class="button button-block button-dark" ng-click="showToType()">
-          {{ 'TO' | translate }} {{current.to_type.name}}
-        </button>
-      </div>
+    <div id="from-to" class="list">
+      <label class="item item-input">
+        <span class="input-label">{{ 'FROM' | translate }}</span>
+        <input type="text" class="right" ng-model="current.from" name="from" disabled>
+        <span class="input-label center" ng-bind="current.getTypeFrom()"></span>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">{{ 'TO' | translate }}</span>
+        <input type="text" class="right" ng-model="current.to" name="to" disabled>
+        <span class="input-label center" ng-bind="current.getTypeTo()"></span>
+      </label>
     </div>
-  </div>
 
-    <!-- Calc keyboard -->
-  <div id="calculator-key">
-    <div class="row">
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('1')">1</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('2')">2</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('3')">3</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-outline button-assertive ion-ios-arrow-thin-left" ng-click="removeValCalc(0)"></a>
+
+    <div id="criteria-list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          {{ 'INGREDIENT_SELECTED' | translate }}
+        </div>
+        <select ng-model="current.ingredient" ng-options="ingredient.name for ingredient in ingredients track by ingredient.id"></select>
+      </label>
+
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-dark" ng-click="showFromType()">
+            {{ 'FROM' | translate }} {{current.from_type.name}}
+          </button>
+        </div>
+        <div class="col">
+          <button class="button button-block button-dark" ng-click="showToType()">
+            {{ 'TO' | translate }} {{current.to_type.name}}
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('4')">4</a>
+    <div id="calculator-key">
+      <div class="row">
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('1')">1</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('2')">2</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('3')">3</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-assertive ion-ios-arrow-thin-left" ng-click="removeValCalc(0)"></a>
+        </div>
       </div>
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('5')">5</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('6')">6</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-outline button-assertive" ng-click="removeValCalc(1)">AC</a>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('7')">7</a>
+      <div class="row">
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('4')">4</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('5')">5</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('6')">6</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-assertive" ng-click="removeValCalc(1)">AC</a>
+        </div>
       </div>
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('8')">8</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('9')">9</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-outline button-assertive" ng-click="inverseVal()">{{ 'INV' | translate }}</a>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('.')">.</a>
+      <div class="row">
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('7')">7</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('8')">8</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('9')">9</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-assertive" ng-click="inverseVal()">{{ 'INV' | translate }}</a>
+        </div>
       </div>
-      <div class="col">
-        <a class="button button-block button-outline button-dark" ng-click="addValCalc('0')">0</a>
-      </div>
-      <div class="col">
-        <a class="button button-block " disabled>&nbsp;</a>
-      </div>
-      <div class="col">
-        <a class="button button-block button-balanced">{{ 'SAVE' | translate }}</a>
-      </div>
-    </div>
 
-  </div>
+      <div class="row">
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('.')">.</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="addValCalc('0')">0</a>
+        </div>
+        <div class="col">
+          <a class="button button-block " disabled>&nbsp;</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-balanced">{{ 'SAVE' | translate }}</a>
+        </div>
+      </div>
+
+    </div>
 
   </ion-content>
 </ion-view>

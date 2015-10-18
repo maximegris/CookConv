@@ -1,13 +1,25 @@
 {
-  "TAB_TITLE_CALCULATOR" : "Calculator",
+  "TAB_TITLE_CALCULATOR" : "Converter",
   "TAB_TITLE_SAVINGS" : "Savings",
   "TAB_TITLE_PARAMETERS" : "Settings",
 
-  "VIEW_CALCULATOR" : "CookConv - Calculator",
+  "VIEW_CALCULATOR" : "CookConv - Converter",
+  "VIEW_SAVINGS" : "CookConv - Savings",
+  "VIEW_SETTINGS" : "CookConv - Settings",
+  "VIEW_LANGUAGES" : "CookConv - Languages",
 
   "FROM" : "From",
   "TO" : "To",
   "INGREDIENT_SELECTED" : "Ingredient",
   "SAVE" : "Save",
-  "INV" : "Inv."
+  "INV" : "Inv.",
+
+  "SELECT_LANGUAGE" : "Select a language",
+  "SELECT_LANGUAGE_LABEL" :" Current language : ",
+  "VERSION_APP" : "Application version",
+  "MANAGE_PART" : "Manage my ingredients (PRO)",
+  "MANAGE_INGREDIENTS" : "Management of my ingredients",
+  "MANAGE_INGREDIENTS_LABEL" : "Add, modify, delete",
+  "REINIT_APP" :"Application initialization",
+  "REINIT_APP_LABEL" : "Delete all my personal datas"
 }

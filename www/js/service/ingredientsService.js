@@ -1,12 +1,12 @@
 // Factory des ingrédients
 angular.module('ingredients.service', ['ionic', 'ngCordova']
-).factory('Ingredients', function($ionicPlatform, $q, $log, $cordovaSQLite) {
-
+).factory('Ingredients', function($ionicPlatform, $q, $log, $cordovaSQLite, $translate) {
+  'use strict';
   // Détection WebView ou non pour utiliser SQLite
   var _isWebView = ionic.Platform.isWebView(),
 
   // Data pour le browser
- _ingredients = [{
+  _ingredients = [{
     id: 1, name: 'Eau', masse_volumique : '1'
   }, {
     id: 2, name: 'Lait', masse_volumique : '1.030'
@@ -21,39 +21,40 @@ angular.module('ingredients.service', ['ionic', 'ngCordova']
   // Méthodes publiques
   var getIngredients = function() {
 
-      $log.debug("Récupération des ingrédients");
+    $log.debug("Récupération des ingrédients");
 
-      var q = $q.defer();
+    var q = $q.defer();
 
-      if(_isWebView) {
+    if(_isWebView) {
 
       _ingredients = [];
 
-      var dbQuery = "SELECT id, name_fr, masse_volumique FROM ingredients ORDER BY name_fr";
+      var dbQuery = "SELECT id, name_" +  $translate.use()  + ", masse_volumique FROM ingredients ORDER BY name_" +  $translate.use();
+
       $cordovaSQLite.execute(_db, dbQuery)
       .then(function(res){
 
-          if(res.rows.length > 0) {
-            for (var i = 0; i < res.rows.length; i++) {
-                _ingredients.push({  id : res.rows.item(i)["id"], name : res.rows.item(i)["name_fr"], masse_volumique : res.rows.item(i)["masse_volumique"] });
-            }
-
+        if(res.rows.length > 0) {
+          for (var i = 0; i < res.rows.length; i++) {
+            _ingredients.push({  id : res.rows.item(i).id , name : res.rows.item(i)["name_" +  $translate.use()] , masse_volumique : res.rows.item(i).masse_volumique });
           }
 
-          q.resolve(_ingredients);
-        }, function (err) {
-          alert("Error Get ingredients : "  + JSON.stringify(err));
-        });
+        }
 
-      } else {
         q.resolve(_ingredients);
-      }
+      }, function (err) {
+        alert("Error Get ingredients : "  + JSON.stringify(err));
+      });
 
-      return q.promise;
-    };
+    } else {
+      q.resolve(_ingredients);
+    }
 
-    return {
-        getIngredients:getIngredients
-    };
+    return q.promise;
+  };
+
+  return {
+    getIngredients:getIngredients
+  };
 
 });

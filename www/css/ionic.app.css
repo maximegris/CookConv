@@ -7700,6 +7700,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.item-input {
+  padding: 2px 0px 2px 16px; }
+
 #loading-spinner .spinner svg {
   width: 28px;
   height: 28px;
@@ -7710,7 +7713,7 @@ a.button {
   top: -8px; }
 
 #from-to {
-  margin-top: 10px; }
+  margin-top: 5px; }
   #from-to span, #from-to input {
     background-color: #fff; }
   #from-to label .input-label {
@@ -7737,8 +7740,8 @@ a.button {
   padding: 1px 2px 1px 0px; }
 
 #criteria-list .button {
-  min-height: 38px;
-  line-height: 38px; }
+  min-height: 32px;
+  line-height: 32px; }
 #criteria-list .button-block, #criteria-list .row, #criteria-list .col {
   padding: 5px 5px 5px 5px;
   margin: 0; }

@@ -1,25 +1,29 @@
 angular.module('app.directives', [])
-.directive('hideTabs', function($rootScope, $ionicScrollDelegate) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attributes) {
-            scope.$watch(attributes.hideTabs, function(value){
-                $rootScope.hideTabs = value;
-            });
+.directive('hideTabs', function($rootScope) {
+  'use strict';
 
-            scope.$on('$destroy', function() {
-                $rootScope.hideTabs = false;
-            });
-        }
-    };
+  return {
+    restrict: 'A',
+    link: function(scope, element, attributes) {
+      scope.$watch(attributes.hideTabs, function(value){
+        $rootScope.hideTabs = value;
+      });
+
+      scope.$on('$destroy', function() {
+        $rootScope.hideTabs = false;
+      });
+    }
+  };
 }).directive('appVersion', function () {
-  return function(scope, elm, attrs) {
+  'use strict';
+
+  return function(scope, elm) {
     if(window.cordova) {
       cordova.getAppVersion(function (version) {
         elm.text(version);
       });
     } else {
-        elm.text("browser.version-1.0.0");
+      elm.text("browser.version-1.0.0");
     }
 
   };

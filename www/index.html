@@ -5,52 +5,45 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
-    <!-- compiled css output -->
-    <link href="css/ionic.app.css" type="text/css" rel="stylesheet">
+    <!-- build:css dist_css/styles.css -->
+    <link href="css/ionic.app.min.css" type="text/css" rel="stylesheet">
+   <!-- endbuild -->
 
-    <!-- ionic/angularjs js -->
     <script type="text/javascript" src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script type="text/javascript" src="js/ng-cordova.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
 
-
-    <!--  angular/ionic js modules-->
-    <script type="text/javascript" src="js/vendor/angular-translate.min.js"></script>
-    <script type="text/javascript" src="js/vendor/angular-translate-loader-static-files.min.js"></script>
-
     <!-- your app's js -->
-    <script type="text/javascript" src="js/app.js"></script>
+    <!-- build:js dist_js/app.js -->
+    <!--  angular/ionic js modules-->
+    <script type="text/javascript" src="dist/dist_js/app/ng-cordova.min.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/vendor/angular-translate.min.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/vendor/angular-translate-loader-static-files.min.js"></script>
 
-    <script type="text/javascript" src="js/directive/appDirectives.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/app.js"></script>
 
-    <script type="text/javascript" src="js/service/dbService.js"></script>
-    <script type="text/javascript" src="js/config/dbConfig.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/directive/appDirectives.js"></script>
 
-    <script type="text/javascript" src="js/controller/calculatorController.js"></script>
-    <script type="text/javascript" src="js/controller/savingsController.js"></script>
-    <script type="text/javascript" src="js/controller/settingsController.js"></script>
-    <script type="text/javascript" src="js/controller/settingsLangController.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/service/dbService.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/config/dbConfig.js"></script>
 
-    <script type="text/javascript" src="js/service/ingredientsService.js"></script>
-    <script type="text/javascript" src="js/service/typesService.js"></script>
-    <script type="text/javascript" src="js/service/languagesService.js"></script>
-    
+    <script type="text/javascript" src="dist/dist_js/app/controller/calculatorController.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/controller/savingsController.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/controller/settingsController.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/controller/settingsLangController.js"></script>
+
+    <script type="text/javascript" src="dist/dist_js/app/service/ingredientsService.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/service/typesService.js"></script>
+    <script type="text/javascript" src="dist/dist_js/app/service/languagesService.js"></script>
+
+    <script type="text/javascript" src="dist/dist_js/app/templates.js"></script>
+    <!-- endbuild -->
+
   </head>
-  <body ng-app="starter">
-    <!--
-      The nav bar that will be updated as we navigate between views.
-    -->
+  <body ng-app="starter" ng-strict-di>
     <ion-nav-bar align-title="center" no-tap-scroll="false" class="bar-calm">
       <ion-nav-back-button>
       </ion-nav-back-button>
     </ion-nav-bar>
-    <!--
-      The views will be rendered in the <ion-nav-view> directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-    -->
     <ion-nav-view></ion-nav-view>
 
   </body>
