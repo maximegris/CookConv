@@ -26,8 +26,6 @@ angular.module('types.service', ['ionic', 'ngCordova']
   // Méthodes publiques
   var getTypes = function() {
 
-    $log.debug("Récupération des types");
-
     var q = $q.defer();
 
     if(_isWebView) {

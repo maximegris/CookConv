@@ -14,8 +14,6 @@ angular.module('languages.service', [])
 
     var q = $q.defer();
 
-    $log.debug("Récupération des langues");
-
     if(_isWebView) {
 
       _languages = [];
@@ -49,8 +47,6 @@ angular.module('languages.service', [])
   var updateCurrent = function(language) {
 
     var q = $q.defer();
-
-    $log.debug("Mise à jour de la langue courante (init)");
 
     if(_isWebView) {
 

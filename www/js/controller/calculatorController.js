@@ -130,6 +130,10 @@ angular.module('calculator.controller', []
     });
   };
 
+  $scope.saveConverter = function() {
+    alert("test");
+  };
+
   $scope.$watch('current.from_type', calculateConversion, false);
   $scope.$watch('current.to_type', calculateConversion, false);
   $scope.$watch('current.ingredient', calculateConversion, false);

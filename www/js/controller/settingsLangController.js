@@ -35,8 +35,10 @@ angular.module('settings.lang.controller', ['languages.service', 'db.service'])
       lang : $translate.use()
     };
     $scope.languages = _languages;
+
+    $scope.$watch('current.lang', changeLanguage, false);
   });
 
-  $scope.$watch('current.lang', changeLanguage);
+
 
 });

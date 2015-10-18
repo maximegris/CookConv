@@ -21,6 +21,7 @@ angular.module('starter', ['ionic', 'ngCordova',
     }
 
     if(window.cordova){
+      //$cordovaSQLite.deleteDB("cookconv.db");
       _db = $cordovaSQLite.openDB("cookconv.db");
     }
     else {
@@ -39,7 +40,7 @@ angular.module('starter', ['ionic', 'ngCordova',
   }
 
   // Cache
-  $ionicConfigProvider.views.maxCache(15);
+  $ionicConfigProvider.views.maxCache(0);
 
   $ionicConfigProvider.tabs.position('bottom');
   $ionicConfigProvider.backButton.previousTitleText(false).text('');
@@ -68,12 +69,12 @@ angular.module('starter', ['ionic', 'ngCordova',
       dbReady: function(DBFactory, $log, $rootScope){
         // (1) init the DB
         return DBFactory.initDB()
-        .then(function(success) { return DBFactory.getContextApplication(success); }, function(error) { alert('Failed initDB : ' + JSON.stringify(error)); $log.debug('Failed initDB : ' + error); })
+        .then(function(success) { return DBFactory.getContextApplication(success); }, function(error) { alert('Failed initDB : ' + JSON.stringify(error));  })
         .then(function(success) {
           $rootScope.settings = success[0];
           $rootScope.ingredients = success[1];
           $rootScope.types  = success[2];
-        }, function(error) { alert('Failed getContextApplication: ' +  JSON.stringify(error)); $log.debug('Failed getContextApplication: ' + error); });
+        }, function(error) { alert('Failed getContextApplication: ' +  JSON.stringify(error)); });
       }
     }
   })
@@ -125,11 +126,11 @@ angular.module('starter', ['ionic', 'ngCordova',
 
 })
 .controller('LoadCtrl',
-function($rootScope, $ionicLoading) {
+function($rootScope, $ionicLoading, $translate) {
   'use strict';
   $rootScope.show = function() {
     $ionicLoading.show({
-      template: '<div id="loading-spinner"><ion-spinner icon="lines"></ion-spinner> <span>Loading... Please wait</span></div>',
+      template: '<div id="loading-spinner"><ion-spinner icon="lines"></ion-spinner><span>{{ "LOADER" | translate }}</span></div>',
     });
   };
   $rootScope.hide = function(){

@@ -1,6 +1,6 @@
 // Contrller de l'onglet settings
 angular.module('settings.controller', [])
-.controller('SettingsCtrl',  function($scope, $rootScope) {
+.controller('SettingsCtrl',  function($scope, $rootScope, $log) {
   'use strict';
 
   // scope

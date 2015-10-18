@@ -9,9 +9,9 @@ angular.module('app.directives', [])
         $rootScope.hideTabs = value;
       });
 
-      scope.$on('$destroy', function() {
+      /*scope.$on('$destroy', function() {
         $rootScope.hideTabs = false;
-      });
+      });*/
     }
   };
 }).directive('appVersion', function () {

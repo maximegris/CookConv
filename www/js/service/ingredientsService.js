@@ -21,8 +21,6 @@ angular.module('ingredients.service', ['ionic', 'ngCordova']
   // Méthodes publiques
   var getIngredients = function() {
 
-    $log.debug("Récupération des ingrédients");
-
     var q = $q.defer();
 
     if(_isWebView) {
