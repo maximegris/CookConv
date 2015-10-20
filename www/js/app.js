@@ -21,7 +21,7 @@ angular.module('starter', ['ionic', 'ngCordova',
     }
 
     if(window.cordova){
-      //$cordovaSQLite.deleteDB("cookconv.db");
+      $cordovaSQLite.deleteDB("cookconv.db");
       _db = $cordovaSQLite.openDB("cookconv.db");
     }
     else {

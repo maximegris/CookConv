@@ -1,15 +1,13 @@
 <ion-view view-title="{{ 'VIEW_SAVINGS' | translate }}" hide-tabs="false">
   <ion-content>
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.lastText}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
+    <ion-list id="list-savings">
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="saving in savings track by saving.id" type="item-text-wrap">
 
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
+        <strong><div id="ingredient">{{saving.ingredient}}</div></strong>
+        <span>{{saving.fromVal}}</span> <span>{{saving.fromType}}</span> <i class="ion-arrow-right-c"></i>
+        <span>{{saving.toVal}}</span> <span>{{saving.toType}}</span>
+        <i class="icon ion-trash-a assertive" ng-click="removeSaving(saving)"></i>
+
       </ion-item>
     </ion-list>
   </ion-content>

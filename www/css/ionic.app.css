@@ -7749,3 +7749,6 @@ a.button {
   padding: 5px 0px 5px 5px; }
 #criteria-list .button-block:first-child, #criteria-list .col:first-child {
   padding: 5px 5px 5px 0px; }
+
+#list-savings #ingredient {
+  width: 150px; }

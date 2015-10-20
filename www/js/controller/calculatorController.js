@@ -1,10 +1,13 @@
 // Controller de l'onglet Calculator
-angular.module('calculator.controller', []
-).controller('CalculatorCtrl', function($controller, $rootScope, $scope, $q, $ionicPopup) {
+angular.module('calculator.controller', ['savings.service']
+).controller('CalculatorCtrl', function($controller, $rootScope, $scope, $q, $ionicPopup, Savings) {
   'use strict';
 
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+
+  // IoC
+  $controller('LoadCtrl');
 
   // Methodes privees
   function calculateConversion(){
@@ -131,7 +134,28 @@ angular.module('calculator.controller', []
   };
 
   $scope.saveConverter = function() {
-    alert("test");
+
+    if($scope.current.from !== "0"){
+
+      $rootScope.show();
+
+      var _item = {
+        fromVal : $scope.current.from,
+        fromType : $scope.current.from_type.code,
+        toVal : $scope.current.to,
+        toType : $scope.current.to_type.code,
+        ingredient : $scope.current.ingredient.id
+      };
+
+      Savings.addSaving(_item).then(function(){
+
+          $rootScope.hide();
+
+      }, function(error) {
+        alert(error);
+      });
+    }
+
   };
 
   $scope.$watch('current.from_type', calculateConversion, false);

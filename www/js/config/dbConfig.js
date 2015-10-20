@@ -27,14 +27,14 @@ angular.module('db.config', [])
       ]
     },
     {
-      name: 'saving', // Liste des conversions sauvegardées
+      name: 'savings', // Liste des conversions sauvegardées
       columns:[
         {name: 'id', type: 'integer primary key'},
         {name: 'ingredient', type: 'integer'},
         {name: 'from_value', type: 'numeric'},
-        {name: 'from_type', type: 'integer'},
+        {name: 'from_type', type: 'text'},
         {name: 'to_value', type: 'numeric'},
-        {name: 'to_type', type: 'integer'}
+        {name: 'to_type', type: 'text'}
       ]
     },
     {
@@ -62,35 +62,31 @@ angular.module('db.config', [])
       "'Lait', 'Milk',  '', '1.030', 1",
       "'Chocolat noir', 'Black chocolate',  '', '1.2', 1",
       "'Beurre', 'Butter',  '', '0.91', 1",
-      "'Farine de maïs', 'Cornflour',  '', '0.6', 1",
-    ]
-  },
-  {
-    name: 'types', // Type d'unité pour la conversion
-    columns : ["'code', 'name_fr', 'name_en', 'name_de', 'type', 'rapport'"],
-    rows:[ "'L', 'litre', 'liter',  '', 'volume', 1",
-    "'Dl', 'décilitre', 'deciliter',  '', 'volume', 10",
-    "'Cl', 'centilitre', 'centiliter',  '', 'volume', 100",
-    "'Ml', 'millilitre', 'milliliter',  '', 'volume', 1000",
-    "'Kg', 'kilogramme', 'kilogram',  '', 'poids', 1",
-    "'g', 'gramme', 'gram',  '', 'poids', 1000",
-    "'mg', 'milligramme', 'milligram',  '', 'poids', 1000000",
-  ]
-},
-{
-  name: 'languages',
-  columns : ["'code', 'label'"],
-  rows:[ "'de', 'Deutsh'",
-  "'en', 'English'",
-  "'fr', 'Français'",
-]
-},
-{
-  name: 'settings',
-  columns : ["'current_lang', 'current_lang_label', 'db_version'"],
-  rows:[ "'en', 'English', '1'"
-]
-},
+      "'Farine de maïs', 'Cornflour',  '', '0.6', 1"  ]
+    },
+    {
+      name: 'types', // Type d'unité pour la conversion
+      columns : ["'code', 'name_fr', 'name_en', 'name_de', 'type', 'rapport'"],
+      rows:[ "'L', 'litre', 'liter',  '', 'volume', 1",
+      "'Dl', 'décilitre', 'deciliter',  '', 'volume', 10",
+      "'Cl', 'centilitre', 'centiliter',  '', 'volume', 100",
+      "'Ml', 'millilitre', 'milliliter',  '', 'volume', 1000",
+      "'Kg', 'kilogramme', 'kilogram',  '', 'poids', 1",
+      "'g', 'gramme', 'gram',  '', 'poids', 1000",
+      "'mg', 'milligramme', 'milligram',  '', 'poids', 1000000"]
+    },
+    {
+      name: 'languages',
+      columns : ["'code', 'label'"],
+      rows:[ "'de', 'Deutsh'",
+      "'en', 'English'",
+      "'fr', 'Français'"]
+    },
+    {
+      name: 'settings',
+      columns : ["'current_lang', 'current_lang_label', 'db_version'"],
+      rows:[ "'en', 'English', '1'"]
+    },
 
-]
+  ]
 });

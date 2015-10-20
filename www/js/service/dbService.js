@@ -93,6 +93,7 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
     return q.promise;
   }
 
+
   // Methodes publiques
   var initDB = function() {
     $log.debug("Initialisation de la BDD");
