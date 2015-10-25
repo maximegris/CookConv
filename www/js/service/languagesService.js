@@ -44,13 +44,13 @@ angular.module('languages.service', [])
 
   };
 
-  var updateCurrent = function(language) {
+  var updateCurrentLanguage = function(language) {
 
     var q = $q.defer();
 
     if(_isWebView) {
 
-      var dbQuery = 'UPDATE settings SET current_lang = ?, current_lang_label = (SELECT label FROM languages WHERE code = ?)';
+      var dbQuery = 'UPDATE settings SET current_lang = ?, current_lang_label = (SELECT label FROM languages WHERE code = ?), current_unit_label = (SELECT name_' + language  + ' FROM unit_type WHERE code = (SELECT current_unit FROM settings))';
 
       $cordovaSQLite.execute(_db, dbQuery, [language, language])
       .then(function() {
@@ -71,7 +71,7 @@ angular.module('languages.service', [])
 
   return {
     getLanguages:getLanguages,
-    updateCurrent:updateCurrent
+    updateCurrentLanguage:updateCurrentLanguage
   };
 
 });

@@ -7700,6 +7700,16 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+/*
+    CSS styles to eliminate the annoying flickering header when changing tabs in an Ionic app on Android:
+    http://forum.ionicframework.com/t/flickering-when-navigating-via-tabs-on-android/27281/2
+*/
+.platform-android .header-item.title {
+  transition-duration: 0ms; }
+
+.platform-android .header-item.buttons {
+  transition-duration: 0ms; }
+
 .item-input {
   padding: 2px 0px 2px 16px; }
 
@@ -7715,9 +7725,10 @@ a.button {
 #from-to {
   margin-top: 5px; }
   #from-to span, #from-to input {
-    background-color: #fff; }
+    background-color: #fff;
+    padding-right: 10px; }
   #from-to label .input-label {
-    width: 50px; }
+    width: 100px; }
 
 .right {
   text-align: right; }

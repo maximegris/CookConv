@@ -6,6 +6,14 @@ angular.module('savings.controller', ['savings.service']
 
     $scope.savings = _savings;
 
- });
+  });
+
+  $scope.removeSaving = function($index, saving) {
+    Savings.removeSaving(saving).then(function() {
+
+      $scope.savings.splice($index, 1);
+
+    });
+  };
 
 });

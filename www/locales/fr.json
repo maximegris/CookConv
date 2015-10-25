@@ -10,6 +10,7 @@
   "VIEW_SAVINGS" : "CookConv - Sauvegardes",
   "VIEW_SETTINGS" : "CookConv - Paramètres",
   "VIEW_LANGUAGES" : "CookConv - Langues",
+  "VIEW_UNITS" : "CookConv - Unités de mesure",
 
   "FROM" : "De",
   "TO" : "Vers",
@@ -19,6 +20,8 @@
 
   "SELECT_LANGUAGE" : "Selectionner une langue",
   "SELECT_LANGUAGE_LABEL" :" Langue courante : ",
+  "SELECT_UNIT" : "Choisir l'unité de mesure",
+  "SELECT_UNIT_LABEL" :"Unité courante : ",
   "VERSION_APP" : "Version de l'application",
   "MANAGE_PART" : "Gérer ma liste d'ingrédients (PRO)",
   "MANAGE_INGREDIENTS" : "Gestion des ingrédients",

@@ -13,18 +13,17 @@ var ngAnnotate = require('gulp-ng-annotate'); // Enable ng-strict-di (injection)
 var useref = require('gulp-useref'); // Concatenate js and css files
 
 var paths = {
-  sass: ['./scss/**/*.scss'],
+  sass: ['./scss/ionic.app.scss'],
   js : ['./www/js/**/*.js'],
   jsapp : ['./www/js/**/*.js', '!./www/js/vendor/**/*.js', '!./www/js/ng-cordova.min.js'],
-  ng_annotate: ['./www/js/**/*.js'],
   tpl : ['./www/templates/**/*.html'],
   useref: ['./www/*.html']
 };
 
-gulp.task('default', ['sass', 'lint', 'templatecache',  'ng_annotate', 'useref']);
+gulp.task('default', ['useref']);
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
+  gulp.src(paths.sass)
     .pipe(sass({
       errLogToConsole: true
     }))
@@ -52,15 +51,15 @@ gulp.task('templatecache', function (done) {
   });
 
   gulp.task('ng_annotate', function (done) {
-   gulp.src(paths.ng_annotate)
+   gulp.src(paths.js)
      .pipe(ngAnnotate({single_quotes: true}))
      .pipe(gulp.dest('./www/dist/dist_js/app'))
      .on('end', done);
  });
 
- gulp.task('useref', function (done) {
+ gulp.task('useref', ['sass', 'lint', 'templatecache',  'ng_annotate'], function (done) {
     var assets = useref.assets();
-    gulp.src('./www/*.html')
+    gulp.src(paths.useref)
       .pipe(assets)
       .pipe(assets.restore())
       .pipe(useref())
@@ -68,11 +67,10 @@ gulp.task('templatecache', function (done) {
       .on('end', done);
   });
 
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
-  gulp.watch(paths.js, ['lint']);
-  gulp.watch(paths.tpl, ['templatecache']);
-  gulp.watch(paths.ng_annotate, ['ng_annotate']);
+gulp.task('watch', ['useref'],  function() {
+  gulp.watch(paths.sass, ['useref']);
+  gulp.watch(paths.js, ['useref']);
+  gulp.watch(paths.tpl, ['useref']);
   gulp.watch(paths.useref, ['useref']);
 });
 

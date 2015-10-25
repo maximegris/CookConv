@@ -71,9 +71,34 @@ angular.module('savings.service', ['ionic', 'ngCordova']
       return q.promise;
     };
 
+    var removeSaving = function(_saving) {
+
+      var q = $q.defer();
+
+      if(_isWebView) {
+
+        var dbQuery = 'DELETE FROM savings WHERE id = ?';
+
+        $cordovaSQLite.execute(_db, dbQuery, [_saving.id])
+        .then(function() {
+          q.resolve();
+        },
+        function(error) {
+          q.reject(error);
+        });
+
+      } // Fallback si pas de BDD disponible
+      else {
+        q.resolve();
+      }
+
+      return q.promise;
+    };
+
     return {
       getSavings:getSavings,
-      addSaving:addSaving
+      addSaving:addSaving,
+      removeSaving:removeSaving
     };
 
   });

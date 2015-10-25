@@ -6,7 +6,7 @@
         <strong><div id="ingredient">{{saving.ingredient}}</div></strong>
         <span>{{saving.fromVal}}</span> <span>{{saving.fromType}}</span> <i class="ion-arrow-right-c"></i>
         <span>{{saving.toVal}}</span> <span>{{saving.toType}}</span>
-        <i class="icon ion-trash-a assertive" ng-click="removeSaving(saving)"></i>
+        <i class="icon ion-trash-a assertive" ng-click="removeSaving($index, saving)"></i>
 
       </ion-item>
     </ion-list>

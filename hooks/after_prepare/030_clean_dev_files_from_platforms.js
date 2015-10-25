@@ -26,7 +26,7 @@ var deleteFolderRecursive = function(removePath) {
 if (rootdir) {
 
   // list of dev folders to delete from platform folder
-  var foldersToDelete = ['css', 'js'/*, 'lib'*/, 'templates', 'dist/dist_js/app'];
+  var foldersToDelete = ['css', 'js'/*, 'lib'*/, 'templates'];
 
   // go through each of the platform directories that have been prepared
   var platforms = (process.env.CORDOVA_PLATFORMS ? process.env.CORDOVA_PLATFORMS.split(',') : []);

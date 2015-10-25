@@ -6,6 +6,7 @@ angular.module('settings.controller', [])
   // scope
   $scope.settings = {
     lang: $rootScope.settings.current_lang_label,
+    type: $rootScope.settings.current_unit_label
   };
 
 });

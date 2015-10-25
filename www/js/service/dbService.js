@@ -76,18 +76,19 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
     var q = $q.defer();
 
     if(_isWebView) {
-      var dbQuery = 'SELECT current_lang, current_lang_label, db_version FROM settings';
+      var dbQuery = 'SELECT current_lang, current_lang_label, current_unit, current_unit_label, db_version FROM settings';
 
       $q.when($cordovaSQLite.execute(_db, dbQuery))
       .then(function(res) {
-        q.resolve({current_lang : res.rows.item(0).current_lang , current_lang_label : res.rows.item(0).current_lang_label , db_version : res.rows.item(0).db_version });
+        q.resolve({current_lang : res.rows.item(0).current_lang , current_lang_label : res.rows.item(0).current_lang_label ,
+          current_unit : res.rows.item(0).current_unit , current_unit_label : res.rows.item(0).current_unit_label ,  db_version : res.rows.item(0).db_version });
       },
       function(error) {
         q.reject(error);
       });
 
     } else {
-      q.resolve({current_lang : 'en', current_lang_label : 'English', db_version : 1});
+      q.resolve({current_lang : 'fr', current_lang_label : 'Français', current_unit : 'M', current_unit_label: 'Métrique', db_version : 1});
     }
 
     return q.promise;
@@ -127,7 +128,7 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
     if(init) {
       // On initialise la table settings avec la base langue
 
-      Languages.updateCurrent($translate.use())
+      Languages.updateCurrentLanguage($translate.use())
       .then(function(){
         return $q.all([getSettings(), Ingredients.getIngredients(), Types.getTypes()]);
       },

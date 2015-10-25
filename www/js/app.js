@@ -1,10 +1,6 @@
 var _db = null;
 
-angular.module('starter', ['ionic', 'ngCordova',
-'pascalprecht.translate',
-'app.directives',
-'db.service',
-'calculator.controller', 'savings.controller', 'settings.controller', 'settings.lang.controller', 'templates'])
+angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.directives', 'db.service', 'calculator.controller', 'savings.controller', 'settings.controller', 'settings.lang.controller', 'settings.unit.controller', 'templates'])
 
 .run(function($ionicPlatform, $cordovaSQLite) {
   'use strict';
@@ -21,7 +17,7 @@ angular.module('starter', ['ionic', 'ngCordova',
     }
 
     if(window.cordova){
-      $cordovaSQLite.deleteDB("cookconv.db");
+      //$cordovaSQLite.deleteDB("cookconv.db");
       _db = $cordovaSQLite.openDB("cookconv.db");
     }
     else {
@@ -74,6 +70,7 @@ angular.module('starter', ['ionic', 'ngCordova',
           $rootScope.settings = success[0];
           $rootScope.ingredients = success[1];
           $rootScope.types  = success[2];
+
         }, function(error) { alert('Failed getContextApplication: ' +  JSON.stringify(error)); });
       }
     }
@@ -116,6 +113,16 @@ angular.module('starter', ['ionic', 'ngCordova',
       'tab-parameters': {
         templateUrl: 'parameters-lang.html',
         controller: 'SettingsLangCtrl'
+      }
+    }
+
+  }).state('tab.parameters-unit', {
+
+    url: '/parameter/unit',
+    views: {
+      'tab-parameters': {
+        templateUrl: 'parameters-unit.html',
+        controller: 'SettingsUnitCtrl'
       }
     }
 

@@ -13,7 +13,7 @@ var rootdir = process.argv[2];
 if (rootdir) {
 
   // list of files and folders to move from www/dist to www/
-  var toMove = ['dist_css', 'dist_js', 'index.html'];
+  var toMove = ['dist_css', 'dist_js/app.js', 'index.html'];
 
   // go through each of the platform directories that have been prepared
   var platforms = (process.env.CORDOVA_PLATFORMS ? process.env.CORDOVA_PLATFORMS.split(',') : []);

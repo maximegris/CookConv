@@ -25,7 +25,7 @@ angular.module('settings.lang.controller', ['languages.service', 'db.service'])
         alert("Error update Language" + error);
         $rootScope.hide();
       });
-
+      
     }
   }
 

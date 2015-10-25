@@ -1,0 +1,7 @@
+<ion-view view-title="{{ 'VIEW_UNITS' | translate }}" hide-tabs="true">
+  <ion-content>
+    <ion-list>
+      <ion-radio ng-model="current.unit" ng-repeat="unit in units track by unit.code" ng-value="unit.code" name="{{unit.code}}"> {{unit.name}} </ion-radio>
+    </ion-list>
+  </ion-content>
+</ion-view>
