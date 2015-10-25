@@ -7701,8 +7701,8 @@ a.button {
   transition-duration: 0s; }
 
 /*
-    CSS styles to eliminate the annoying flickering header when changing tabs in an Ionic app on Android:
-    http://forum.ionicframework.com/t/flickering-when-navigating-via-tabs-on-android/27281/2
+CSS styles to eliminate the annoying flickering header when changing tabs in an Ionic app on Android:
+http://forum.ionicframework.com/t/flickering-when-navigating-via-tabs-on-android/27281/2
 */
 .platform-android .header-item.title {
   transition-duration: 0ms; }
@@ -7712,6 +7712,9 @@ a.button {
 
 .item-input {
   padding: 2px 0px 2px 16px; }
+
+.hide-popup-head .popup-head {
+  display: none; }
 
 #loading-spinner .spinner svg {
   width: 28px;
@@ -7726,7 +7729,7 @@ a.button {
   margin-top: 5px; }
   #from-to span, #from-to input {
     background-color: #fff;
-    padding-right: 10px; }
+    padding-right: 24px; }
   #from-to label .input-label {
     width: 100px; }
 
@@ -7753,13 +7756,16 @@ a.button {
 #criteria-list .button {
   min-height: 32px;
   line-height: 32px; }
-#criteria-list .button-block, #criteria-list .row, #criteria-list .col {
-  padding: 5px 5px 5px 5px;
+#criteria-list .row, #criteria-list .col {
+  padding: 0;
+  margin: 0; }
+#criteria-list .button-block {
+  padding: 1px 2px 2px 2px;
   margin: 0; }
 #criteria-list .button-block:last-child, #criteria-list .col:last-child {
-  padding: 5px 0px 5px 5px; }
+  padding: 2px 0px 2px 2px; }
 #criteria-list .button-block:first-child, #criteria-list .col:first-child {
-  padding: 5px 5px 5px 0px; }
+  padding: 2px 0px 2px 0px; }
 
 #list-savings #ingredient {
   width: 150px; }

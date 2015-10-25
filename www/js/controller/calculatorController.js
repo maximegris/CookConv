@@ -24,11 +24,11 @@ angular.module('calculator.controller', ['savings.service']
         // On compare les types des mesures pour savoir comment on effectue le calcul de conversion
         // Utilisation de Math.floor & facteur pour afficher correctement les valeurs (meme toutes petites soient elles)
         if(_from.type === _to.type) {
-          $scope.current.to = Math.floor(1000000 * (_from_val * _to.rapport / _from.rapport)) / 1000000;
+          $scope.current.to = (Math.floor(1000000 * (_from_val * _to.rapport / _from.rapport)) / 1000000).toString();
         } else if (_from.type === "poids") {
-          $scope.current.to = Math.floor(1000000 * (_from_val * _to.rapport / (_from.rapport * _ingredient.masse_volumique))) / 1000000;
+          $scope.current.to = (Math.floor(1000000 * (_from_val * _to.rapport / (_from.rapport * _ingredient.masse_volumique))) / 1000000).toString();
         } else {
-          $scope.current.to = Math.floor(1000000 * (_from_val * _to.rapport * _ingredient.masse_volumique / _from.rapport)) / 1000000;
+          $scope.current.to = (Math.floor(1000000 * (_from_val * _to.rapport * _ingredient.masse_volumique / _from.rapport)) / 1000000).toString();
         }
       }
     }
@@ -36,20 +36,26 @@ angular.module('calculator.controller', ['savings.service']
 
   // scope
   $scope.addValCalc = function(value) {
-    if($scope.current.from === "0" && value !== "0") {
 
-      if(value === ".") {
-        $scope.current.from = "0.";
-      } else {
-        $scope.current.from = value;
+    var lengthVal = $scope.current.from.length;
+
+
+    if(lengthVal <= 5) {
+      if($scope.current.from === "0" && value !== "0") {
+
+        if(value === ".") {
+          $scope.current.from = "0.";
+        } else {
+          $scope.current.from = value;
+        }
+
+      } else if ($scope.current.from !== "0") {
+
+        if(value !== "." || (value === "." && lengthVal !== 5 && $scope.current.from.indexOf(".") === -1)) {
+          $scope.current.from += value;
+        }
+
       }
-
-    } else if ($scope.current.from !== "0") {
-
-      if(value !== "." || (value === "." && $scope.current.from.indexOf(".") === -1)) {
-        $scope.current.from += value;
-      }
-
     }
 
     calculateConversion();
@@ -78,8 +84,8 @@ angular.module('calculator.controller', ['savings.service']
     $scope.current.from_type = $scope.current.to_type;
     $scope.current.to_type = tmp_type;
 
-    $scope.current.from = $scope.current.to;
-    $scope.current.to = tmp;
+    $scope.current.from = $scope.current.to.toString();
+    $scope.current.to = tmp.toString();
 
   };
 
@@ -101,12 +107,12 @@ angular.module('calculator.controller', ['savings.service']
 
   $scope.showFromType = function() {
     var confirmPopup = $ionicPopup.show({
-      template: '<ion-list> <ion-radio ng-model="current.from_type" ng-repeat="type in types track by type.id" ng-value="type" name="{{type.id}}"> {{type.name}} </ion-radio> </ion-list>',
-      title: 'Select a measure (FROM)',
+      templateUrl: 'popup-from.html',
+      cssClass: 'hide-popup-head',
       scope: $scope,
       buttons: [
         {
-          text: '<b>Back</b>',
+          text: '<b>OK</b>',
           type: 'button-positive'
         }
       ]
@@ -118,12 +124,29 @@ angular.module('calculator.controller', ['savings.service']
 
   $scope.showToType = function() {
     var confirmPopup = $ionicPopup.show({
-      template: '<ion-list> <ion-radio ng-model="current.to_type" ng-repeat="type in types track by type.id" ng-value="type" name="{{type.id}}"> {{type.name}} </ion-radio> </ion-list>',
-      title: 'Select a measure (TO)',
+      templateUrl: 'popup-to.html',
+      cssClass: 'hide-popup-head',
       scope: $scope,
       buttons: [
         {
-          text: '<b>Back</b>',
+          text: '<b>OK</b>',
+          type: 'button-positive'
+        }
+      ]
+    });
+    confirmPopup.then(function() {
+
+    });
+  };
+
+  $scope.showIngredient = function() {
+    var confirmPopup = $ionicPopup.show({
+      templateUrl: 'popup-ingredient.html',
+      cssClass: 'hide-popup-head',
+      scope: $scope,
+      buttons: [
+        {
+          text: '<b>OK</b>',
           type: 'button-positive'
         }
       ]
@@ -162,7 +185,6 @@ angular.module('calculator.controller', ['savings.service']
 
 
   if(window.cordova) {
-    alert("1");
     setTimeout($cordovaSplashscreen.hide(), 1000);
   }
 

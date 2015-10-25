@@ -16,12 +16,14 @@
 
 
     <div id="criteria-list">
-      <label class="item item-input item-select">
-        <div class="input-label">
-          {{ 'INGREDIENT_SELECTED' | translate }}
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-dark" ng-click="showIngredient()">
+            {{current.ingredient.name}}
+          </button>
         </div>
-        <select ng-model="current.ingredient" ng-options="ingredient.name for ingredient in ingredients track by ingredient.id"></select>
-      </label>
+      </div>
+      <!--  <select ng-model="current.ingredient" ng-options="ingredient.name for ingredient in ingredients track by ingredient.id"></select>-->
 
       <div class="row">
         <div class="col">

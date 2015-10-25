@@ -1,0 +1,4 @@
+<ion-list>
+  <ion-radio ng-model="current.to_type" ng-repeat="type in types track by type.id" ng-value="type" name="{{type.id}}"> {{type.name}}
+  </ion-radio>
+</ion-list>

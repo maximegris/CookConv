@@ -17,7 +17,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
     }
 
     if(window.cordova){
-      //$cordovaSQLite.deleteDB("cookconv.db");
+      $cordovaSQLite.deleteDB("cookconv.db");
       _db = $cordovaSQLite.openDB("cookconv.db");
     }
     else {
