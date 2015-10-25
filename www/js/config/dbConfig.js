@@ -101,14 +101,6 @@ angular.module('db.config', [])
       "'', '',  '', '0.6', 1",
       "'', '',  '', '0.6', 1",
       "'', '',  '', '0.6', 1",
-      "'', '',  '', '0.6', 1",
-      "'', '',  '', '0.6', 1",
-      "'', '',  '', '0.6', 1",
-      "'', '',  '', '0.6', 1",
-      "'', '',  '', '0.6', 1",
-      "'', '',  '', '0.6', 1",
-      "'', '',  '', '0.6', 1",
-      "'', '',  '', '0.6', 1",
       "'', '',  '', '0.6', 1" ]
     },
     {
@@ -136,7 +128,7 @@ angular.module('db.config', [])
 
           "'tsp', 'cuillère café', 'teaspoon',  '', 'volume', 'A', 202.884136211058",
           "'Tbsp', 'cuillère soupe', 'tablespoon',  '', 'volume', 'A', 67.688045403686",
-          "'oz US', 'once liquide', 'fuild ounce',  '', 'volume', 'A', 33.814022701843",
+          "'fl oz US', 'once liquide', 'fuild ounce',  '', 'volume', 'A', 33.814022701843",
           "'cp US', 'tasse', 'cup',  '', 'volume', 'A', 4.226752837730",
           "'pt US', 'pinte', 'pint',  '', 'volume', 'A', 2.113376418865",
           "'qt US', 'quart', 'quart',  '', 'volume', 'A', 1.056688209433",
@@ -146,7 +138,7 @@ angular.module('db.config', [])
 
           "'tsp', 'cuillère café', 'teaspoon',  '', 'volume', 'I', 202.884136211058",
           "'Tbsp', 'cuillère soupe', 'tablespoon',  '', 'volume', 'I', 67.688045403686",
-          "'oz UK', 'once liquide', 'US fuild ounce',  '', 'volume', 'I', 35.222429643197",
+          "'fl oz UK', 'once liquide', 'US fuild ounce',  '', 'volume', 'I', 35.222429643197",
           "'cp UK', 'tasse', 'cup',  '', 'volume', 'I', 3.531938659055",
           "'pt UK', 'pinte', 'pint',  '', 'volume', 'I', 1.733667122043",
           "'qt UK', 'quart', 'quart',  '', 'volume', 'I', 0.880591757661",

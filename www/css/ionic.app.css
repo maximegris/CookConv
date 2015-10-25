@@ -7727,11 +7727,14 @@ http://forum.ionicframework.com/t/flickering-when-navigating-via-tabs-on-android
 
 #from-to {
   margin-top: 5px; }
-  #from-to span, #from-to input {
+  #from-to input {
+    background-color: #fff; }
+  #from-to .input-label-calc {
+    padding: 0;
     background-color: #fff;
-    padding-right: 24px; }
-  #from-to label .input-label {
-    width: 100px; }
+    color: #444;
+    font-size: 16px;
+    width: 90px; }
 
 .right {
   text-align: right; }
