@@ -14,7 +14,7 @@ angular.module('settings.unit.controller', ['types.service', 'db.service'])
 
       Types.updateCurrentUnitType($scope.current.unit)
       .then(function(success) {
-        return DBFactory.getContextApplication(true);
+        return DBFactory.getContextApplication(true, $translate.use());
       },
       function(error){
         alert("Error update unit" + error);

@@ -1,8 +1,8 @@
 angular.module('languages.service', [])
 .factory('Languages', function($ionicPlatform, $q, $log, $cordovaSQLite) {
   'use strict';
-  // Détection WebView ou non pour utiliser SQLite
-  var _isWebView = ionic.Platform.isWebView(),
+  // Détection WebView Android ou non pour utiliser SQLite
+  var _isWebView = ionic.Platform.isAndroid(),
 
   // Data pour le browser
   _languages = [{ code: 'de', label: 'Deutsch'},

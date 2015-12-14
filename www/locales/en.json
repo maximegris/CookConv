@@ -2,14 +2,14 @@
   "LOADER" : "Please wait...",
 
   "TAB_TITLE_CALCULATOR" : "Converter",
-  "TAB_TITLE_SAVINGS" : "Savings",
-  "TAB_TITLE_PARAMETERS" : "Settings",
+  "TAB_TITLE_SAVINGS" : "Backups",
+  "TAB_TITLE_PARAMETERS" : "Parameters",
 
   "VIEW_CALCULATOR" : "CookConv - Converter",
-  "VIEW_SAVINGS" : "CookConv - Savings",
-  "VIEW_SETTINGS" : "CookConv - Settings",
+  "VIEW_SAVINGS" : "CookConv - Backups",
+  "VIEW_SETTINGS" : "CookConv - Parameters",
   "VIEW_LANGUAGES" : "CookConv - Languages",
-  "VIEW_UNITS" : "CookConv - Units of measure",
+  "VIEW_UNITS" : "CookConv - Units of measurement",
 
   "FROM" : "From",
   "TO" : "To",
@@ -18,13 +18,13 @@
   "INV" : "Inv.",
 
   "SELECT_LANGUAGE" : "Select a language",
-  "SELECT_LANGUAGE_LABEL" :" Current language : ",
-  "SELECT_UNIT" : "Select a unit of measure",
-  "SELECT_UNIT_LABEL" :"Current unit of measure : ",
+  "SELECT_LANGUAGE_LABEL" :"Current language : ",
+  "SELECT_UNIT" : "Choose a unit of measurement",
+  "SELECT_UNIT_LABEL" :"Current unit : ",
   "VERSION_APP" : "Application version",
-  "MANAGE_PART" : "Manage my ingredients (PRO)",
-  "MANAGE_INGREDIENTS" : "Management of my ingredients",
-  "MANAGE_INGREDIENTS_LABEL" : "Add, modify, delete",
-  "REINIT_APP" :"Application initialization",
-  "REINIT_APP_LABEL" : "Delete all my personal datas"
+  "MANAGE_PART" : "Manage my list of ingredients (PRO)",
+  "MANAGE_INGREDIENTS" : "Ingredient management",
+  "MANAGE_INGREDIENTS_LABEL" : "Add Edit Delete",
+  "REINIT_APP" :"Reset application",
+  "REINIT_APP_LABEL" : "Delete my personal details"
 }

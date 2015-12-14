@@ -1,0 +1,30 @@
+{
+  "LOADER" : "请稍候...",
+
+  "TAB_TITLE_CALCULATOR" : "换算器",
+  "TAB_TITLE_SAVINGS" : "保存",
+  "TAB_TITLE_PARAMETERS" : "设置",
+
+  "VIEW_CALCULATOR" : "CookConv - 换算器",
+  "VIEW_SAVINGS" : "CookConv - 保存",
+  "VIEW_SETTINGS" : "CookConv - 设置",
+  "VIEW_LANGUAGES" : "CookConv - 语言",
+  "VIEW_UNITS" : "CookConv - 计量单位",
+
+  "FROM" : "从",
+  "TO" : "到",
+  "INGREDIENT_SELECTED" : "成分",
+  "SAVE" : "Save",
+  "INV" : "Inv.",
+
+  "SELECT_LANGUAGE" : "选择语言",
+  "SELECT_LANGUAGE_LABEL" :"当前语言 : ",
+  "SELECT_UNIT" : "选择计量单位",
+  "SELECT_UNIT_LABEL" :"当前计量单位 : ",
+  "VERSION_APP" : "本程序版本",
+  "MANAGE_PART" : "管理我的配料表 (PRO)",
+  "MANAGE_INGREDIENTS" : "配料管理",
+  "MANAGE_INGREDIENTS_LABEL" : "添加 删除 编辑",
+  "REINIT_APP" :"程序初始化",
+  "REINIT_APP_LABEL" : "删除我的个人资料"
+}

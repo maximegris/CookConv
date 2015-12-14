@@ -1,5 +1,4 @@
 {
-
   "LOADER" : "Veuillez patienter...",
 
   "TAB_TITLE_CALCULATOR" : "Convertisseur",
@@ -19,7 +18,7 @@
   "INV" : "Inv.",
 
   "SELECT_LANGUAGE" : "Selectionner une langue",
-  "SELECT_LANGUAGE_LABEL" :" Langue courante : ",
+  "SELECT_LANGUAGE_LABEL" :"Langue courante : ",
   "SELECT_UNIT" : "Choisir l'unité de mesure",
   "SELECT_UNIT_LABEL" :"Unité courante : ",
   "VERSION_APP" : "Version de l'application",
@@ -27,6 +26,5 @@
   "MANAGE_INGREDIENTS" : "Gestion des ingrédients",
   "MANAGE_INGREDIENTS_LABEL" : "Ajouter, modifier, supprimer",
   "REINIT_APP" :"Réinitialiser l'application",
-  "REINIT_APP_LABEL" : "Suppression de mes données perso"
-
+  "REINIT_APP_LABEL" : "Suppression de mes données personnelles"
 }

@@ -7713,6 +7713,9 @@ http://forum.ionicframework.com/t/flickering-when-navigating-via-tabs-on-android
 .item-input {
   padding: 2px 0px 2px 16px; }
 
+.popup .list label.item.item-radio {
+  font-size: 14px; }
+
 .hide-popup-head .popup-head {
   display: none; }
 
@@ -7758,7 +7761,8 @@ http://forum.ionicframework.com/t/flickering-when-navigating-via-tabs-on-android
 
 #criteria-list .button {
   min-height: 32px;
-  line-height: 32px; }
+  line-height: 32px;
+  font-size: 15px; }
 #criteria-list .row, #criteria-list .col {
   padding: 0;
   margin: 0; }

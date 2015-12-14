@@ -3,8 +3,8 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
 ).factory('DBFactory', function($ionicPlatform, $q, $log, $cordovaSQLite, $translate, DB_CONFIG, Ingredients, Types, Languages) {
   'use strict';
 
-  // Détection WebView ou non pour utiliser SQLite
-  var _isWebView = ionic.Platform.isWebView();
+  // Détection WebView Android ou non pour utiliser SQLite
+  var _isWebView = ionic.Platform.isAndroid();
 
   // Methodes privees
   function isDBExists() {
@@ -63,6 +63,7 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
           q.resolve();
         },
         function(error) {
+          //alert(dbQuery);
           q.reject(error);
         });
       });
@@ -121,14 +122,13 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
     return q.promise;
   };
 
-  var getContextApplication = function(init) {
+  var getContextApplication = function(init, lang) {
 
     var q= $q.defer();
 
     if(init) {
       // On initialise la table settings avec la base langue
-
-      Languages.updateCurrentLanguage($translate.use())
+      Languages.updateCurrentLanguage(lang)
       .then(function(){
         return $q.all([getSettings(), Ingredients.getIngredients(), Types.getTypes()]);
       },

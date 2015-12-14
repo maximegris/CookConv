@@ -24,11 +24,11 @@ angular.module('calculator.controller', ['savings.service']
         // On compare les types des mesures pour savoir comment on effectue le calcul de conversion
         // Utilisation de Math.floor & facteur pour afficher correctement les valeurs (meme toutes petites soient elles)
         if(_from.type === _to.type) {
-          $scope.current.to = (Math.floor(1000000 * (_from_val * _to.rapport / _from.rapport)) / 1000000).toString();
+          $scope.current.to = (Math.floor(1000 * (_from_val * _to.rapport / _from.rapport)) / 1000).toString();
         } else if (_from.type === "poids") {
-          $scope.current.to = (Math.floor(1000000 * (_from_val * _to.rapport / (_from.rapport * _ingredient.masse_volumique))) / 1000000).toString();
+          $scope.current.to = (Math.floor(1000 * (_from_val * _to.rapport / (_from.rapport * _ingredient.masse_volumique))) / 1000).toString();
         } else {
-          $scope.current.to = (Math.floor(1000000 * (_from_val * _to.rapport * _ingredient.masse_volumique / _from.rapport)) / 1000000).toString();
+          $scope.current.to = (Math.floor(1000 * (_from_val * _to.rapport * _ingredient.masse_volumique / _from.rapport)) / 1000).toString();
         }
       }
     }

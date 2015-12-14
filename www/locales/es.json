@@ -1,0 +1,30 @@
+{
+  "LOADER" : "Espere...",
+
+  "TAB_TITLE_CALCULATOR" : "Convertidor",
+  "TAB_TITLE_SAVINGS" : "Copias de seguridad",
+  "TAB_TITLE_PARAMETERS" : "Parámetros",
+
+  "VIEW_CALCULATOR" : "CookConv - Convertidor",
+  "VIEW_SAVINGS" : "CookConv - Copias de seguridad",
+  "VIEW_SETTINGS" : "CookConv - Parámetros",
+  "VIEW_LANGUAGES" : "CookConv - Idiomas",
+  "VIEW_UNITS" : "CookConv - Unidades de medida",
+
+  "FROM" : "De",
+  "TO" : "A",
+  "INGREDIENT_SELECTED" : "Ingrediente",
+  "SAVE" : "Save.",
+  "INV" : "Inv.",
+
+  "SELECT_LANGUAGE" : "Seleccionar un idioma",
+  "SELECT_LANGUAGE_LABEL" :"Idioma actual : ",
+  "SELECT_UNIT" : "Seleccionar la unidad de medida",
+  "SELECT_UNIT_LABEL" :"Unidad actual : ",
+  "VERSION_APP" : "Versión de la aplicación",
+  "MANAGE_PART" : "Gestionar mi lista de ingredientes (PRO)",
+  "MANAGE_INGREDIENTS" : "Gestión de ingredientes",
+  "MANAGE_INGREDIENTS_LABEL" : "Añadir Modificar Eliminar",
+  "REINIT_APP" :"Reiniciar la aplicación",
+  "REINIT_APP_LABEL" : "Eliminar mis datos personales"
+}

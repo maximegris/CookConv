@@ -3,8 +3,8 @@ angular.module('savings.service', ['ionic', 'ngCordova']
 ).factory('Savings', function($ionicPlatform, $q, $log, $cordovaSQLite, $translate) {
   'use strict';
 
-  // Détection WebView ou non pour utiliser SQLite
-  var _isWebView = ionic.Platform.isWebView(),
+  // Détection WebView Android ou non pour utiliser SQLite
+  var _isWebView = ionic.Platform.isAndroid(),
 
   // Data pour le browser
   _savings = [{ id : "1", fromVal : "50", fromType : "Ml", toVal : "5", toType : "dL", ingredient : "Beure" },

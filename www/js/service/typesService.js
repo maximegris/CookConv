@@ -3,8 +3,8 @@ angular.module('types.service', ['ionic', 'ngCordova']
 ).factory('Types', function($ionicPlatform, $q, $log, $cordovaSQLite, $translate) {
   'use strict';
 
-  // Détection WebView ou non pour utiliser SQLite
-  var _isWebView = ionic.Platform.isWebView(),
+  // Détection WebView Android ou non pour utiliser SQLite
+  var _isWebView = ionic.Platform.isAndroid(),
 
   // Data pour le browser
   _types = [{

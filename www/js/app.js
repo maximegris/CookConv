@@ -2,10 +2,12 @@ var _db = null;
 
 angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.directives', 'db.service', 'calculator.controller', 'savings.controller', 'settings.controller', 'settings.lang.controller', 'settings.unit.controller', 'templates'])
 
-.run(function($ionicPlatform, $cordovaSQLite) {
+.run(function($ionicPlatform, $cordovaSQLite, $cordovaSplashscreen) {
   'use strict';
 
   $ionicPlatform.ready(function() {
+
+    $cordovaSplashscreen.show();
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -30,14 +32,13 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
 .config(function($ionicConfigProvider, $logProvider, $compileProvider, $stateProvider, $urlRouterProvider, $translateProvider) {
   'use strict';
 
-  if(ionic.Platform.isWebView()) {
+  if(ionic.Platform.isAndroid()) {
     $logProvider.debugEnabled(false);
     $compileProvider.debugInfoEnabled(false);
   }
 
   // Cache
   $ionicConfigProvider.views.maxCache(0);
-
   $ionicConfigProvider.tabs.position('bottom');
   $ionicConfigProvider.backButton.previousTitleText(false).text('');
 
@@ -46,10 +47,13 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
     prefix: 'locales/',
     suffix: '.json'
   })
-  .registerAvailableLanguageKeys(['en', 'fr', 'de'], {
-    'en' : 'en', 'en_*': 'en',
-    'fr' : 'fr', 'fr_*': 'fr',
-    'de' : 'de', 'de_*': 'de',
+  .registerAvailableLanguageKeys(['en', 'fr', 'de', 'es', 'pt' , 'zh'], {
+    'en' : 'en', 'en_*': 'en', 'EN_*': 'en', 'En_*': 'en',
+    'fr' : 'fr', 'fr_*': 'fr', 'FR_*': 'fr', 'Fr_*': 'fr',
+    'de' : 'de', 'de_*': 'de', 'DE_*': 'de', 'De_*': 'de',
+    'es' : 'es', 'es_*': 'es', 'ES_*': 'es', 'Es_*': 'es',
+    'pt' : 'pt', 'pt_*': 'pt', 'PT_*': 'pt', 'Pt_*': 'pt',
+    'zh' : 'zh', 'zh_*': 'zh', 'ZH_*': 'zh', 'Zh_*': 'zh',
   })
   .determinePreferredLanguage()
   .fallbackLanguage('en')
@@ -62,10 +66,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
     abstract: true,
     templateUrl: 'tabs.html',
     resolve: {
-      dbReady: function(DBFactory, $log, $rootScope){
+      dbReady: function(DBFactory, $log, $rootScope,$translate) {
         // (1) init the DB
         return DBFactory.initDB()
-        .then(function(success) { return DBFactory.getContextApplication(success); }, function(error) { alert('Failed initDB : ' + JSON.stringify(error));  })
+        .then(function(success) { return DBFactory.getContextApplication(success, $translate.use()); }, function(error) { alert('Failed initDB : ' + JSON.stringify(error));  })
         .then(function(success) {
           $rootScope.settings = success[0];
           $rootScope.ingredients = success[1];

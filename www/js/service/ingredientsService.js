@@ -2,8 +2,8 @@
 angular.module('ingredients.service', ['ionic', 'ngCordova']
 ).factory('Ingredients', function($ionicPlatform, $q, $log, $cordovaSQLite, $translate) {
   'use strict';
-  // Détection WebView ou non pour utiliser SQLite
-  var _isWebView = ionic.Platform.isWebView(),
+  // Détection WebView Android ou non pour utiliser SQLite
+  var _isWebView = ionic.Platform.isAndroid(),
 
   // Data pour le browser
   _ingredients = [{
