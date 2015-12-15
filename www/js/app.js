@@ -19,7 +19,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
     }
 
     if(window.cordova){
-      //$cordovaSQLite.deleteDB("cookconv.db");
+      $cordovaSQLite.deleteDB("cookconv.db");
       _db = $cordovaSQLite.openDB("cookconv.db");
     }
     else {
@@ -66,10 +66,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
     abstract: true,
     templateUrl: 'tabs.html',
     resolve: {
-      dbReady: function(DBFactory, $log, $rootScope,$translate) {
+      dbReady: function(DBFactory, $log, $rootScope, $translate) {
         // (1) init the DB
         return DBFactory.initDB()
-        .then(function(success) { return DBFactory.getContextApplication(success, $translate.use()); }, function(error) { alert('Failed initDB : ' + JSON.stringify(error));  })
+        .then(function(success) { return DBFactory.getContextApplication(success,  $translate.use()); }, function(error) { alert('Failed initDB : ' + JSON.stringify(error));  })
         .then(function(success) {
           $rootScope.settings = success[0];
           $rootScope.ingredients = success[1];
@@ -137,7 +137,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
 
 })
 .controller('LoadCtrl',
-function($rootScope, $ionicLoading, $translate) {
+function($rootScope, $ionicLoading) {
   'use strict';
   $rootScope.show = function() {
     $ionicLoading.show({

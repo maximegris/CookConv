@@ -22,9 +22,9 @@
   "SELECT_UNIT" : "Escolher unidade de medida",
   "SELECT_UNIT_LABEL" :"Unidade atual : ",
   "VERSION_APP" : "Versão  da aplicação",
-  "MANAGE_PART" : "Gerir a minha lista de ingredientes  (PRO)",
+  "MANAGE_PART" : "Gerir a minha lista de ingredientes (PRO)",
   "MANAGE_INGREDIENTS" : "Gestão dos ingredientes",
   "MANAGE_INGREDIENTS_LABEL" : "Adicionar Modificar Eliminar",
   "REINIT_APP" :"Reinicializar a aplicação",
-  "REINIT_APP_LABEL" : "Eliminar os meus dados pessoais"
+  "REINIT_APP_LABEL" : "Eliminação de dados pessoais"
 }

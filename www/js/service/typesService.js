@@ -1,102 +1,59 @@
 // Factory des types
 angular.module('types.service', ['ionic', 'ngCordova']
-).factory('Types', function($ionicPlatform, $q, $log, $cordovaSQLite, $translate) {
+).factory('Types', function($q, $log, $cordovaSQLite) {
   'use strict';
 
-  // Détection WebView Android ou non pour utiliser SQLite
-  var _isWebView = ionic.Platform.isAndroid(),
-
-  // Data pour le browser
-  _types = [{
-    id : 1, code: 'L', name: 'litre', type : 'volume', ref : 'M',  rapport : '1'
-  }, {
-    id : 2, code: 'dL', name: 'décilitre', type : 'volume', ref : 'M', rapport : '10'
-  }, {
-    id : 3, code: 'cL', name: 'centilitre', type : 'volume', ref : 'M', rapport : '100'
-  }, {
-    id : 4, code: 'mL', name: 'millilitre', type : 'volume', ref : 'M', rapport : '1000'
-  }, {
-    id : 5, code: 'Kg', name: 'kilogramme', type : 'poids', ref : 'M', rapport : '1'
-  }, {
-    id : 6, code: 'g', name: 'gramme', type : 'poids', ref : 'M', rapport : '1000'
-  }, {
-    id : 7, code: 'mg', name: 'milligramme', type : 'poids', ref : 'M', rapport : '1000000'
-  }],
-
-  _unit = [{
-    id : 1, code: 'M', name: 'Métrique'
-  }, {
-    id : 2, code: 'I', name: 'Imperial UK'
-  }, {
-    id : 3, code: 'A', name: 'Imperial US'
-  }];
-
   // Méthodes publiques
-  var getTypes = function() {
+  var getTypes = function(language) {
 
     var q = $q.defer();
 
-    if(_isWebView) {
+    var _types = [];
 
-      _types = [];
-      var dbQuery = "SELECT id, code, name_" +  $translate.use()  + ", type, rapport FROM types WHERE ref = (SELECT current_unit FROM settings) ORDER BY id";
+    var dbQuery = "SELECT id, code, name_" +  language  + ", type, rapport FROM types WHERE ref = (SELECT current_unit FROM settings) ORDER BY id";
 
-      $cordovaSQLite.execute(_db, dbQuery)
-      .then(function(res){
-        if(res.rows.length > 0) {
-          for (var i = 0; i < res.rows.length; i++) {
-            _types.push({ id : res.rows.item(i).id , code : res.rows.item(i).code , name : res.rows.item(i)["name_" +  $translate.use()] ,
-            type : res.rows.item(i).type , rapport : res.rows.item(i).rapport });
-          }
-
+    $cordovaSQLite.execute(_db, dbQuery)
+    .then(function(res){
+      if(res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) {
+          _types.push({ id : res.rows.item(i).id , code : res.rows.item(i).code , name : res.rows.item(i)["name_" +  language] ,
+          type : res.rows.item(i).type , rapport : res.rows.item(i).rapport });
         }
+      }
 
-        q.resolve(_types);
-
-      }, function (err) {
-        alert("Error get types : " + JSON.stringify(err));
-      });
-
-
-    } // Fallback si pas de BDD disponible
-    else {
       q.resolve(_types);
-    }
+
+    }, function (err) {
+      alert("Error get types : " + JSON.stringify(err));
+    });
 
     return q.promise;
 
   };
 
   // Méthodes publiques
-  var getUnitTypes = function() {
+  var getUnitTypes = function(language) {
 
     var q = $q.defer();
 
-    if(_isWebView) {
+    var _unit = [];
 
-      _unit = [];
-      var dbQuery = "SELECT id, code, name_" +  $translate.use()  + " FROM unit_type ORDER BY id";
+    var dbQuery = "SELECT id, code, name_" +  language  + " FROM unit_type ORDER BY id";
 
-      $cordovaSQLite.execute(_db, dbQuery)
-      .then(function(res){
-        if(res.rows.length > 0) {
-          for (var i = 0; i < res.rows.length; i++) {
-            _unit.push({ id : res.rows.item(i).id , code : res.rows.item(i).code , name : res.rows.item(i)["name_" +  $translate.use()] });
-          }
-
+    $cordovaSQLite.execute(_db, dbQuery)
+    .then(function(res){
+      if(res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) {
+          _unit.push({ id : res.rows.item(i).id , code : res.rows.item(i).code , name : res.rows.item(i)["name_" +  language] });
         }
 
-        q.resolve(_unit);
+      }
 
-      }, function (err) {
-        alert("Error get unit : " + JSON.stringify(err));
-      });
-
-
-    } // Fallback si pas de BDD disponible
-    else {
       q.resolve(_unit);
-    }
+
+    }, function (err) {
+      alert("Error get unit : " + JSON.stringify(err));
+    });
 
     return q.promise;
 
@@ -107,27 +64,21 @@ angular.module('types.service', ['ionic', 'ngCordova']
 
     var q = $q.defer();
 
-    if(_isWebView) {
+    var dbQuery = 'UPDATE settings SET current_unit = ?';
 
-      var dbQuery = 'UPDATE settings SET current_unit = ?';
-
-      $cordovaSQLite.execute(_db, dbQuery, [type])
-      .then(function() {
-        q.resolve();
-      },
-      function(error) {
-        q.reject(error);
-      });
-
-    } // Fallback si pas de BDD disponible
-    else {
+    $cordovaSQLite.execute(_db, dbQuery, [type])
+    .then(function() {
       q.resolve();
-    }
+    },
+    function(error) {
+      q.reject(error);
+    });
 
     return q.promise;
 
   };
 
+  // Public interface
   return {
     getTypes:getTypes,
     getUnitTypes:getUnitTypes,

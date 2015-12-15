@@ -26,5 +26,5 @@
   "MANAGE_INGREDIENTS" : "Gestion des ingrédients",
   "MANAGE_INGREDIENTS_LABEL" : "Ajouter, modifier, supprimer",
   "REINIT_APP" :"Réinitialiser l'application",
-  "REINIT_APP_LABEL" : "Suppression de mes données personnelles"
+  "REINIT_APP_LABEL" : "Suppression des données personnelles"
 }

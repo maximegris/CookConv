@@ -14,17 +14,22 @@ angular.module('settings.unit.controller', ['types.service', 'db.service'])
 
       Types.updateCurrentUnitType($scope.current.unit)
       .then(function(success) {
-        return DBFactory.getContextApplication(true, $translate.use());
+        return DBFactory.getContextApplication(true,  $translate.use());
       },
       function(error){
         alert("Error update unit" + error);
         $rootScope.hide();
       })
       .then(function(success) {
+
         $rootScope.settings = success[0];
         $rootScope.ingredients = success[1];
         $rootScope.types  = success[2];
-        $rootScope.hide();
+
+        // On laisse pendant 1 seconde la fenêtre pour montrer qu'il se passe quelquechose.
+        setTimeout(function() {
+          $rootScope.hide();
+        }, 1000);
       },
       function(error){
         alert("Error update unit" + error);
@@ -35,7 +40,7 @@ angular.module('settings.unit.controller', ['types.service', 'db.service'])
   }
 
   // scope
-  Types.getUnitTypes().then(function(_units) {
+  Types.getUnitTypes($translate.use()).then(function(_units) {
     $scope.current = {
       unit : $rootScope.settings.current_unit
     };
