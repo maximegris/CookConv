@@ -22,6 +22,7 @@ angular.module('settings.unit.controller', ['types.service', 'db.service'])
       })
       .then(function(success) {
 
+        $rootScope.init = true;
         $rootScope.settings = success[0];
         $rootScope.ingredients = success[1];
         $rootScope.types  = success[2];
@@ -29,7 +30,7 @@ angular.module('settings.unit.controller', ['types.service', 'db.service'])
         // On laisse pendant 1 seconde la fenêtre pour montrer qu'il se passe quelquechose.
         setTimeout(function() {
           $rootScope.hide();
-        }, 1000);
+        }, 500);
       },
       function(error){
         alert("Error update unit" + error);

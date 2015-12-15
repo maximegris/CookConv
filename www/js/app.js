@@ -71,6 +71,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
         return DBFactory.initDB()
         .then(function(success) { return DBFactory.getContextApplication(success,  $translate.use()); }, function(error) { alert('Failed initDB : ' + JSON.stringify(error));  })
         .then(function(success) {
+          $rootScope.init = true;
           $rootScope.settings = success[0];
           $rootScope.ingredients = success[1];
           $rootScope.types  = success[2];

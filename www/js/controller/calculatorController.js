@@ -11,24 +11,24 @@ angular.module('calculator.controller', ['savings.service']
 
   // Methodes privees
   function calculateConversion(){
-    if($scope.current) {
-      var _from_val = $scope.current.from;
-      var _from = $scope.current.from_type;
-      var _to = $scope.current.to_type;
-      var _ingredient = $scope.current.ingredient;
+    if($rootScope.converter) {
+      var _from_val = $rootScope.converter.from;
+      var _from = $rootScope.converter.from_type;
+      var _to = $rootScope.converter.to_type;
+      var _ingredient = $rootScope.converter.ingredient;
 
       if(_from_val === "0") {
-        $scope.current.to = "0";
+        $rootScope.converter.to = "0";
       } else {
 
         // On compare les types des mesures pour savoir comment on effectue le calcul de conversion
         // Utilisation de Math.floor & facteur pour afficher correctement les valeurs (meme toutes petites soient elles)
         if(_from.type === _to.type) {
-          $scope.current.to = (Math.floor(1000 * (_from_val * _to.rapport / _from.rapport)) / 1000).toString();
+          $rootScope.converter.to = (Math.floor(1000 * (_from_val * _to.rapport / _from.rapport)) / 1000).toString();
         } else if (_from.type === "poids") {
-          $scope.current.to = (Math.floor(1000 * (_from_val * _to.rapport / (_from.rapport * _ingredient.masse_volumique))) / 1000).toString();
+          $rootScope.converter.to = (Math.floor(1000 * (_from_val * _to.rapport / (_from.rapport * _ingredient.masse_volumique))) / 1000).toString();
         } else {
-          $scope.current.to = (Math.floor(1000 * (_from_val * _to.rapport * _ingredient.masse_volumique / _from.rapport)) / 1000).toString();
+          $rootScope.converter.to = (Math.floor(1000 * (_from_val * _to.rapport * _ingredient.masse_volumique / _from.rapport)) / 1000).toString();
         }
       }
     }
@@ -37,22 +37,22 @@ angular.module('calculator.controller', ['savings.service']
   // scope
   $scope.addValCalc = function(value) {
 
-    var lengthVal = $scope.current.from.length;
+    var lengthVal = $rootScope.converter.from.length;
 
 
     if(lengthVal <= 5) {
-      if($scope.current.from === "0" && value !== "0") {
+      if($rootScope.converter.from === "0" && value !== "0") {
 
         if(value === ".") {
-          $scope.current.from = "0.";
+          $rootScope.converter.from = "0.";
         } else {
-          $scope.current.from = value;
+          $rootScope.converter.from = value;
         }
 
-      } else if ($scope.current.from !== "0") {
+      } else if ($rootScope.converter.from !== "0") {
 
-        if(value !== "." || (value === "." && lengthVal !== 5 && $scope.current.from.indexOf(".") === -1)) {
-          $scope.current.from += value;
+        if(value !== "." || (value === "." && lengthVal !== 5 && $rootScope.converter.from.indexOf(".") === -1)) {
+          $rootScope.converter.from += value;
         }
 
       }
@@ -63,13 +63,13 @@ angular.module('calculator.controller', ['savings.service']
 
   $scope.removeValCalc = function(all) {
     if(all) {
-      $scope.current.from = "0";
-      $scope.current.to = "0";
+      $rootScope.converter.from = "0";
+      $rootScope.converter.to = "0";
     } else {
-      if($scope.current.from.length > 1) {
-        $scope.current.from = $scope.current.from.substring(0, $scope.current.from.length-1);
+      if($rootScope.converter.from.length > 1) {
+        $rootScope.converter.from = $rootScope.converter.from.substring(0, $rootScope.converter.from.length-1);
       } else {
-        $scope.current.from = "0";
+        $rootScope.converter.from = "0";
       }
 
       calculateConversion();
@@ -78,32 +78,35 @@ angular.module('calculator.controller', ['savings.service']
   };
 
   $scope.inverseVal = function() {
-    var tmp = $scope.current.from,
-    tmp_type = $scope.current.from_type;
+    var tmp = $rootScope.converter.from,
+    tmp_type = $rootScope.converter.from_type;
 
-    $scope.current.from_type = $scope.current.to_type;
-    $scope.current.to_type = tmp_type;
+    $rootScope.converter.from_type = $rootScope.converter.to_type;
+    $rootScope.converter.to_type = tmp_type;
 
-    $scope.current.from = $scope.current.to.toString();
-    $scope.current.to = tmp.toString();
-
-  };
-
-  $scope.current = {
-    "from" : "0",
-    "from_type": $rootScope.types[0],
-    "to" : "0",
-    "to_type": $rootScope.types[3],
-    "ingredient": $rootScope.ingredients[1],
-
-    getTypeFrom : function() {
-      return $scope.current.from_type.code;
-    },
-    getTypeTo : function() {
-      return $scope.current.to_type.code;
-    },
+    $rootScope.converter.from = $rootScope.converter.to.toString();
+    $rootScope.converter.to = tmp.toString();
 
   };
+
+  if($rootScope.init) {
+    $rootScope.init = false;
+
+    $rootScope.converter = {
+      "from" : "0",
+      "from_type": $rootScope.types[0],
+      "to" : "0",
+      "to_type": $rootScope.types[3],
+      "ingredient": $rootScope.ingredients[1],
+
+      getTypeFrom : function() {
+        return $rootScope.converter.from_type.code;
+      },
+      getTypeTo : function() {
+        return $rootScope.converter.to_type.code;
+      },
+    };
+  }
 
   $scope.showFromType = function() {
     var confirmPopup = $ionicPopup.show({
@@ -158,16 +161,16 @@ angular.module('calculator.controller', ['savings.service']
 
   $scope.saveConverter = function() {
 
-    if($scope.current.from !== "0"){
+    if($rootScope.converter.from !== "0"){
 
       $rootScope.show();
 
       var _item = {
-        fromVal : $scope.current.from,
-        fromType : $scope.current.from_type.code,
-        toVal : $scope.current.to,
-        toType : $scope.current.to_type.code,
-        ingredient : $scope.current.ingredient.id
+        fromVal : $rootScope.converter.from,
+        fromType : $rootScope.converter.from_type.code,
+        toVal : $rootScope.converter.to,
+        toType : $rootScope.converter.to_type.code,
+        ingredient : $rootScope.converter.ingredient.id
       };
 
       Savings.addSaving(_item).then(function(){
@@ -179,9 +182,9 @@ angular.module('calculator.controller', ['savings.service']
 
   };
 
-  $scope.$watch('current.from_type', calculateConversion, false);
-  $scope.$watch('current.to_type', calculateConversion, false);
-  $scope.$watch('current.ingredient', calculateConversion, false);
+  $scope.$watch('converter.from_type', calculateConversion, false);
+  $scope.$watch('converter.to_type', calculateConversion, false);
+  $scope.$watch('converter.ingredient', calculateConversion, false);
 
 
   if(window.cordova) {

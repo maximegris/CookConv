@@ -4,13 +4,13 @@
     <div id="from-to" class="list">
       <label class="item item-input">
         <span class="input-label-calc">{{ 'FROM' | translate }}</span>
-        <input type="text" class="right" ng-model="current.from" name="from" disabled>
-        <span class="input-label-calc center" ng-bind="current.getTypeFrom()"></span>
+        <input type="text" class="right" ng-model="$root.converter.from" name="from" disabled>
+        <span class="input-label-calc center" ng-bind="$root.converter.getTypeFrom()"></span>
       </label>
       <label class="item item-input">
         <span class="input-label-calc">{{ 'TO' | translate }}</span>
-        <input type="text" class="right" ng-model="current.to" name="to" disabled>
-        <span class="input-label-calc center" ng-bind="current.getTypeTo()"></span>
+        <input type="text" class="right" ng-model="$root.converter.to" name="to" disabled>
+        <span class="input-label-calc center" ng-bind="$root.converter.getTypeTo()"></span>
       </label>
     </div>
 
@@ -18,21 +18,21 @@
       <div class="row">
         <div class="col">
           <button class="button button-block button-dark" ng-click="showIngredient()">
-            {{current.ingredient.name}}
+            {{$root.converter.ingredient.name}}
           </button>
         </div>
       </div>
-      <!--  <select ng-model="current.ingredient" ng-options="ingredient.name for ingredient in ingredients track by ingredient.id"></select>-->
+      <!--  <select ng-model="$root.converter.ingredient" ng-options="ingredient.name for ingredient in ingredients track by ingredient.id"></select>-->
 
       <div class="row">
         <div class="col">
           <button class="button button-block button-dark" ng-click="showFromType()">
-            {{ 'FROM' | translate }} {{current.from_type.name}}
+            {{ 'FROM' | translate }} {{$root.converter.from_type.name}}
           </button>
         </div>
         <div class="col">
           <button class="button button-block button-dark" ng-click="showToType()">
-            {{ 'TO' | translate }} {{current.to_type.name}}
+            {{ 'TO' | translate }} {{$root.converter.to_type.name}}
           </button>
         </div>
       </div>
@@ -95,7 +95,7 @@
           <a class="button button-block " disabled>&nbsp;</a>
         </div>
         <div class="col">
-          <a class="button button-block button-balanced" ng-click="saveConverter()">{{ 'SAVE' | translate }}</a>
+          <a class="button button-block button-balanced" ng-click="save$root.converter()">{{ 'SAVE' | translate }}</a>
         </div>
       </div>
 

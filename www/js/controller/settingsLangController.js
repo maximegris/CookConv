@@ -14,15 +14,19 @@ angular.module('settings.lang.controller', ['languages.service', 'db.service'])
 
       DBFactory.getContextApplication(true, $scope.current.lang)
       .then(function(success) {
-        $translate.use($scope.current.lang);
-        $rootScope.settings = success[0];
-        $rootScope.ingredients = success[1];
-        $rootScope.types  = success[2];
+
+        if($translate.use() !== $scope.current.lang) {
+          $rootScope.init = true;
+          $translate.use($scope.current.lang);
+          $rootScope.settings = success[0];
+          $rootScope.ingredients = success[1];
+          $rootScope.types  = success[2];
+        }
 
         // On laisse pendant 1 seconde la fenêtre pour montrer qu'il se passe quelquechose.
         setTimeout(function() {
           $rootScope.hide();
-        }, 1000);
+        }, 500);
 
       },
       function(error){
