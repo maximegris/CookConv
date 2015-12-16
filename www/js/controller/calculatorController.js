@@ -1,10 +1,7 @@
 // Controller de l'onglet Calculator
 angular.module('calculator.controller', ['savings.service']
-).controller('CalculatorCtrl', function($controller, $rootScope, $scope, $q, $ionicPopup, $cordovaSplashscreen, Savings) {
+).controller('CalculatorCtrl', function($controller, $rootScope, $scope, $ionicPopup,  Savings) {
   'use strict';
-
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
   // IoC
   $controller('LoadCtrl');
@@ -185,10 +182,5 @@ angular.module('calculator.controller', ['savings.service']
   $scope.$watch('converter.from_type', calculateConversion, false);
   $scope.$watch('converter.to_type', calculateConversion, false);
   $scope.$watch('converter.ingredient', calculateConversion, false);
-
-
-  if(window.cordova) {
-    setTimeout($cordovaSplashscreen.hide(), 1000);
-  }
 
 });

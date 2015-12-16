@@ -12,7 +12,12 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
 
     $q.when($cordovaSQLite.execute(_db, dbQuery))
     .then(function(res) {
-      q.resolve({ current_lang : res.rows.item(0).current_lang, version : res.rows.item(0).db_version });
+      if(res && res.rows && res.rows.length > 0) {
+        q.resolve({ current_lang : res.rows.item(0).current_lang, version : res.rows.item(0).db_version });
+      } else {
+        q.reject();
+      }
+
     }, function() {
       q.reject();
     });
@@ -86,15 +91,15 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
     var q = $q.defer();
 
     $ionicPlatform.ready(function () {
-        isDBExists()
-        .then(function(_current) {
-          $translate.use(_current.current_lang);
-          q.resolve(false);
-        }, function() {
-          createDB()
-          .then(function() { return insertDB(); }, function(error) { q.reject(error); })
-          .then(function() { q.resolve(true); }, function(error) { q.reject(error); });
-        });
+      isDBExists()
+      .then(function(_current) {
+        $translate.use(_current.current_lang);
+        q.resolve(false);
+      }, function() {
+        createDB()
+        .then(function() { return insertDB(); }, function(error) { q.reject(error); })
+        .then(function() { q.resolve(true); }, function(error) { q.reject(error); });
+      });
     });
 
     return q.promise;

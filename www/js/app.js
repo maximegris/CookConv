@@ -6,8 +6,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
   'use strict';
 
   $ionicPlatform.ready(function() {
-
-    $cordovaSplashscreen.show();
+alert(window.cordova);
+    if(window.cordova){
+      $cordovaSplashscreen.show();
+    }
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -66,7 +68,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
     abstract: true,
     templateUrl: 'tabs.html',
     resolve: {
-      dbReady: function(DBFactory, $log, $rootScope, $translate) {
+      dbReady: function(DBFactory, $log, $rootScope, $translate, $cordovaSplashscreen) {
         // (1) init the DB
         return DBFactory.initDB()
         .then(function(success) { return DBFactory.getContextApplication(success,  $translate.use()); }, function(error) { alert('Failed initDB : ' + JSON.stringify(error));  })
@@ -75,6 +77,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
           $rootScope.settings = success[0];
           $rootScope.ingredients = success[1];
           $rootScope.types  = success[2];
+
+          if(window.cordova){
+            $cordovaSplashscreen.hide();
+          }
 
         }, function(error) { alert('Failed getContextApplication: ' +  JSON.stringify(error)); });
       }
