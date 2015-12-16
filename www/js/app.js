@@ -6,7 +6,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
   'use strict';
 
   $ionicPlatform.ready(function() {
-alert(window.cordova);
+
     if(window.cordova){
       $cordovaSplashscreen.show();
     }
