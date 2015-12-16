@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bower = require('bower');
+var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
@@ -50,14 +51,19 @@ gulp.task('templatecache', function (done) {
       .on('end', done);
   });
 
-  gulp.task('ng_annotate', function (done) {
+  gulp.task('clean', function (done) {
+    return gulp.src('./www/dist', {read: false})
+    .pipe(clean());
+  });
+
+  gulp.task('ng_annotate', [ 'clean' ], function (done) {
    gulp.src(paths.js)
      .pipe(ngAnnotate({single_quotes: true}))
      .pipe(gulp.dest('./www/dist/dist_js/app'))
      .on('end', done);
  });
 
- gulp.task('useref', ['sass', 'lint', 'templatecache',  'ng_annotate'], function (done) {
+ gulp.task('useref', ['sass', 'lint', 'templatecache', 'ng_annotate'], function (done) {
     var assets = useref.assets();
     gulp.src(paths.useref)
       .pipe(assets)
