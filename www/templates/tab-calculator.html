@@ -1,6 +1,5 @@
 <ion-view view-title="{{ 'VIEW_CALCULATOR' | translate }}" hide-tabs="false">
   <ion-content class="padding">
-
     <div id="from-to" class="list">
       <label class="item item-input">
         <span class="input-label-calc">{{ 'FROM' | translate }}</span>
@@ -13,7 +12,6 @@
         <span class="input-label-calc center" ng-bind="$root.converter.getTypeTo()"></span>
       </label>
     </div>
-
     <div id="criteria-list">
       <div class="row">
         <div class="col">
@@ -22,8 +20,6 @@
           </button>
         </div>
       </div>
-      <!--  <select ng-model="$root.converter.ingredient" ng-options="ingredient.name for ingredient in ingredients track by ingredient.id"></select>-->
-
       <div class="row">
         <div class="col">
           <button class="button button-block button-dark" ng-click="showFromType()">
@@ -37,7 +33,6 @@
         </div>
       </div>
     </div>
-
     <div id="calculator-key">
       <div class="row">
         <div class="col">
@@ -53,7 +48,6 @@
           <a class="button button-block button-outline button-assertive ion-ios-arrow-thin-left" ng-click="removeValCalc(0)"></a>
         </div>
       </div>
-
       <div class="row">
         <div class="col">
           <a class="button button-block button-outline button-dark" ng-click="addValCalc('4')">4</a>
@@ -68,7 +62,6 @@
           <a class="button button-block button-outline button-assertive" ng-click="removeValCalc(1)">AC</a>
         </div>
       </div>
-
       <div class="row">
         <div class="col">
           <a class="button button-block button-outline button-dark" ng-click="addValCalc('7')">7</a>
@@ -83,7 +76,6 @@
           <a class="button button-block button-outline button-assertive" ng-click="inverseVal()">{{ 'INV' | translate }}</a>
         </div>
       </div>
-
       <div class="row">
         <div class="col">
           <a class="button button-block button-outline button-dark" ng-click="addValCalc('.')">.</a>
@@ -95,11 +87,9 @@
           <a class="button button-block " disabled>&nbsp;</a>
         </div>
         <div class="col">
-          <a class="button button-block button-balanced" ng-click="save$root.converter()">{{ 'SAVE' | translate }}</a>
+          <a class="button button-block button-balanced" ng-click="saveConverter()">{{ 'SAVE' | translate }}</a>
         </div>
       </div>
-
     </div>
-
   </ion-content>
 </ion-view>
