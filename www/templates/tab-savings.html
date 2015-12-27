@@ -1,7 +1,7 @@
 <ion-view view-title="{{ 'VIEW_SAVINGS' | translate }}" hide-tabs="false">
   <ion-content>
     <ion-list id="list-savings">
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="saving in vm.savings track by saving.id" type="item-text-wrap">
+      <ion-item class="item-remove-animate item-icon-right" collection-repeat="saving in vm.savings track by saving.id" type="item-text-wrap">
         <strong><div id="ingredient">{{saving.ingredient}}</div></strong>
         <span>{{saving.fromVal}}</span> <span>{{saving.fromType}}</span> <i class="ion-arrow-right-c"></i>
         <span>{{saving.toVal}}</span> <span>{{saving.toType}}</span>

@@ -1,6 +1,6 @@
 // Controller de l'onglet Converter
 angular.module('calculator.controller', ['savings.service']
-).controller('CalculatorCtrl', function($controller, $scope, $rootScope, $ionicPopup,  Savings) {
+).controller('CalculatorCtrl', function($controller, $scope, $rootScope, $ionicPopup, Savings) {
   'use strict';
 
   var vm = this;

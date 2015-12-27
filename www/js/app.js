@@ -40,6 +40,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
   }
 
   // Cache
+  $ionicConfigProvider.views.transition('none');
   $ionicConfigProvider.views.maxCache(0);
   $ionicConfigProvider.tabs.position('bottom');
   $ionicConfigProvider.backButton.previousTitleText(false).text('');
