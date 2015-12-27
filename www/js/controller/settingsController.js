@@ -1,12 +1,12 @@
 // Contrller de l'onglet settings
 angular.module('settings.controller', [])
-.controller('SettingsCtrl',  function($scope, $rootScope, $log) {
+.controller('SettingsCtrl',  function($rootScope) {
   'use strict';
 
-  // scope
-  $scope.settings = {
-    lang: $rootScope.settings.current_lang_label,
-    type: $rootScope.settings.current_unit_label
+  var vm = this;
+
+  vm.settings = {
+    lang: $rootScope.settings.current_lang_label
   };
 
 });

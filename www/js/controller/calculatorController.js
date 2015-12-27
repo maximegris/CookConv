@@ -1,12 +1,47 @@
-// Controller de l'onglet Calculator
+// Controller de l'onglet Converter
 angular.module('calculator.controller', ['savings.service']
-).controller('CalculatorCtrl', function($controller, $rootScope, $scope, $ionicPopup,  Savings) {
+).controller('CalculatorCtrl', function($controller, $scope, $rootScope, $ionicPopup,  Savings) {
   'use strict';
+
+  var vm = this;
+
+  vm.addValCalc = addValCalc;
+  vm.inverseVal = inverseVal;
+  vm.removeValCalc = removeValCalc;
+  vm.saveConverter = saveConverter;
+  vm.showFromType = showFromType;
+  vm.showIngredient = showIngredient;
+  vm.showToType = showToType;
 
   // IoC
   $controller('LoadCtrl');
 
-  // Methodes privees
+  // Fonction d'écoute sur la vue
+  $scope.$watch('vm.converter.from_type', calculateConversion, false);
+  $scope.$watch('vm.converter.to_type', calculateConversion, false);
+  $scope.$watch('vm.converter.ingredient', calculateConversion, false);
+
+  // Initialisation des données
+  if($rootScope.init) {
+    $rootScope.init = false;
+
+    $rootScope.converter = {
+      "from" : "0",
+      "from_type": $rootScope.types[0],
+      "to" : "0",
+      "to_type": $rootScope.types[3],
+      "ingredient": $rootScope.ingredients[0],
+
+      getTypeFrom : function() {
+        return $rootScope.converter.from_type.code;
+      },
+      getTypeTo : function() {
+        return $rootScope.converter.to_type.code;
+      },
+    };
+  }
+
+  // Fonctions privées
   function calculateConversion(){
     if($rootScope.converter) {
       var _from_val = $rootScope.converter.from;
@@ -31,11 +66,9 @@ angular.module('calculator.controller', ['savings.service']
     }
   }
 
-  // scope
-  $scope.addValCalc = function(value) {
+  function addValCalc(value) {
 
     var lengthVal = $rootScope.converter.from.length;
-
 
     if(lengthVal <= 5) {
       if($rootScope.converter.from === "0" && value !== "0") {
@@ -56,9 +89,9 @@ angular.module('calculator.controller', ['savings.service']
     }
 
     calculateConversion();
-  };
+  }
 
-  $scope.removeValCalc = function(all) {
+  function removeValCalc(all) {
     if(all) {
       $rootScope.converter.from = "0";
       $rootScope.converter.to = "0";
@@ -72,9 +105,9 @@ angular.module('calculator.controller', ['savings.service']
       calculateConversion();
     }
 
-  };
+  }
 
-  $scope.inverseVal = function() {
+  function inverseVal() {
     var tmp = $rootScope.converter.from,
     tmp_type = $rootScope.converter.from_type;
 
@@ -84,30 +117,11 @@ angular.module('calculator.controller', ['savings.service']
     $rootScope.converter.from = $rootScope.converter.to.toString();
     $rootScope.converter.to = tmp.toString();
 
-  };
-
-  if($rootScope.init) {
-    $rootScope.init = false;
-
-    $rootScope.converter = {
-      "from" : "0",
-      "from_type": $rootScope.types[0],
-      "to" : "0",
-      "to_type": $rootScope.types[3],
-      "ingredient": $rootScope.ingredients[1],
-
-      getTypeFrom : function() {
-        return $rootScope.converter.from_type.code;
-      },
-      getTypeTo : function() {
-        return $rootScope.converter.to_type.code;
-      },
-    };
   }
 
-  $scope.showFromType = function() {
+function showFromType() {
     var confirmPopup = $ionicPopup.show({
-      templateUrl: 'popup-from.html',
+      templateUrl: 'modal/popup-from.html',
       cssClass: 'hide-popup-head',
       scope: $scope,
       buttons: [
@@ -120,11 +134,11 @@ angular.module('calculator.controller', ['savings.service']
     confirmPopup.then(function() {
 
     });
-  };
+  }
 
-  $scope.showToType = function() {
+   function showToType() {
     var confirmPopup = $ionicPopup.show({
-      templateUrl: 'popup-to.html',
+      templateUrl: 'modal/popup-to.html',
       cssClass: 'hide-popup-head',
       scope: $scope,
       buttons: [
@@ -137,11 +151,11 @@ angular.module('calculator.controller', ['savings.service']
     confirmPopup.then(function() {
 
     });
-  };
+  }
 
-  $scope.showIngredient = function() {
+  function showIngredient() {
     var confirmPopup = $ionicPopup.show({
-      templateUrl: 'popup-ingredient.html',
+      templateUrl: 'modal/popup-ingredient.html',
       cssClass: 'hide-popup-head',
       scope: $scope,
       buttons: [
@@ -154,9 +168,9 @@ angular.module('calculator.controller', ['savings.service']
     confirmPopup.then(function() {
 
     });
-  };
+  }
 
-  $scope.saveConverter = function() {
+  function saveConverter() {
 
     if($rootScope.converter.from !== "0"){
 
@@ -176,11 +190,6 @@ angular.module('calculator.controller', ['savings.service']
         alert(error);
       });
     }
-
-  };
-
-  $scope.$watch('converter.from_type', calculateConversion, false);
-  $scope.$watch('converter.to_type', calculateConversion, false);
-  $scope.$watch('converter.ingredient', calculateConversion, false);
+  }
 
 });

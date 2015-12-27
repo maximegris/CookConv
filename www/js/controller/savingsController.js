@@ -1,19 +1,22 @@
 // Controller de l'onglet Savings
 angular.module('savings.controller', ['savings.service']
-).controller('SavingsCtrl', function($scope, $translate, $ionicConfig, Savings) {
+).controller('SavingsCtrl', function(Savings) {
+  'use strict';
 
+  var vm = this;
+  vm.removeSaving = removeSaving;
+
+  // Chargement données
   Savings.getSavings().then(function(_savings) {
-
-    $scope.savings = _savings;
-
+    vm.savings = _savings;
   });
 
-  $scope.removeSaving = function($index, saving) {
+  // Fonctions privées
+  function removeSaving($index, saving) {
     Savings.removeSaving(saving).then(function() {
 
-      $scope.savings.splice($index, 1);
-
+      vm.savings.splice($index, 1);
     });
-  };
+  }
 
 });

@@ -33,7 +33,7 @@ angular.module('languages.service', [])
 
     var q = $q.defer();
 
-    var dbQuery = 'UPDATE settings SET current_lang = ?, current_lang_label = (SELECT label FROM languages WHERE code = ?), current_unit_label = (SELECT name_' + language  + ' FROM unit_type WHERE code = (SELECT current_unit FROM settings))';
+    var dbQuery = 'UPDATE settings SET current_lang = ?, current_lang_label = (SELECT label FROM languages WHERE code = ?)';
 
     $cordovaSQLite.execute(_db, dbQuery, [language, language])
     .then(function() {

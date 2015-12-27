@@ -1,16 +1,10 @@
 <ion-view view-title="{{ 'VIEW_SETTINGS' | translate }}" hide-tabs="false">
   <ion-content>
     <ion-list>
-      <a class="item item-icon-left item-icon-right" href="#/tab/parameter/lang">
+      <a class="item item-icon-left item-icon-right" href="#/tab/settings/lang">
         <i class="icon ion-chatbox-working"></i>
         <h2>{{ 'SELECT_LANGUAGE' | translate }}</h2>
-        <p>{{ 'SELECT_LANGUAGE_LABEL' | translate }} {{settings.lang}}</p>
-        <i class="icon ion-ios-arrow-forward"></i>
-      </a>
-      <a class="item item-icon-left item-icon-right" href="#/tab/parameter/unit">
-        <i class="icon ion-ios-calculator"></i>
-        <h2>{{ 'SELECT_UNIT' | translate }}</h2>
-        <p>{{ 'SELECT_UNIT_LABEL' | translate }} {{settings.type}}</p>
+        <p>{{ 'SELECT_LANGUAGE_LABEL' | translate }} {{vm.settings.lang}}</p>
         <i class="icon ion-ios-arrow-forward"></i>
       </a>
       <div class="item item-icon-left">

@@ -1,7 +1,0 @@
-<ion-view view-title="{{ 'VIEW_LANGUAGES' | translate }}" hide-tabs="true">
-  <ion-content>
-    <ion-list>
-      <ion-radio ng-model="current.lang" ng-repeat="language in languages track by language.code" ng-value="language.code" name="{{language.code}}"> {{language.label}} </ion-radio>
-    </ion-list>
-  </ion-content>
-</ion-view>

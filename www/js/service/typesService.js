@@ -10,7 +10,7 @@ angular.module('types.service', ['ionic', 'ngCordova']
 
     var _types = [];
 
-    var dbQuery = "SELECT id, code, name_" +  language  + ", type, rapport FROM types WHERE ref = (SELECT current_unit FROM settings) ORDER BY id";
+    var dbQuery = "SELECT id, code, name_" +  language  + ", type, rapport FROM types ORDER BY id";
 
     $cordovaSQLite.execute(_db, dbQuery)
     .then(function(res){
@@ -31,58 +31,9 @@ angular.module('types.service', ['ionic', 'ngCordova']
 
   };
 
-  // Méthodes publiques
-  var getUnitTypes = function(language) {
-
-    var q = $q.defer();
-
-    var _unit = [];
-
-    var dbQuery = "SELECT id, code, name_" +  language  + " FROM unit_type ORDER BY id";
-
-    $cordovaSQLite.execute(_db, dbQuery)
-    .then(function(res){
-      if(res.rows.length > 0) {
-        for (var i = 0; i < res.rows.length; i++) {
-          _unit.push({ id : res.rows.item(i).id , code : res.rows.item(i).code , name : res.rows.item(i)["name_" +  language] });
-        }
-
-      }
-
-      q.resolve(_unit);
-
-    }, function (err) {
-      alert("Error get unit : " + JSON.stringify(err));
-    });
-
-    return q.promise;
-
-  };
-
-
-  var updateCurrentUnitType = function(type) {
-
-    var q = $q.defer();
-
-    var dbQuery = 'UPDATE settings SET current_unit = ?';
-
-    $cordovaSQLite.execute(_db, dbQuery, [type])
-    .then(function() {
-      q.resolve();
-    },
-    function(error) {
-      q.reject(error);
-    });
-
-    return q.promise;
-
-  };
-
   // Public interface
   return {
-    getTypes:getTypes,
-    getUnitTypes:getUnitTypes,
-    updateCurrentUnitType:updateCurrentUnitType
+    getTypes:getTypes
   };
 
 });

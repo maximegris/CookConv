@@ -1,23 +1,37 @@
 // Contrller de l'onglet settings
 angular.module('settings.lang.controller', ['languages.service', 'db.service'])
-.controller('SettingsLangCtrl',  function($controller, $scope, $rootScope, $translate, $ionicConfig , Languages, DBFactory) {
+.controller('SettingsLangCtrl',  function($controller, $scope, $rootScope, $translate, Languages, DBFactory) {
   'use strict';
+
+  var langvm = this;
 
   // IoC
   $controller('LoadCtrl');
 
-  // Methodes privees
+  // Chargement des données
+  langvm.current = {
+    lang : $translate.use()
+  };
+
+  Languages.getLanguages().then(function(_languages) {
+
+    langvm.languages = _languages;
+
+    $scope.$watch('langvm.current.lang', changeLanguage, false);
+  });
+
+  // Fonctions privées
   function changeLanguage() {
-    if($scope.current) {
+    if(langvm.current) {
 
       $rootScope.show();
 
-      DBFactory.getContextApplication(true, $scope.current.lang)
+      DBFactory.getContextApplication(true, langvm.current.lang)
       .then(function(success) {
 
-        if($translate.use() !== $scope.current.lang) {
+        if($translate.use() !== langvm.current.lang) {
           $rootScope.init = true;
-          $translate.use($scope.current.lang);
+          $translate.use(langvm.current.lang);
           $rootScope.settings = success[0];
           $rootScope.ingredients = success[1];
           $rootScope.types  = success[2];
@@ -36,17 +50,5 @@ angular.module('settings.lang.controller', ['languages.service', 'db.service'])
 
     }
   }
-
-  // scope
-  Languages.getLanguages().then(function(_languages) {
-    $scope.current = {
-      lang : $translate.use()
-    };
-    $scope.languages = _languages;
-
-    $scope.$watch('current.lang', changeLanguage, false);
-  });
-
-
 
 });

@@ -1,6 +1,6 @@
 var _db = null;
 
-angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.directives', 'db.service', 'calculator.controller', 'savings.controller', 'settings.controller', 'settings.lang.controller', 'settings.unit.controller', 'templates'])
+angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.directives', 'db.service', 'calculator.controller', 'savings.controller', 'settings.controller', 'settings.lang.controller', 'templates'])
 
 .run(function($ionicPlatform, $cordovaSQLite, $cordovaSplashscreen) {
   'use strict';
@@ -22,10 +22,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
 
     if(window.cordova){
       //$cordovaSQLite.deleteDB("cookconv.db");
-      _db = $cordovaSQLite.openDB("cookconv.db");
+      _db = $cordovaSQLite.openDB("db.cookconv.db");
     }
     else {
-      _db = window.openDatabase("cookconv.db", '1.0', 'My app', -1);
+      _db = window.openDatabase("db.cookconv.db", '1.0', 'My app', -1);
     }
 
   });
@@ -93,47 +93,36 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
     views: {
       'tab-calculator': {
         templateUrl: 'tab-calculator.html',
-
-        controller: 'CalculatorCtrl'
+        controller: 'CalculatorCtrl as vm'
       }
     }
   })
 
-  .state('tab.save', {
-    url: '/save',
+  .state('tab.savings', {
+    url: '/savings',
     views : {
-      'tab-save': {
-        templateUrl: 'tab-save.html',
-        controller: 'SavingsCtrl'
+      'tab-savings': {
+        templateUrl: 'tab-savings.html',
+        controller: 'SavingsCtrl as vm'
       }
     }
   })
-  .state('tab.parameters', {
-    url: '/parameters',
+  .state('tab.settings', {
+    url: '/settings',
     views: {
-      'tab-parameters': {
-        templateUrl: 'tab-parameters.html',
-        controller: 'SettingsCtrl'
+      'tab-settings': {
+        templateUrl: 'tab-settings.html',
+        controller: 'SettingsCtrl as vm'
       }
     }
   })
-  .state('tab.parameters-lang', {
+  .state('tab.settings-lang', {
 
-    url: '/parameter/lang',
+    url: '/settings/lang',
     views: {
-      'tab-parameters': {
-        templateUrl: 'parameters-lang.html',
-        controller: 'SettingsLangCtrl'
-      }
-    }
-
-  }).state('tab.parameters-unit', {
-
-    url: '/parameter/unit',
-    views: {
-      'tab-parameters': {
-        templateUrl: 'parameters-unit.html',
-        controller: 'SettingsUnitCtrl'
+      'tab-settings': {
+        templateUrl: 'settings/settings-lang.html',
+        controller: 'SettingsLangCtrl as langvm'
       }
     }
 
