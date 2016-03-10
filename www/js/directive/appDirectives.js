@@ -1,11 +1,10 @@
-angular.module('app.directives', [])
-.directive('hideTabs', function($rootScope) {
+angular.module('app.directives', []).directive('hideTabs', function($rootScope) {
   'use strict';
 
   return {
     restrict: 'A',
     link: function(scope, element, attributes) {
-      scope.$watch(attributes.hideTabs, function(value){
+      scope.$watch(attributes.hideTabs, function(value) {
         $rootScope.hideTabs = value;
       });
 
@@ -14,12 +13,12 @@ angular.module('app.directives', [])
       });*/
     }
   };
-}).directive('appVersion', function () {
+}).directive('appVersion', function() {
   'use strict';
 
   return function(scope, elm) {
-    if(window.cordova) {
-      cordova.getAppVersion(function (version) {
+    if (window.cordova) {
+      cordova.getAppVersion(function(version) {
         elm.text(version);
       });
     } else {

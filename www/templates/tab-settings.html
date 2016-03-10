@@ -4,7 +4,7 @@
       <a class="item item-icon-left item-icon-right" href="#/tab/settings/lang">
         <i class="icon ion-chatbox-working"></i>
         <h2>{{ 'SELECT_LANGUAGE' | translate }}</h2>
-        <p>{{ 'SELECT_LANGUAGE_LABEL' | translate }} {{vm.settings.lang}}</p>
+        <p>{{ 'SELECT_LANGUAGE_LABEL' | translate }} {{settingsvm.settings.lang}}</p>
         <i class="icon ion-ios-arrow-forward"></i>
       </a>
       <div class="item item-icon-left">
@@ -15,13 +15,13 @@
       <div class="item item-divider">
         {{ 'MANAGE_PART' | translate }}
       </div>
-      <a class="item item-icon-left item-icon-right" href="#">
+      <a class="item item-icon-left item-icon-right" ng-click="settingsvm.versionPro('INGREDIENTS')" ng-disabled="true">
         <i class="icon ion-clipboard"></i>
         <h2>{{ 'MANAGE_INGREDIENTS' | translate }}</h2>
         <p>{{ 'MANAGE_INGREDIENTS_LABEL' | translate }}</p>
         <i class="icon ion-ios-arrow-forward"></i>
       </a>
-      <a class="item item-icon-left item-icon-right" href="#">
+      <a class="item item-icon-left item-icon-right" href="" ng-click="settingsvm.versionPro('RESET')" ng-disabled="true">
         <i class="icon ion-arrow-return-left"></i>
         <h2>{{ 'REINIT_APP' | translate }}</h2>
         <p>{{ 'REINIT_APP_LABEL' | translate }}</p>

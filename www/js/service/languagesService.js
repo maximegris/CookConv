@@ -1,5 +1,4 @@
-angular.module('languages.service', [])
-.factory('Languages', function($q, $log, $cordovaSQLite) {
+angular.module('languages.service', []).factory('Languages', function($q, $log, $cordovaSQLite) {
   'use strict';
 
   // Méthodes publiques
@@ -12,18 +11,21 @@ angular.module('languages.service', [])
     var dbQuery = "SELECT code, label FROM languages ORDER BY label";
 
     $cordovaSQLite.execute(_db, dbQuery)
-    .then(function(res){
-      if(res.rows.length > 0) {
-        for (var i = 0; i < res.rows.length; i++) {
-          _languages.push({ code : res.rows.item(i).code , label : res.rows.item(i).label });
-        }
+      .then(function(res) {
+          if (res.rows.length > 0) {
+            for (var i = 0; i < res.rows.length; i++) {
+              _languages.push({
+                code: res.rows.item(i).code,
+                label: res.rows.item(i).label
+              });
+            }
 
-      }
-      q.resolve(_languages);
-    },
-    function (err) {
-      alert("Error get types : " + JSON.stringify(err));
-    });
+          }
+          q.resolve(_languages);
+        },
+        function(err) {
+          alert("Error get types : " + JSON.stringify(err));
+        });
 
     return q.promise;
 
@@ -36,12 +38,12 @@ angular.module('languages.service', [])
     var dbQuery = 'UPDATE settings SET current_lang = ?, current_lang_label = (SELECT label FROM languages WHERE code = ?)';
 
     $cordovaSQLite.execute(_db, dbQuery, [language, language])
-    .then(function() {
-      q.resolve();
-    },
-    function(error) {
-      q.reject(error);
-    });
+      .then(function() {
+          q.resolve();
+        },
+        function(error) {
+          q.reject(error);
+        });
 
     return q.promise;
 
@@ -51,20 +53,22 @@ angular.module('languages.service', [])
 
     var q = $q.defer();
 
-    var _current = { current_lang : 'fr' };
+    var _current = {
+      current_lang: 'fr'
+    };
 
     var dbQuery = 'SELECT current_lang FROM settings';
 
     $cordovaSQLite.execute(_db, dbQuery)
-    .then(function(res){
-      if(res.rows.length > 0) {
-          _current.current_lang = res.rows.item(0).current_lang;
-      }
-      q.resolve(_current);
-    },
-    function (err) {
-      alert("Error get types : " + JSON.stringify(err));
-    });
+      .then(function(res) {
+          if (res.rows.length > 0) {
+            _current.current_lang = res.rows.item(0).current_lang;
+          }
+          q.resolve(_current);
+        },
+        function(err) {
+          alert("Error get types : " + JSON.stringify(err));
+        });
 
     return q.promise;
 
@@ -72,9 +76,9 @@ angular.module('languages.service', [])
 
   // Public interface
   return {
-    getLanguages:getLanguages,
-    updateCurrentLanguage:updateCurrentLanguage,
-    getCurrentLanguage:getCurrentLanguage,
+    getLanguages: getLanguages,
+    updateCurrentLanguage: updateCurrentLanguage,
+    getCurrentLanguage: getCurrentLanguage,
   };
 
 });

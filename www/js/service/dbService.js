@@ -1,6 +1,5 @@
 // Définition du service de DB
-angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.service', 'types.service', 'languages.service'])
-.factory('DBFactory', function($ionicPlatform, $q, $log, $cordovaSQLite, $translate, DB_CONFIG, Ingredients, Types, Languages) {
+angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.service', 'types.service', 'languages.service']).factory('DBFactory', function($ionicPlatform, $q, $log, $cordovaSQLite, $translate, DB_CONFIG, Ingredients, Types, Languages) {
   'use strict';
 
   // Methodes privees
@@ -11,16 +10,19 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
     var dbQuery = 'SELECT current_lang, db_version FROM settings';
 
     $q.when($cordovaSQLite.execute(_db, dbQuery))
-    .then(function(res) {
-      if(res && res.rows && res.rows.length > 0) {
-        q.resolve({ current_lang : res.rows.item(0).current_lang, version : res.rows.item(0).db_version });
-      } else {
-        q.reject();
-      }
+      .then(function(res) {
+        if (res && res.rows && res.rows.length > 0) {
+          q.resolve({
+            current_lang: res.rows.item(0).current_lang,
+            version: res.rows.item(0).db_version
+          });
+        } else {
+          q.reject();
+        }
 
-    }, function() {
-      q.reject();
-    });
+      }, function() {
+        q.reject();
+      });
 
     return q.promise;
   }
@@ -38,11 +40,11 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
       var dbQuery = 'CREATE TABLE IF NOT EXISTS ' + table.name + ' (' + columns.join(',') + ')';
 
       $q.when($cordovaSQLite.execute(_db, dbQuery))
-      .then(function() {
-        q.resolve();
-      }, function(error) {
-        q.reject(error);
-      });
+        .then(function() {
+          q.resolve();
+        }, function(error) {
+          q.reject(error);
+        });
     });
 
     return q.promise;
@@ -55,14 +57,14 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
     angular.forEach(DB_CONFIG.datas, function(data) {
       angular.forEach(data.rows, function(row) {
 
-        var dbQuery = 'INSERT INTO ' + data.name + '('+ data.columns + ') VALUES (' + row + ')';
+        var dbQuery = 'INSERT INTO ' + data.name + '(' + data.columns + ') VALUES (' + row + ')';
 
         $q.when($cordovaSQLite.execute(_db, dbQuery))
-        .then(function() {
-          q.resolve();
-        }, function(error) {
-          q.reject(error);
-        });
+          .then(function() {
+            q.resolve();
+          }, function(error) {
+            q.reject(error);
+          });
       });
     });
 
@@ -76,11 +78,15 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
     var dbQuery = 'SELECT current_lang, current_lang_label, db_version FROM settings';
 
     $q.when($cordovaSQLite.execute(_db, dbQuery))
-    .then(function(res) {
-      q.resolve({ current_lang : res.rows.item(0).current_lang , current_lang_label : res.rows.item(0).current_lang_label, db_version : res.rows.item(0).db_version });
-    },  function(error) {
-      q.reject(error);
-    });
+      .then(function(res) {
+        q.resolve({
+          current_lang: res.rows.item(0).current_lang,
+          current_lang_label: res.rows.item(0).current_lang_label,
+          db_version: res.rows.item(0).db_version
+        });
+      }, function(error) {
+        q.reject(error);
+      });
 
     return q.promise;
   }
@@ -90,16 +96,24 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
     $log.debug("Initialisation de la BDD");
     var q = $q.defer();
 
-    $ionicPlatform.ready(function () {
+    $ionicPlatform.ready(function() {
       isDBExists()
-      .then(function(_current) {
-        $translate.use(_current.current_lang);
-        q.resolve(false);
-      }, function() {
-        createDB()
-        .then(function() { return insertDB(); }, function(error) { q.reject(error); })
-        .then(function() { q.resolve(true); }, function(error) { q.reject(error); });
-      });
+        .then(function(_current) {
+          $translate.use(_current.current_lang);
+          q.resolve(false);
+        }, function() {
+          createDB()
+            .then(function() {
+              return insertDB();
+            }, function(error) {
+              q.reject(error);
+            })
+            .then(function() {
+              q.resolve(true);
+            }, function(error) {
+              q.reject(error);
+            });
+        });
     });
 
     return q.promise;
@@ -107,35 +121,35 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
 
   var getContextApplication = function(init, lang) {
 
-    var q= $q.defer();
+    var q = $q.defer();
 
-    if(init) {
+    if (init) {
       // On initialise la table settings avec la base langue
       Languages.updateCurrentLanguage(lang)
-      .then(function(){
-        return $q.all([getSettings(), Ingredients.getIngredients(lang), Types.getTypes(lang)]);
-      }, function(){
-        alert("Error init language");
-      })
-      .then(function(result) {
-        q.resolve(result);
-      }, function() {
-        alert("Error init context");
-      });
+        .then(function() {
+          return $q.all([getSettings(), Ingredients.getIngredients(lang), Types.getTypes(lang)]);
+        }, function() {
+          alert("Error init language");
+        })
+        .then(function(result) {
+          q.resolve(result);
+        }, function() {
+          alert("Error init context");
+        });
 
     } else {
 
       Languages.getCurrentLanguage()
-      .then(function(_current){
-        return $q.all([getSettings(), Ingredients.getIngredients(_current.current_lang), Types.getTypes(_current.current_lang)]);
-      }, function(){
-        alert("Error init language");
-      })
-      .then(function(result) {
-        q.resolve(result);
-      }, function() {
-        alert("Error init context");
-      });
+        .then(function(_current) {
+          return $q.all([getSettings(), Ingredients.getIngredients(_current.current_lang), Types.getTypes(_current.current_lang)]);
+        }, function() {
+          alert("Error init language");
+        })
+        .then(function(result) {
+          q.resolve(result);
+        }, function() {
+          alert("Error init context");
+        });
 
     }
 
@@ -145,7 +159,7 @@ angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.se
 
   // Public interface
   return {
-    initDB:initDB,
-    getContextApplication:getContextApplication
+    initDB: initDB,
+    getContextApplication: getContextApplication
   };
 });

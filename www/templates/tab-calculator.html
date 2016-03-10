@@ -15,19 +15,19 @@
     <div id="criteria-list">
       <div class="row">
         <div class="col">
-          <button class="button button-block button-dark" ng-click="vm.showIngredient()">
+          <button class="button button-block button-dark" ng-click="calcvm.showIngredient()">
             {{$root.converter.ingredient.name}}
           </button>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <button class="button button-block button-dark" ng-click="vm.showFromType()">
+          <button class="button button-block button-dark" ng-click="calcvm.showFromType()">
             {{ 'FROM' | translate }} {{$root.converter.from_type.name}}
           </button>
         </div>
         <div class="col">
-          <button class="button button-block button-dark" ng-click="vm.showToType()">
+          <button class="button button-block button-dark" ng-click="calcvm.showToType()">
             {{ 'TO' | translate }} {{$root.converter.to_type.name}}
           </button>
         </div>
@@ -36,58 +36,58 @@
     <div id="calculator-key">
       <div class="row">
         <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('1')">1</a>
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('1')">1</a>
         </div>
         <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('2')">2</a>
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('2')">2</a>
         </div>
         <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('3')">3</a>
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('3')">3</a>
         </div>
         <div class="col">
-          <a class="button button-block button-outline button-assertive ion-ios-arrow-thin-left" ng-click="vm.removeValCalc(0)"></a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('4')">4</a>
-        </div>
-        <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('5')">5</a>
-        </div>
-        <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('6')">6</a>
-        </div>
-        <div class="col">
-          <a class="button button-block button-outline button-assertive" ng-click="vm.removeValCalc(1)">AC</a>
+          <a class="button button-block button-outline button-assertive ion-ios-arrow-thin-left" ng-click="calcvm.removeValCalc(0)"></a>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('7')">7</a>
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('4')">4</a>
         </div>
         <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('8')">8</a>
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('5')">5</a>
         </div>
         <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('9')">9</a>
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('6')">6</a>
         </div>
         <div class="col">
-          <a class="button button-block button-outline button-assertive" ng-click="vm.inverseVal()">{{ 'INV' | translate }}</a>
+          <a class="button button-block button-outline button-assertive" ng-click="calcvm.removeValCalc(1)">AC</a>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('.')">.</a>
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('7')">7</a>
         </div>
         <div class="col">
-          <a class="button button-block button-outline button-dark" ng-click="vm.addValCalc('0')">0</a>
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('8')">8</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('9')">9</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-assertive" ng-click="calcvm.inverseVal()">{{ 'INV' | translate }}</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('.')">.</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('0')">0</a>
         </div>
         <div class="col">
           <a class="button button-block " disabled>&nbsp;</a>
         </div>
         <div class="col">
-          <a class="button button-block button-balanced" ng-click="vm.saveConverter()">{{ 'SAVE' | translate }}</a>
+          <a class="button button-block button-balanced" ng-click="calcvm.saveConverter()">{{ 'SAVE' | translate }}</a>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ var runSequence = require('run-sequence');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
+var cleanCSS = require('gulp-clean-css');
 var rename = require('gulp-rename');
 var jshint = require('gulp-jshint'); // Lint your javascript
 var stylish = require('jshint-stylish'); // Lint your javascript
@@ -24,7 +24,7 @@ var args = require('yargs')
 // emulate or run would also mean build
 var build = args.build;
 var run = args.run;
-// if build we use 'www', otherwise '.tmp'
+// if build we use 'www', otherwise '.www'
 var targetDir = build ? './www/dist' : './www';
 
 // if we just use emualate or run without specifying platform, we assume iOS
@@ -48,13 +48,9 @@ gulp.task('noop', function() {});
 
 gulp.task('sass', function(done) {
   gulp.src(paths.sass)
-    .pipe(sass({
-      errLogToConsole: true
-    }))
+    .pipe(sass())
     .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
+    .pipe(cleanCSS())
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);

@@ -1,0 +1,9 @@
+<ion-view view-title="{{ 'VIEW_INGREDIENTS' | translate }}" hide-tabs="true">
+  <ion-content>
+    <ion-list id="list-ingredients">
+      <ion-item collection-repeat="ingredient in ingredientsvm.ingredients track by ingredient.id" type="item-text-wrap">
+        <strong><div id="ingredient.id">{{ingredient.name}}</div></strong>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
