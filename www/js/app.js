@@ -42,7 +42,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
 
   $translateProvider
     .useStaticFilesLoader({
-      prefix: 'locales/',
+      prefix: 'assets/locales/',
       suffix: '.json'
     })
     .registerAvailableLanguageKeys(['en', 'fr', 'de', 'es', 'pt', 'zh'], {

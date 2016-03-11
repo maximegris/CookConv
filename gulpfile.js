@@ -3,7 +3,7 @@ var gutil = require('gulp-util');
 var bower = require('bower');
 var shell = require('gulp-shell');
 var runSequence = require('run-sequence');
-var clean = require('gulp-clean');
+var del = require('del');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var cleanCSS = require('gulp-clean-css');
@@ -25,18 +25,25 @@ var args = require('yargs')
 var build = args.build;
 var run = args.run;
 // if build we use 'www', otherwise '.www'
-var targetDir = build ? './www/dist' : './www';
+var project = {
+	dist : './www/dist',
+	target : build ? './www/dist' : './www',
 
-// if we just use emualate or run without specifying platform, we assume iOS
+};
+
+// if we just use emulate or run without specifying platform, we assume iOS
 // in this case the value returned from yargs would just be true
 if (run === true) {
   run = 'android';
 }
 
 var paths = {
+  ionicjs : ['./www/lib/ionic/js/ionic.bundle.min.js'],
+  ionicfonts : ['./www/lib/ionic/fonts/**'],
+  ionicstyle : ['./www/lib/ionic/css/**'],
   sass: ['./scss/*.scss', './scss/**/*.scss'],
-  js : ['./www/js/**/*.js'],
-  jsapp : ['./www/js/**/*.js', '!./www/js/vendor/**/*.js', '!./www/js/ng-cordova.min.js'],
+  jsapp : ['./www/js/**/*.js', '!./www/js/vendor/**/*.js', '!./www/lib/ngCordova/dist/ng-cordova.min.js'],
+  assets : ['./www/assets/**'],
   tpl : ['./www/templates/**/*.html'],
   useref: ['./www/*.html']
 };
@@ -46,7 +53,7 @@ gulp.task('default', ['build']);
 // no-op = empty function
 gulp.task('noop', function() {});
 
-gulp.task('sass', function(done) {
+gulp.task('sassFiles', function(done) {
   gulp.src(paths.sass)
     .pipe(sass())
     .pipe(gulp.dest('./www/css/'))
@@ -56,57 +63,67 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('lint', function() {
-  return gulp.src(paths.jsapp)
+gulp.task('jsFiles', function(done) {
+gulp.src(paths.jsapp)
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
-    .pipe(jshint.reporter('fail'));
+    .pipe(jshint.reporter('fail'))
+	.pipe(ngAnnotate({single_quotes: true}))
+	.pipe(gulp.dest(project.dist + '/dist_js/app'))
+	.on('end', done);
+});
+
+gulp.task('ionicdeps', function(done) {
+gulp.src(paths.ionicfonts)
+	.pipe(gulp.dest('./www/dist/lib/ionic/fonts'));
+gulp.src(paths.ionicstyle)
+	.pipe(gulp.dest('./www/dist/lib/ionic/css')).on('end', done);
+//gulp.src(paths.ionicjs)
+//	.pipe(gulp.dest('./www/dist/lib/ionic/js'))
+//	.on('end', done);
+});
+
+gulp.task('assets', function(done) {
+gulp.src(paths.assets)
+	.pipe(gulp.dest('./www/dist/assets'))
+	.on('end', done);
 });
 
 gulp.task('templatecache', function (done) {
-    gulp.src(paths.tpl)
-      .pipe(templateCache({standalone:true}))
-      .pipe(gulp.dest('./www/js'))
-      .on('end', done);
-  });
+	gulp.src(paths.tpl)
+	.pipe(templateCache({standalone:true}))
+	.pipe(gulp.dest('./www/js'))
+	.on('end', done);
+});
 
-  gulp.task('clean', function (done) {
-    return gulp.src('./www/dist', {read: false})
-    .pipe(clean({force: true}));
-  });
+gulp.task('clean', function (done) {
+	return del([project.dist + '/**']).then(paths => {
+		gulp.on('end', done);
+	});
+});
 
-  gulp.task('ng_annotate', function (done) {
-   gulp.src(paths.js)
-     .pipe(ngAnnotate({single_quotes: true}))
-     .pipe(gulp.dest('./www/dist/dist_js/app'))
-     .on('end', done);
- });
+gulp.task('useref', ['sassFiles', 'jsFiles',  'ionicdeps', 'assets', 'templatecache'], function (done) {
+	gulp.src(paths.useref)
+	.pipe(useref())
+	.pipe(gulp.dest(project.dist))
+	.on('end', done);
+});
 
-   gulp.task('useref', ['sass', 'lint', 'templatecache', 'ng_annotate'], function (done) {
-    var assets = useref.assets();
-    gulp.src(paths.useref)
-      .pipe(assets)
-      .pipe(assets.restore())
-      .pipe(useref())
-      .pipe(gulp.dest('./www/dist'))
-      .on('end', done);
-  });
-
-  gulp.task('watch', [],  function() {
+gulp.task('watch', [],  function() {
   gulp.watch(paths.sass, ['useref']);
   gulp.watch(paths.js, ['useref']);
   gulp.watch(paths.tpl, ['useref']);
   gulp.watch(paths.useref, ['useref']);
 });
 
-  gulp.task('connect', [], function() {
+gulp.task('connect', [], function() {
   connect.server({
-    root: targetDir,
+    root: project.target,
     livereload: true
   });
 });
 
-  gulp.task('build', function (done) {
+gulp.task('build', function (done) {
   runSequence(
     'clean',
     'useref',
@@ -114,12 +131,12 @@ gulp.task('templatecache', function (done) {
     run ? 'noop' : 'connect',
     run ? 'ionic:run' : 'noop',
     done);
-  });
+});
 
   // ionic run wrapper
-  gulp.task('ionic:run', shell.task([
+gulp.task('ionic:run', shell.task([
     'ionic run ' + run
-  ]));
+]));
 
 gulp.task('install', function() {
   return bower.commands.install()
