@@ -1,5 +1,5 @@
 // Controller de l'onglet settings ingredients
-angular.module('settings.ingredients.controller', ['ingredients.service']).controller('SettingsIngredientsCtrl', function($controller, $scope, $rootScope, $translate, Ingredients) {
+angular.module('controllers').controller('SettingsIngredientsCtrl', function($controller, $scope, $rootScope, $translate, Ingredients) {
 	'use strict';
 
 	var vm = this;

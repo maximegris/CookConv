@@ -1,5 +1,5 @@
 // Factory des types
-angular.module('types.service', ['ionic', 'ngCordova']).factory('Types', function($q, $log, $cordovaSQLite) {
+angular.module('services').factory('Types', function($q, $log, $cordovaSQLite) {
   'use strict';
 
   // Méthodes publiques

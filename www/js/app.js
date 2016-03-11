@@ -1,6 +1,12 @@
+//Global variable DB
 var _db = null;
 
-angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.directives', 'db.service', 'calculator.controller', 'savings.controller', 'settings.controller', 'settings.lang.controller', 'settings.ingredients.controller', 'templates']).run(function($ionicPlatform, $cordovaSQLite, $cordovaSplashscreen) {
+// Initialisation des modules
+angular.module('db.config', []);
+angular.module('services', ['ionic', 'db.config', 'ngCordova']);
+angular.module('controllers', ['services']);
+angular.module('directives', []);
+angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'directives', 'controllers', 'services', 'templates']).run(function($ionicPlatform, $cordovaSQLite, $cordovaSplashscreen) {
   'use strict';
 
   $ionicPlatform.ready(function() {
@@ -161,15 +167,4 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'app.
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/calculator');
-
-}).controller('LoadCtrl', function($rootScope, $ionicLoading) {
-  'use strict';
-  $rootScope.show = function() {
-    $ionicLoading.show({
-      template: '<div id="loading-spinner"><ion-spinner icon="lines"></ion-spinner><span>{{ "LOADER" | translate }}</span></div>',
-    });
-  };
-  $rootScope.hide = function() {
-    $ionicLoading.hide();
-  };
 });

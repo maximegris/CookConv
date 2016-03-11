@@ -78,9 +78,6 @@ gulp.src(paths.ionicfonts)
 	.pipe(gulp.dest('./www/dist/lib/ionic/fonts'));
 gulp.src(paths.ionicstyle)
 	.pipe(gulp.dest('./www/dist/lib/ionic/css')).on('end', done);
-//gulp.src(paths.ionicjs)
-//	.pipe(gulp.dest('./www/dist/lib/ionic/js'))
-//	.on('end', done);
 });
 
 gulp.task('assets', function(done) {
@@ -111,7 +108,8 @@ gulp.task('useref', ['sassFiles', 'jsFiles',  'ionicdeps', 'assets', 'templateca
 
 gulp.task('watch', [],  function() {
   gulp.watch(paths.sass, ['useref']);
-  gulp.watch(paths.js, ['useref']);
+  gulp.watch(paths.jsapp, ['useref']);
+	gulp.watch(paths.assets, ['useref']);
   gulp.watch(paths.tpl, ['useref']);
   gulp.watch(paths.useref, ['useref']);
 });

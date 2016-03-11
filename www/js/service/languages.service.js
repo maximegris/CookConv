@@ -1,4 +1,4 @@
-angular.module('languages.service', []).factory('Languages', function($q, $log, $cordovaSQLite) {
+angular.module('services').factory('Languages', function($q, $log, $cordovaSQLite) {
   'use strict';
 
   // Méthodes publiques

@@ -1,5 +1,5 @@
 // Controller de l'onglet settings
-angular.module('settings.controller', ['ingredients.service']).controller('SettingsCtrl', function($controller, $rootScope, Ingredients) {
+angular.module('controllers').controller('SettingsCtrl', function($controller, $rootScope, Ingredients) {
 	'use strict';
 
 	var vm = this;

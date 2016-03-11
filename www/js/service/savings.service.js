@@ -1,5 +1,5 @@
 // Factory des sauvergardes
-angular.module('savings.service', ['ionic', 'ngCordova']).factory('Savings', function($q, $log, $cordovaSQLite, $translate) {
+angular.module('services').factory('Savings', function($q, $log, $cordovaSQLite, $translate) {
   'use strict';
 
   // Méthodes publiques

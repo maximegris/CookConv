@@ -1,5 +1,5 @@
 // Controller de l'onglet Savings
-angular.module('savings.controller', ['savings.service']).controller('SavingsCtrl', function(Savings) {
+angular.module('controllers').controller('SavingsCtrl', function(Savings) {
   'use strict';
 
   var vm = this;

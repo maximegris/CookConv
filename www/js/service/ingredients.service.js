@@ -1,5 +1,5 @@
 // Factory des ingrédients
-angular.module('ingredients.service', ['ionic', 'ngCordova']).factory('Ingredients', function($q, $log, $translate, $cordovaSQLite) {
+angular.module('services').factory('Ingredients', function($q, $log, $translate, $cordovaSQLite) {
   'use strict';
 
   // Méthodes publiques

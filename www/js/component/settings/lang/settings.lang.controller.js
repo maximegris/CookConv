@@ -1,5 +1,5 @@
 // Controller de l'onglet settings langues
-angular.module('settings.lang.controller', ['languages.service', 'db.service']).controller('SettingsLangCtrl', function($controller, $scope, $rootScope, $translate, Languages, DBFactory) {
+angular.module('controllers').controller('SettingsLangCtrl', function($controller, $scope, $rootScope, $translate, Languages, DBFactory) {
   'use strict';
 
   var vm = this;

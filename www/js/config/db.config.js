@@ -1,5 +1,5 @@
 // Configuration des tables de la base de données
-angular.module('db.config', []).constant('DB_CONFIG', {
+angular.module('db.config').constant('DB_CONFIG', {
   name: 'cookconv',
   tables: [{
     name: 'ingredients', // Liste des ingrédients

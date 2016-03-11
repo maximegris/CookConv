@@ -1,5 +1,5 @@
 // Définition du service de DB
-angular.module('db.service', ['ionic', 'db.config', 'ngCordova', 'ingredients.service', 'types.service', 'languages.service']).factory('DBFactory', function($ionicPlatform, $q, $log, $cordovaSQLite, $translate, DB_CONFIG, Ingredients, Types, Languages) {
+angular.module('services').factory('DBFactory', function($ionicPlatform, $q, $log, $cordovaSQLite, $translate, DB_CONFIG, Ingredients, Types, Languages) {
   'use strict';
 
   // Methodes privees
