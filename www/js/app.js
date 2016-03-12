@@ -4,15 +4,13 @@
 
   angular.module('constants', []);
   angular.module('db.config', []);
-  angular.module('services', ['ionic', 'db.config', 'ngCordova']);
-  angular.module('controllers', ['services']);
-  angular.module('directives', ['constants']);
-  angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'directives', 'controllers', 'services', 'templates'])
-  .run(runApplication)
-  .config(ionicConfig)
-  .config(translateConfig)
-  .config(stateConfig)
-;
+  angular.module('services', ['constants', 'db.config']);
+  angular.module('directives', ['constants', 'services']);
+  angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'directives', 'templates'])
+    .run(runApplication)
+    .config(ionicConfig)
+    .config(translateConfig)
+    .config(stateConfig);
 
   runApplication.$inject = ['$ionicPlatform', '$cordovaSplashscreen'];
 
@@ -35,7 +33,7 @@
           androidLockWorkaround: 1
         });
       } else {
-        window._db = window.openDatabase("db.cookconv.db", '1.0', 'My app', 5*1024*1024);
+        window._db = window.openDatabase("db.cookconv.db", '1.0', 'My app', 5 * 1024 * 1024);
       }
 
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -114,28 +112,7 @@
       abstract: true,
       templateUrl: 'tabs.html',
       resolve: {
-        dbReady: function(DBFactory, $log, $rootScope, $translate, $cordovaSplashscreen) {
-          // (1) init the DB
-          return DBFactory.initDB()
-            .then(function(success) {
-              return DBFactory.getContextApplication(success, $translate.use());
-            }, function(error) {
-              alert('Failed initDB : ' + JSON.stringify(error));
-            })
-            .then(function(success) {
-              $rootScope.init = true;
-              $rootScope.settings = success[0];
-              $rootScope.ingredients = success[1];
-              $rootScope.types = success[2];
-
-              if (window.cordova) {
-                $cordovaSplashscreen.hide();
-              }
-
-            }, function(error) {
-              alert('Failed getContextApplication: ' + JSON.stringify(error));
-            });
-        }
+        dbReady:dbReady
       }
     })
 
@@ -144,8 +121,7 @@
       url: '/calculator',
       views: {
         'tab-calculator': {
-          templateUrl: 'tab-calculator.html',
-          controller: 'CalculatorController as calcvm'
+          template: '<calculator></calculator>'
         }
       }
     })
@@ -154,8 +130,7 @@
         url: '/savings',
         views: {
           'tab-savings': {
-            templateUrl: 'tab-savings.html',
-            controller: 'SavingsController as savingsvm'
+            template: '<savings></savings>'
           }
         }
       })
@@ -163,8 +138,7 @@
         url: '/settings',
         views: {
           'tab-settings': {
-            templateUrl: 'tab-settings.html',
-            controller: 'SettingsController as settingsvm'
+            template: '<settings></settings>'
           }
         }
       })
@@ -173,8 +147,7 @@
         url: '/settings/lang',
         views: {
           'tab-settings': {
-            templateUrl: 'settings/settings-lang.html',
-            controller: 'SettingsLangController as langvm'
+            template: '<settings-lang><settings-lang>'
           }
         }
 
@@ -184,15 +157,32 @@
         url: '/settings/ingredients',
         views: {
           'tab-settings': {
-            templateUrl: 'settings/settings-ingredients.html',
-            controller: 'SettingsIngredientsController as ingredientsvm'
+            template: '<settings-ingredients><settings-ingredients>'
           }
         }
-
       });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/calculator');
+
+    function dbReady(DBFactory, $log, $rootScope, $translate, $cordovaSplashscreen) {
+      // (1) init the DB
+      return DBFactory.initDB()
+        .then(function(success) {
+          return DBFactory.getContextApplication(success, $translate.use());
+        }, function(error) {
+          alert('Failed initDB : ' + JSON.stringify(error));
+        })
+        .then(function(success) {
+          $rootScope.init = true;
+          $rootScope.settings = success[0];
+          $rootScope.ingredients = success[1];
+          $rootScope.types = success[2];
+
+        }, function(error) {
+          alert('Failed getContextApplication: ' + JSON.stringify(error));
+        });
+    }
   }
 
 })(angular);

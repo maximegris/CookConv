@@ -1,12 +1,29 @@
-// Controller de l'onglet Converter
-(function(angular, undefined) {
+(function(angular) {
   'use strict';
+  angular.module('directives').directive('calculator', calculator);
 
-  angular.module('controllers').controller('CalculatorController', CalculatorController);
+  calculator.$inject = [];
 
-  CalculatorController.$inject = ['$scope', '$rootScope', '$ionicPopup', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+  function calculator() {
 
-  function CalculatorController($scope, $rootScope, $ionicPopup, SavingsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
+    var directive = {
+      restrict: 'E',
+      templateUrl: 'tab-calculator.html',
+      controller: calculatorController,
+      controllerAs: 'calcvm',
+      bindToController: true // because the scope is isolated
+    };
+
+    return directive;
+
+  }
+
+  /**
+   * Injection de dépendances.
+   */
+  calculatorController.$inject = ['$scope', '$rootScope', '$cordovaSplashscreen', '$ionicPopup', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+
+  function calculatorController($scope, $rootScope, $cordovaSplashscreen, $ionicPopup, SavingsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;
 
@@ -189,6 +206,9 @@
       }
     }
 
-  }
+    if (window.cordova) {
+      $cordovaSplashscreen.hide();
+    }
 
+  }
 })(angular);

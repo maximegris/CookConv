@@ -1,13 +1,29 @@
-// Controller de l'onglet settings langues
 (function(angular, undefined) {
-
   'use strict';
+  angular.module('directives').directive('settingsLang', settingsLang);
 
-  angular.module('controllers').controller('SettingsLangController', SettingsLangController);
+  settingsLang.$inject = [];
 
-  SettingsLangController.$inject = ['$scope', '$rootScope', '$translate', 'LanguagesFactory', 'DBFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+  function settingsLang() {
 
-  function SettingsLangController($scope, $rootScope, $translate, LanguagesFactory, DBFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
+    var directive = {
+      restrict: 'E',
+      templateUrl: 'settings/settings-lang.html',
+      controller: settingsLangController,
+      controllerAs: 'langvm',
+      bindToController: true // because the scope is isolated
+    };
+
+    return directive;
+
+  }
+
+  /**
+   * Injection de dépendances.
+   */
+  settingsLangController.$inject = ['$scope', '$rootScope', '$translate', 'LanguagesFactory', 'DBFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+
+  function settingsLangController($scope, $rootScope, $translate, LanguagesFactory, DBFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;
 
@@ -51,5 +67,4 @@
     }
 
   }
-
 })(angular);

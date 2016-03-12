@@ -1,12 +1,29 @@
-// Controller de l'onglet settings
 (function(angular, undefined) {
   'use strict';
+  angular.module('directives').directive('settings', settings);
 
-  angular.module('controllers').controller('SettingsController', SettingsController);
+  settings.$inject = [];
 
-  SettingsController.$inject = ['$rootScope', 'IngredientsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+  function settings() {
 
-  function SettingsController($rootScope, IngredientsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
+    var directive = {
+      restrict: 'E',
+      templateUrl: 'tab-settings.html',
+      controller: settingsController,
+      controllerAs: 'settingsvm',
+      bindToController: true // because the scope is isolated
+    };
+
+    return directive;
+
+  }
+
+  /**
+   * Injection de dépendances.
+   */
+  settingsController.$inject = ['$rootScope', 'IngredientsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+
+  function settingsController($rootScope, IngredientsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;
     vm.versionPro = versionPro;
@@ -46,5 +63,4 @@
     }
 
   }
-
 })(angular);

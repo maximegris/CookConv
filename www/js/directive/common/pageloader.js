@@ -1,4 +1,4 @@
-(function(angular) {
+(function(angular, undefined) {
   'use strict';
   angular.module('directives').directive('pageLoader', pageLoader);
 
@@ -33,7 +33,7 @@
     });
 
     $scope.$on(_LOADING_SPINNER_END_, function(value) {
-      $timeout(function() {$ionicLoading.hide()}, 500);
+      $timeout(function() {$ionicLoading.hide();}, 500);
     });
   }
 })(angular);
