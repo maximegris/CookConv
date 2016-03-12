@@ -1,21 +1,28 @@
 // Controller de l'onglet Savings
-angular.module('controllers').controller('SavingsCtrl', function(Savings) {
+(function(angular, undefined) {
   'use strict';
 
-  var vm = this;
-  vm.removeSaving = removeSaving;
+  angular.module('controllers').controller('SavingsController', SavingsController);
 
-  // Chargement données
-  Savings.getSavings().then(function(_savings) {
-    vm.savings = _savings;
-  });
+  SavingsController.$inject = ['SavingsFactory'];
 
-  // Fonctions privées
-  function removeSaving($index, saving) {
-    Savings.removeSaving(saving).then(function() {
+  function SavingsController(SavingsFactory) {
 
-      vm.savings.splice($index, 1);
+    var vm = this;
+    vm.removeSaving = removeSaving;
+
+    // Chargement données
+    SavingsFactory.getSavings().then(function(_savings) {
+      vm.savings = _savings;
     });
-  }
 
-});
+    // Fonctions privées
+    function removeSaving($index, saving) {
+      SavingsFactory.removeSaving(saving).then(function() {
+
+        vm.savings.splice($index, 1);
+      });
+    }
+
+  }
+})(angular);

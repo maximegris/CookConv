@@ -67,7 +67,7 @@ gulp.task('jsFiles', function(done) {
 gulp.src(paths.jsapp)
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
-    .pipe(jshint.reporter('fail'))
+    //.pipe(jshint.reporter('fail'))
 	.pipe(ngAnnotate({single_quotes: true}))
 	.pipe(gulp.dest(project.dist + '/dist_js/app'))
 	.on('end', done);

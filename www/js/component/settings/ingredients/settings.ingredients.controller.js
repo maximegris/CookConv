@@ -1,14 +1,20 @@
 // Controller de l'onglet settings ingredients
-angular.module('controllers').controller('SettingsIngredientsCtrl', function($controller, $scope, $rootScope, $translate, Ingredients) {
-	'use strict';
+(function(angular) {
 
-	var vm = this;
+'use strict';
 
-	// IoC
-	$controller('LoadCtrl');
+	angular.module('controllers').controller('SettingsIngredientsController', SettingsIngredientsController);
 
-	Ingredients.getIngredientsByRef("1").then(function(_ingredients) {
-		vm.ingredients = _ingredients;
-	});
+SettingsIngredientsController.$inject = ['Ingredients'];
 
-});
+	function SettingsIngredientsController(Ingredients) {
+
+		var vm = this;
+
+		Ingredients.getIngredientsByRef("1").then(function(_ingredients) {
+			vm.ingredients = _ingredients;
+		});
+
+	}
+
+})(angular);

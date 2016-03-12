@@ -1,13 +1,23 @@
-angular.module('directives').directive('appVersion', function() {
+(function(angular, undefined) {
+
   'use strict';
 
-  return function(scope, elm) {
-    if (window.cordova) {
-      cordova.getAppVersion(function(version) {
-        elm.text(version);
-      });
-    } else {
-      elm.text("browser.version-1.0.0");
-    }
-  };
-});
+
+  angular.module('directives').directive('appVersion', appVersion);
+
+  appVersion.$inject = [];
+
+  function appVersion() {
+
+    return function(scope, elm) {
+      if (window.cordova) {
+        cordova.getAppVersion(function(version) {
+          elm.text(version);
+        });
+      } else {
+        elm.text("browser.version-1.0.0");
+      }
+    };
+  }
+
+})(angular);

@@ -1,91 +1,99 @@
 // Factory des ingrédients
-angular.module('services').factory('Ingredients', function($q, $log, $translate, $cordovaSQLite) {
+(function(angular, undefined) {
   'use strict';
 
-  // Méthodes publiques
-  var getIngredients = function(language) {
+  angular.module('services').factory('IngredientsFactory', IngredientsFactory);
 
-    var q = $q.defer();
+  IngredientsFactory.$inject = ['$q', '$log', '$translate', '$cordovaSQLite'];
 
-    var _ingredients = [];
+  function IngredientsFactory($q, $log, $translate, $cordovaSQLite) {
 
-    var dbQuery = "SELECT id, name_" + language + ", masse_volumique FROM ingredients ORDER BY name_" + language;
+    // Méthodes publiques
+    var getIngredients = function(language) {
 
-    $cordovaSQLite.execute(_db, dbQuery)
-      .then(function(res) {
+      var q = $q.defer();
 
-        if (res.rows.length > 0) {
-          for (var i = 0; i < res.rows.length; i++) {
-            _ingredients.push({
-              id: res.rows.item(i).id,
-              name: res.rows.item(i)["name_" + language],
-              masse_volumique: res.rows.item(i).masse_volumique
-            });
+      var _ingredients = [];
+
+      var dbQuery = "SELECT id, name_" + language + ", masse_volumique FROM ingredients ORDER BY name_" + language;
+
+      $cordovaSQLite.execute(window._db, dbQuery)
+        .then(function(res) {
+
+          if (res.rows.length > 0) {
+            for (var i = 0; i < res.rows.length; i++) {
+              _ingredients.push({
+                id: res.rows.item(i).id,
+                name: res.rows.item(i)["name_" + language],
+                masse_volumique: res.rows.item(i).masse_volumique
+              });
+            }
           }
-        }
 
-        q.resolve(_ingredients);
-      }, function(err) {
-        alert("Error Get ingredients : " + JSON.stringify(err));
-      });
+          q.resolve(_ingredients);
+        }, function(err) {
+          alert("Error Get ingredients : " + JSON.stringify(err));
+        });
 
 
-    return q.promise;
-  };
+      return q.promise;
+    };
 
-  var getIngredientsByRef = function(ref) {
+    var getIngredientsByRef = function(ref) {
 
-    var q = $q.defer();
+      var q = $q.defer();
 
-    var _ingredients = [];
+      var _ingredients = [];
 
-    var dbQuery = "SELECT id, name_" + $translate.use() + ", masse_volumique FROM ingredients WHERE ref = " + ref + " ORDER BY name_" + $translate.use();
+      var dbQuery = "SELECT id, name_" + $translate.use() + ", masse_volumique FROM ingredients WHERE ref = " + ref + " ORDER BY name_" + $translate.use();
 
-    $cordovaSQLite.execute(_db, dbQuery)
-      .then(function(res) {
+      $cordovaSQLite.execute(window._db, dbQuery)
+        .then(function(res) {
 
-        if (res.rows.length > 0) {
-          for (var i = 0; i < res.rows.length; i++) {
-            _ingredients.push({
-              id: res.rows.item(i).id,
-              name: res.rows.item(i)["name_" + $translate.use()],
-              masse_volumique: res.rows.item(i).masse_volumique
-            });
+          if (res.rows.length > 0) {
+            for (var i = 0; i < res.rows.length; i++) {
+              _ingredients.push({
+                id: res.rows.item(i).id,
+                name: res.rows.item(i)["name_" + $translate.use()],
+                masse_volumique: res.rows.item(i).masse_volumique
+              });
+            }
           }
-        }
 
-        q.resolve(_ingredients);
-      }, function(err) {
-        alert("Error Get ingredients By Ref : " + JSON.stringify(err));
-      });
+          q.resolve(_ingredients);
+        }, function(err) {
+          alert("Error Get ingredients By Ref : " + JSON.stringify(err));
+        });
 
 
-    return q.promise;
-  };
+      return q.promise;
+    };
 
-  var resetIngredients = function() {
-    var q = $q.defer();
+    var resetIngredients = function() {
+      var q = $q.defer();
 
-    var _ingredients = [];
+      var _ingredients = [];
 
-    var dbQuery = "DELETE FROM ingredients WHERE ref <> '1'";
+      var dbQuery = "DELETE FROM ingredients WHERE ref <> '1'";
 
-    $cordovaSQLite.execute(_db, dbQuery)
-      .then(function(res) {
-        q.resolve();
-      }, function(err) {
-        alert("Error Reset ingredients : " + JSON.stringify(err));
-      });
+      $cordovaSQLite.execute(window._db, dbQuery)
+        .then(function(res) {
+          q.resolve();
+        }, function(err) {
+          alert("Error Reset ingredients : " + JSON.stringify(err));
+        });
 
-    return q.promise;
+      return q.promise;
 
-  };
+    };
 
-  // Public interface
-  return {
-    getIngredients: getIngredients,
-    getIngredientsByRef: getIngredientsByRef,
-    resetIngredients: resetIngredients
-  };
+    // Public interface
+    return {
+      getIngredients: getIngredients,
+      getIngredientsByRef: getIngredientsByRef,
+      resetIngredients: resetIngredients
+    };
 
-});
+  }
+
+})(angular);

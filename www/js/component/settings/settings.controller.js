@@ -1,51 +1,50 @@
 // Controller de l'onglet settings
-angular.module('controllers').controller('SettingsCtrl', function($controller, $rootScope, Ingredients) {
-	'use strict';
+(function(angular, undefined) {
+  'use strict';
 
-	var vm = this;
-	vm.versionPro = versionPro;
+  angular.module('controllers').controller('SettingsController', SettingsController);
 
-	// IoC
-	$controller('LoadCtrl');
+  SettingsController.$inject = ['$rootScope', 'IngredientsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
-	vm.settings = {
-		lang: $rootScope.settings.current_lang_label
-	};
+  function SettingsController($rootScope, IngredientsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
-	//TODO Désactiver les boutons de la version PRO par défaut
+    var vm = this;
+    vm.versionPro = versionPro;
 
-	// Méthodes privées
-	function versionPro(action) {
-		if ($rootScope.pro) {
-			switch (action) {
-				case "INGREDIENTS":
-					openViewManageIngredients();
-					break;
-				case "RESET":
-					resetApplication();
-					break;
-				default:
-					break;
-			}
-		}
-	}
+    vm.settings = {
+      lang: $rootScope.settings.current_lang_label
+    };
 
-	function openViewManageIngredients() {
-		window.location.href = "#/tab/settings/ingredients";
-	}
+    //TODO Désactiver les boutons de la version PRO par défaut
 
-	function resetApplication() {
-		$rootScope.show();
+    // Méthodes privées
+    function versionPro(action) {
+      if ($rootScope.pro) {
+        switch (action) {
+          case "INGREDIENTS":
+            openViewManageIngredients();
+            break;
+          case "RESET":
+            resetApplication();
+            break;
+          default:
+            break;
+        }
+      }
+    }
 
-		Ingredients.resetIngredients().then(function() {
+    function openViewManageIngredients() {
+      window.location.href = "#/tab/settings/ingredients";
+    }
 
-			// On laisse pendant 0.5 seconde la fenêtre pour montrer qu'il se passe quelquechose.
-			setTimeout(function() {
-				$rootScope.hide();
+    function resetApplication() {
+      $rootScope.$broadcast(_LOADING_SPINNER_START_);
 
-				// TODO Toast pour prévenir que le traitement a réussi
-			}, 500);
-		});
-	}
+      IngredientsFactory.resetIngredients().then(function() {
+        $rootScope.$broadcast(_LOADING_SPINNER_END_);
+      });
+    }
 
-});
+  }
+
+})(angular);

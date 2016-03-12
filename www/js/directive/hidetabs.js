@@ -1,12 +1,22 @@
-angular.module('directives').directive('hideTabs', function($rootScope) {
-  'use strict';
+(function(angular, undefined) {
+    'use strict';
+    angular.module('directives').directive('hideTabs', hideTabs);
 
-  return {
-    restrict: 'A',
-    link: function(scope, element, attributes) {
-      scope.$watch(attributes.hideTabs, function(value) {
-        $rootScope.hideTabs = value;
-      });
+    hideTabs.$inject = ['$rootScope'];
+
+    function hideTabs($rootScope) {
+
+      var directive = {
+        restrict: 'A',
+        link: linkFn
+      };
+
+      return directive;
+
+      function linkFn(scope, element, attributes) {
+        scope.$watch(attributes.hideTabs, function(value) {
+          $rootScope.hideTabs = value;
+        });
+      }
     }
-  };
-});
+})(angular);

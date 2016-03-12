@@ -1,53 +1,55 @@
 // Controller de l'onglet settings langues
-angular.module('controllers').controller('SettingsLangCtrl', function($controller, $scope, $rootScope, $translate, Languages, DBFactory) {
+(function(angular, undefined) {
+
   'use strict';
 
-  var vm = this;
+  angular.module('controllers').controller('SettingsLangController', SettingsLangController);
 
-  // IoC
-  $controller('LoadCtrl');
+  SettingsLangController.$inject = ['$scope', '$rootScope', '$translate', 'LanguagesFactory', 'DBFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
-  // Chargement des données
-  vm.current = {
-    lang: $translate.use()
-  };
+  function SettingsLangController($scope, $rootScope, $translate, LanguagesFactory, DBFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
-  Languages.getLanguages().then(function(_languages) {
+    var vm = this;
 
-    vm.languages = _languages;
+    // Chargement des données
+    vm.current = {
+      lang: $translate.use()
+    };
 
-    $scope.$watch('langvm.current.lang', changeLanguage, false);
-  });
+    LanguagesFactory.getLanguages().then(function(_languages) {
 
-  // Fonctions privées
-  function changeLanguage() {
-    if (vm.current) {
+      vm.languages = _languages;
 
-      $rootScope.show();
+      $scope.$watch('langvm.current.lang', changeLanguage, false);
+    });
 
-      DBFactory.getContextApplication(true, vm.current.lang)
-        .then(function(success) {
+    // Fonctions privées
+    function changeLanguage() {
+      if (vm.current) {
 
-            if ($translate.use() !== vm.current.lang) {
-              $rootScope.init = true;
-              $translate.use(vm.current.lang);
-              $rootScope.settings = success[0];
-              $rootScope.ingredients = success[1];
-              $rootScope.types = success[2];
-            }
+        $rootScope.$broadcast(_LOADING_SPINNER_START_);
 
-            // On laisse pendant 0.5 seconde la fenêtre pour montrer qu'il se passe quelquechose.
-            setTimeout(function() {
-              $rootScope.hide();
-            }, 500);
+        DBFactory.getContextApplication(true, vm.current.lang)
+          .then(function(success) {
 
-          },
-          function(error) {
-            alert("Error update Language" + error);
-            $rootScope.hide();
-          });
+              if ($translate.use() !== vm.current.lang) {
+                $rootScope.init = true;
+                $translate.use(vm.current.lang);
+                $rootScope.settings = success[0];
+                $rootScope.ingredients = success[1];
+                $rootScope.types = success[2];
+              }
 
+              $rootScope.$broadcast(_LOADING_SPINNER_END_);
+            },
+            function(error) {
+              alert("Error update Language" + error);
+              $rootScope.$broadcast(_LOADING_SPINNER_END_);
+            });
+
+      }
     }
+
   }
 
-});
+})(angular);
