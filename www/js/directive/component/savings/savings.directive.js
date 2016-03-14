@@ -9,7 +9,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'tab-savings.html',
-      controller: savingsController,
+      controller: SavingsController,
       controllerAs: 'savingsvm',
       bindToController: true // because the scope is isolated
     };
@@ -21,9 +21,9 @@
   /**
    * Injection de dépendances.
    */
-  savingsController.$inject = ['SavingsFactory'];
+  SavingsController.$inject = ['SavingsFactory'];
 
-  function savingsController(SavingsFactory) {
+  function SavingsController(SavingsFactory) {
 
     var vm = this;
     vm.removeSaving = removeSaving;

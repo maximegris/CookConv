@@ -8,19 +8,18 @@ var fs = require('fs');
 var path = require('path');
 var mv = require('mv');
 
-var mvDistFileToPlatform = function(src,dest,platform) {
-	mv(src, dest, {mkdirp: true}, function(err) {
-		if(typeof err != 'undefined')
-		{
-			console.log("err");
-			console.log(err);
-			console.log("ERROR when moving CSS folder to " + platform + " platform");
-		}
-		else
-		{
-			console.log("CSS folder moved OK to " + platform + " platform");
-		}
-	});
+var mvDistFileToPlatform = function(src, dest, platform) {
+  mv(src, dest, {
+    mkdirp: true
+  }, function(err) {
+    if (typeof err != 'undefined') {
+      console.log("err");
+      console.log(err);
+      console.log("ERROR when moving CSS folder to " + platform + " platform");
+    } else {
+      console.log("CSS folder moved OK to " + platform + " platform");
+    }
+  });
 };
 
 var iosPlatformsDir_dist_css = path.resolve(__dirname, '../../platforms/ios/www/dist/dist_css');

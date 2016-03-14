@@ -9,7 +9,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'settings/settings-ingredients.html',
-      controller: settingsIngredientsController,
+      controller: SettingsIngredientsController,
       controllerAs: 'ingredientsvm',
       bindToController: true // because the scope is isolated
     };
@@ -21,9 +21,9 @@
   /**
    * Injection de dépendances.
    */
-  settingsIngredientsController.$inject = ['Ingredients'];
+  SettingsIngredientsController.$inject = ['Ingredients'];
 
-  function settingsIngredientsController(Ingredients) {
+  function SettingsIngredientsController(Ingredients) {
 
     var vm = this;
 

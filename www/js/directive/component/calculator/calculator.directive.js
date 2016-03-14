@@ -9,7 +9,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'tab-calculator.html',
-      controller: calculatorController,
+      controller: CalculatorController,
       controllerAs: 'calcvm',
       bindToController: true // because the scope is isolated
     };
@@ -21,9 +21,9 @@
   /**
    * Injection de dépendances.
    */
-  calculatorController.$inject = ['$scope', '$rootScope', '$cordovaSplashscreen', '$ionicPopup', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+  CalculatorController.$inject = ['$scope', '$rootScope', '$cordovaSplashscreen', '$ionicPopup', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
-  function calculatorController($scope, $rootScope, $cordovaSplashscreen, $ionicPopup, SavingsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
+  function CalculatorController($scope, $rootScope, $cordovaSplashscreen, $ionicPopup, SavingsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;
 

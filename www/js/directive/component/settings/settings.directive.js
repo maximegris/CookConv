@@ -9,7 +9,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'tab-settings.html',
-      controller: settingsController,
+      controller: SettingsController,
       controllerAs: 'settingsvm',
       bindToController: true // because the scope is isolated
     };
@@ -21,9 +21,9 @@
   /**
    * Injection de dépendances.
    */
-  settingsController.$inject = ['$rootScope', 'IngredientsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+  SettingsController.$inject = ['$rootScope', 'IngredientsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
-  function settingsController($rootScope, IngredientsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
+  function SettingsController($rootScope, IngredientsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;
     vm.versionPro = versionPro;

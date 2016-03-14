@@ -9,7 +9,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'app.html',
-      controller: applicationController,
+      controller: ApplicationController,
       controllerAs: 'appvm',
       bindToController: true // because the scope is isolated
     };
@@ -21,11 +21,9 @@
   /**
    * IoC
    */
-  applicationController.$inject = [];
+  ApplicationController.$inject = [];
 
-  function applicationController() {
-
-
+  function ApplicationController() {
 
   }
 })(angular);
