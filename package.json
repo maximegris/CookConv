@@ -1,6 +1,6 @@
 {
   "name": "CookConv",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Volume to weight (and weight to volume) converter",
   "dependencies": {
     "gulp": "^3.9.1"
