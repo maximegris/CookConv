@@ -30,12 +30,16 @@
     var vm = this;
     vm.removeSaving = removeSaving;
 
-    // Chargement données
-    SavingsFactory.getSavings().then(function(_savings) {
-      vm.savings = _savings;
-    });
+    activate();
 
     // Fonctions privées
+    function activate() {
+      // Chargement données
+      SavingsFactory.getSavings().then(function(_savings) {
+        vm.savings = _savings;
+      });      
+    }
+
     function removeSaving($index, saving) {
       SavingsFactory.removeSaving(saving).then(function() {
 

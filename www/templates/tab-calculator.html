@@ -3,32 +3,32 @@
     <div id="from-to" class="list">
       <label class="item item-input">
         <span class="input-label-calc">{{ 'FROM' | translate }}</span>
-        <input type="text" class="right" ng-model="$root.converter.from" name="from" disabled>
-        <span class="input-label-calc center" ng-bind="$root.converter.getTypeFrom()"></span>
+        <input type="text" class="right" ng-model="calcvm.converter.from" name="from" disabled>
+        <span class="input-label-calc center">{{calcvm.converter.from_type.code}}</span>
       </label>
       <label class="item item-input">
         <span class="input-label-calc">{{ 'TO' | translate }}</span>
-        <input type="text" class="right" ng-model="$root.converter.to" name="to" disabled>
-        <span class="input-label-calc center" ng-bind="$root.converter.getTypeTo()"></span>
+        <input type="text" class="right" ng-model="calcvm.converter.to" name="to" disabled>
+        <span class="input-label-calc center">{{calcvm.converter.to_type.code}}</span>
       </label>
     </div>
     <div id="criteria-list">
       <div class="row">
         <div class="col">
           <button class="button button-block button-dark" ng-click="calcvm.showIngredient()">
-            {{$root.converter.ingredient.name}}
+            {{calcvm.converter.ingredient.name}}
           </button>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <button class="button button-block button-dark" ng-click="calcvm.showFromType()">
-            {{ 'FROM' | translate }} {{$root.converter.from_type.name}}
+            {{ 'FROM' | translate }} {{calcvm.converter.from_type.name}}
           </button>
         </div>
         <div class="col">
           <button class="button button-block button-dark" ng-click="calcvm.showToType()">
-            {{ 'TO' | translate }} {{$root.converter.to_type.name}}
+            {{ 'TO' | translate }} {{calcvm.converter.to_type.name}}
           </button>
         </div>
       </div>

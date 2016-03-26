@@ -29,9 +29,13 @@
 
     var vm = this;
 
-    Ingredients.getIngredientsByRef("1").then(function(_ingredients) {
-      vm.ingredients = _ingredients;
-    });
+    activate();
+
+    function activate() {
+      Ingredients.getIngredientsByRef("1").then(function(_ingredients) {
+        vm.ingredients = _ingredients;
+      });
+    }
 
   }
 })(angular);

@@ -22,23 +22,24 @@
   /**
    * Injection de dépendances.
    */
-  SettingsController.$inject = ['$rootScope', 'IngredientsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+  SettingsController.$inject = ['$rootScope', 'SettingsFactory', 'IngredientsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
   /* @ngInject */
-  function SettingsController($rootScope, IngredientsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
+  function SettingsController($rootScope, SettingsFactory, IngredientsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;
-    vm.versionPro = versionPro;
+    var pro = false;
 
-    vm.settings = {
-      lang: $rootScope.settings.current_lang_label
-    };
-
-    //TODO Désactiver les boutons de la version PRO par défaut
+    activate();
 
     // Méthodes privées
+    function activate() {
+      vm.settings = SettingsFactory.getSettings();
+    }
+
+    //TODO Désactiver les boutons de la version PRO par défaut
     function versionPro(action) {
-      if ($rootScope.pro) {
+      if (pro) {
         switch (action) {
           case "INGREDIENTS":
             openViewManageIngredients();

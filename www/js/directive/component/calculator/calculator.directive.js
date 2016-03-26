@@ -22,10 +22,10 @@
   /**
    * Injection de dépendances.
    */
-  CalculatorController.$inject = ['$scope', '$rootScope', '$cordovaSplashscreen', '$ionicPopup', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+  CalculatorController.$inject = ['$scope', '$rootScope', '$cordovaSplashscreen', '$ionicPopup', 'CalculatorFactory', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
   /* @ngInject */
-  function CalculatorController($scope, $rootScope, $cordovaSplashscreen, $ionicPopup, SavingsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
+  function CalculatorController($scope, $rootScope, $cordovaSplashscreen, $ionicPopup, CalculatorFactory, SavingsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;
 
@@ -36,74 +36,66 @@
     vm.showFromType = showFromType;
     vm.showIngredient = showIngredient;
     vm.showToType = showToType;
+    vm.calculateConversion = calculateConversion;
 
-    // Fonction d'écoute sur la vue
-    $scope.$watch('converter.from_type', calculateConversion, false);
-    $scope.$watch('converter.to_type', calculateConversion, false);
-    $scope.$watch('converter.ingredient', calculateConversion, false);
+    activate();
 
-    // Initialisation des données
-    if ($rootScope.init) {
-      $rootScope.init = false;
+    function activate() {
 
-      $rootScope.converter = {
-        "from": "0",
-        "from_type": $rootScope.types[0],
-        "to": "0",
-        "to_type": $rootScope.types[3],
-        "ingredient": $rootScope.ingredients[0],
+      vm.ingredients = CalculatorFactory.getIngredients();
+      vm.types = CalculatorFactory.getTypes();
+      vm.converter = CalculatorFactory.getConverter();
 
-        getTypeFrom: function() {
-          return $rootScope.converter.from_type.code;
-        },
-        getTypeTo: function() {
-          return $rootScope.converter.to_type.code;
-        },
-      };
+      if (window.cordova) {
+        $cordovaSplashscreen.hide();
+      }
+
     }
 
     // Fonctions privées
     function calculateConversion() {
-      if ($rootScope.converter) {
-        var _from_val = $rootScope.converter.from;
-        var _from = $rootScope.converter.from_type;
-        var _to = $rootScope.converter.to_type;
-        var _ingredient = $rootScope.converter.ingredient;
+      if (vm.converter) {
+        var _from_val = vm.converter.from;
+        var _from = vm.converter.from_type;
+        var _to = vm.converter.to_type;
+        var _ingredient = vm.converter.ingredient;
 
         if (_from_val === "0") {
-          $rootScope.converter.to = "0";
+          vm.converter.to = "0";
         } else {
-
           // On compare les types des mesures pour savoir comment on effectue le calcul de conversion
           // Utilisation de Math.floor & facteur pour afficher correctement les valeurs (meme toutes petites soient elles)
           if (_from.type === _to.type) {
-            $rootScope.converter.to = (Math.floor(1000 * (_from_val * _to.rapport / _from.rapport)) / 1000).toString();
+            vm.converter.to = (Math.floor(1000 * (_from_val * _to.rapport / _from.rapport)) / 1000).toString();
           } else if (_from.type === "poids") {
-            $rootScope.converter.to = (Math.floor(1000 * (_from_val * _to.rapport / (_from.rapport * _ingredient.masse_volumique))) / 1000).toString();
+            vm.converter.to = (Math.floor(1000 * (_from_val * _to.rapport / (_from.rapport * _ingredient.masse_volumique))) / 1000).toString();
           } else {
-            $rootScope.converter.to = (Math.floor(1000 * (_from_val * _to.rapport * _ingredient.masse_volumique / _from.rapport)) / 1000).toString();
+            vm.converter.to = (Math.floor(1000 * (_from_val * _to.rapport * _ingredient.masse_volumique / _from.rapport)) / 1000).toString();
           }
         }
+
+        // On sauvegarde l'état courant de l'objet
+        CalculatorFactory.setConverter(vm.converter);
       }
     }
 
     function addValCalc(value) {
 
-      var lengthVal = $rootScope.converter.from.length;
+      var lengthVal = vm.converter.from.length;
 
       if (lengthVal <= 5) {
-        if ($rootScope.converter.from === "0" && value !== "0") {
+        if (vm.converter.from === "0" && value !== "0") {
 
           if (value === ".") {
-            $rootScope.converter.from = "0.";
+            vm.converter.from = "0.";
           } else {
-            $rootScope.converter.from = value;
+            vm.converter.from = value;
           }
 
-        } else if ($rootScope.converter.from !== "0") {
+        } else if (vm.converter.from !== "0") {
 
-          if (value !== "." || (value === "." && lengthVal !== 5 && $rootScope.converter.from.indexOf(".") === -1)) {
-            $rootScope.converter.from += value;
+          if (value !== "." || (value === "." && lengthVal !== 5 && vm.converter.from.indexOf(".") === -1)) {
+            vm.converter.from += value;
           }
 
         }
@@ -114,13 +106,13 @@
 
     function removeValCalc(all) {
       if (all) {
-        $rootScope.converter.from = "0";
-        $rootScope.converter.to = "0";
+        vm.converter.from = "0";
+        vm.converter.to = "0";
       } else {
-        if ($rootScope.converter.from.length > 1) {
-          $rootScope.converter.from = $rootScope.converter.from.substring(0, $rootScope.converter.from.length - 1);
+        if (vm.converter.from.length > 1) {
+          vm.converter.from = vm.converter.from.substring(0, vm.converter.from.length - 1);
         } else {
-          $rootScope.converter.from = "0";
+          vm.converter.from = "0";
         }
 
         calculateConversion();
@@ -129,14 +121,15 @@
     }
 
     function inverseVal() {
-      var tmp = $rootScope.converter.from,
-        tmp_type = $rootScope.converter.from_type;
+      var tmp = vm.converter.from,
+        tmp_type = vm.converter.from_type;
 
-      $rootScope.converter.from_type = $rootScope.converter.to_type;
-      $rootScope.converter.to_type = tmp_type;
+      vm.converter.from_type = vm.converter.to_type;
+      vm.converter.to_type = tmp_type;
 
-      $rootScope.converter.from = $rootScope.converter.to.toString();
-      $rootScope.converter.to = tmp.toString();
+      vm.converter.from = vm.converter.to.toString();
+
+      calculateConversion();
 
     }
 
@@ -187,29 +180,22 @@
 
     function saveConverter() {
 
-      if ($rootScope.converter.from !== "0") {
+      if (vm.converter.from !== "0") {
 
         $rootScope.$broadcast(_LOADING_SPINNER_START_);
 
         var _item = {
-          fromVal: $rootScope.converter.from,
-          fromType: $rootScope.converter.from_type.code,
-          toVal: $rootScope.converter.to,
-          toType: $rootScope.converter.to_type.code,
-          ingredient: $rootScope.converter.ingredient.id
+          fromVal: vm.converter.from,
+          fromType: vm.converter.from_type.code,
+          toVal: vm.converter.to,
+          toType: vm.converter.to_type.code,
+          ingredient: vm.converter.ingredient.id
         };
 
         SavingsFactory.addSaving(_item).then(function() {
           $rootScope.$broadcast(_LOADING_SPINNER_END_);
-        }, function(error) {
-          alert(error);
-          $rootScope.$broadcast(_LOADING_SPINNER_END_);
         });
       }
-    }
-
-    if (window.cordova) {
-      $cordovaSplashscreen.hide();
     }
 
   }

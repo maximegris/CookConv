@@ -1,8 +1,7 @@
 (function(angular, undefined) {
   'use strict';
 
-  angular.module('starter')
-    .config(stateConfig);
+  angular.module('starter').config(stateConfig);
 
   stateConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
@@ -68,7 +67,7 @@
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/calculator');
 
-    function dbReady(DBFactory, $log, $rootScope, $translate, $cordovaSplashscreen) {
+    function dbReady(DBFactory, CalculatorFactory, SettingsFactory, $translate) {
       // (1) init the DB
       return DBFactory.initDB()
         .then(function(success) {
@@ -77,10 +76,9 @@
           alert('Failed initDB : ' + JSON.stringify(error));
         })
         .then(function(success) {
-          $rootScope.init = true;
-          $rootScope.settings = success[0];
-          $rootScope.ingredients = success[1];
-          $rootScope.types = success[2];
+
+          SettingsFactory.setSettings(success[0]);
+          CalculatorFactory.init(success[1], success[2]);
 
         }, function(error) {
           alert('Failed getContextApplication: ' + JSON.stringify(error));

@@ -22,26 +22,28 @@
   /**
    * Injection de dépendances.
    */
-  SettingsLangController.$inject = ['$scope', '$rootScope', '$translate', 'LanguagesFactory', 'DBFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+  SettingsLangController.$inject = ['$scope', '$rootScope', '$translate', 'LanguagesFactory', 'SettingsFactory', 'CalculatorFactory', 'DBFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
   /* @ngInject */
-  function SettingsLangController($scope, $rootScope, $translate, LanguagesFactory, DBFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
+  function SettingsLangController($scope, $rootScope, $translate, LanguagesFactory, SettingsFactory, CalculatorFactory, DBFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;
 
-    // Chargement des données
-    vm.current = {
-      lang: $translate.use()
-    };
-
-    LanguagesFactory.getLanguages().then(function(_languages) {
-
-      vm.languages = _languages;
-
-      $scope.$watch('langvm.current.lang', changeLanguage, false);
-    });
+    activate();
 
     // Fonctions privées
+    function activate() {
+      // Chargement des données
+      vm.current = {
+        lang: $translate.use()
+      };
+
+      LanguagesFactory.getLanguages().then(function(_languages) {
+        vm.languages = _languages;
+        $scope.$watch('langvm.current.lang', changeLanguage, false);
+      });
+    }
+
     function changeLanguage() {
       if (vm.current) {
 
@@ -51,17 +53,11 @@
           .then(function(success) {
 
               if ($translate.use() !== vm.current.lang) {
-                $rootScope.init = true;
                 $translate.use(vm.current.lang);
-                $rootScope.settings = success[0];
-                $rootScope.ingredients = success[1];
-                $rootScope.types = success[2];
+                SettingsFactory.setSettings(success[0]);
+                CalculatorFactory.init(success[1], success[2]);
               }
 
-              $rootScope.$broadcast(_LOADING_SPINNER_END_);
-            },
-            function(error) {
-              alert("Error update Language" + error);
               $rootScope.$broadcast(_LOADING_SPINNER_END_);
             });
 
