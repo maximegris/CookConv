@@ -18,12 +18,16 @@ var connect = require('gulp-connect'); // Run a webserver (with Livereload)
 var args = require('yargs')
 .alias('b', 'build')
 .alias('r', 'run')
+.alias('p', 'release')
 .default('build', false)
+.default('run', false)
+.default('release', false)
 .argv;
 
 // emulate or run would also mean build
 var build = args.build;
 var run = args.run;
+var release = args.release;
 // if build we use 'www', otherwise '.www'
 var project = {
 	dist : './www/dist',
@@ -127,14 +131,15 @@ gulp.task('build', function (done) {
     'useref',
     run ? 'noop' : 'watch',
     run ? 'noop' : 'connect',
-    run ? 'ionic:run' : 'noop',
+    run ? (release ? 'ionic:release': 'ionic:debug' ) : 'noop',
     done);
 });
 
   // ionic run wrapper
-gulp.task('ionic:run', shell.task([
-    'ionic run ' + run
-]));
+	// ionic run wrapper
+gulp.task('ionic:release', 	shell.task([ 'ionic run ' + run + ' --release' ]));
+
+gulp.task('ionic:debug', shell.task([ 'ionic run ' + run ]));
 
 gulp.task('install', function() {
   return bower.commands.install()
