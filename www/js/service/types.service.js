@@ -6,6 +6,7 @@
 
   TypesFactory.$inject = ['$q', '$log', '$cordovaSQLite'];
 
+  /* @ngInject */
   function TypesFactory($q, $log, $cordovaSQLite) {
 
     // Méthodes publiques

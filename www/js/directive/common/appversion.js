@@ -7,6 +7,7 @@
 
   appVersion.$inject = [];
 
+  /* @ngInject */
   function appVersion() {
 
     return function(scope, elm) {

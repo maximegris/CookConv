@@ -4,6 +4,7 @@
 
   application.$inject = [];
 
+  /* @ngInject */
   function application() {
 
     var directive = {
@@ -23,6 +24,7 @@
    */
   ApplicationController.$inject = [];
 
+  /* @ngInject */
   function ApplicationController() {
 
   }

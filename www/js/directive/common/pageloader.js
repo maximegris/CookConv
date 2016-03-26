@@ -4,6 +4,7 @@
 
   pageLoader.$inject = [];
 
+  /* @ngInject */
   function pageLoader() {
 
     var directive = {
@@ -22,6 +23,7 @@
    */
   pageLoaderController.$inject = ['$scope', '$ionicLoading', '$timeout', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
+  /* @ngInject */
   function pageLoaderController($scope, $ionicLoading, $timeout, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     $ionicLoading.hide();
@@ -33,7 +35,9 @@
     });
 
     $scope.$on(_LOADING_SPINNER_END_, function(value) {
-      $timeout(function() {$ionicLoading.hide();}, 500);
+      $timeout(function() {
+        $ionicLoading.hide();
+      }, 500);
     });
   }
 })(angular);

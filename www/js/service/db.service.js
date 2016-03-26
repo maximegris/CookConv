@@ -6,6 +6,7 @@
 
   DBFactory.$inject = ['$ionicPlatform', '$q', '$log', '$cordovaSQLite', '$translate', 'DB_CONFIG', 'IngredientsFactory', 'TypesFactory', 'LanguagesFactory'];
 
+  /* @ngInject */
   function DBFactory($ionicPlatform, $q, $log, $cordovaSQLite, $translate, DB_CONFIG, IngredientsFactory, TypesFactory, LanguagesFactory, _bd) {
 
     // Methodes privees

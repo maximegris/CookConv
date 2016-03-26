@@ -4,6 +4,7 @@
 
   calculator.$inject = [];
 
+  /* @ngInject */
   function calculator() {
 
     var directive = {
@@ -23,6 +24,7 @@
    */
   CalculatorController.$inject = ['$scope', '$rootScope', '$cordovaSplashscreen', '$ionicPopup', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
+  /* @ngInject */
   function CalculatorController($scope, $rootScope, $cordovaSplashscreen, $ionicPopup, SavingsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;

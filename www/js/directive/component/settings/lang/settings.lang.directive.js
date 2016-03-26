@@ -4,6 +4,7 @@
 
   settingsLang.$inject = [];
 
+  /* @ngInject */
   function settingsLang() {
 
     var directive = {
@@ -23,6 +24,7 @@
    */
   SettingsLangController.$inject = ['$scope', '$rootScope', '$translate', 'LanguagesFactory', 'DBFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
+  /* @ngInject */
   function SettingsLangController($scope, $rootScope, $translate, LanguagesFactory, DBFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;

@@ -6,6 +6,7 @@
 
   IngredientsFactory.$inject = ['$q', '$log', '$translate', '$cordovaSQLite'];
 
+  /* @ngInject */
   function IngredientsFactory($q, $log, $translate, $cordovaSQLite) {
 
     // Méthodes publiques

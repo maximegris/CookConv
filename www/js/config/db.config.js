@@ -1,7 +1,7 @@
 // Configuration des tables de la base de données
 (function(angular) {
   'use strict';
-  
+
   angular.module('db.config').constant('DB_CONFIG', {
     name: 'cookconv',
     tables: [{

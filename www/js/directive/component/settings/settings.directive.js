@@ -4,6 +4,7 @@
 
   settings.$inject = [];
 
+  /* @ngInject */
   function settings() {
 
     var directive = {
@@ -23,6 +24,7 @@
    */
   SettingsController.$inject = ['$rootScope', 'IngredientsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
+  /* @ngInject */
   function SettingsController($rootScope, IngredientsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;

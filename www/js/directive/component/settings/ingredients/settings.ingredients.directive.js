@@ -4,6 +4,7 @@
 
   settingsIngredients.$inject = [];
 
+  /* @ngInject */
   function settingsIngredients() {
 
     var directive = {
@@ -23,6 +24,7 @@
    */
   SettingsIngredientsController.$inject = ['Ingredients'];
 
+  /* @ngInject */
   function SettingsIngredientsController(Ingredients) {
 
     var vm = this;

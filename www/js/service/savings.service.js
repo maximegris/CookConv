@@ -6,6 +6,7 @@
 
   SavingsFactory.$inject = ['$q', '$log', '$cordovaSQLite', '$translate'];
 
+  /* @ngInject */
   function SavingsFactory($q, $log, $cordovaSQLite, $translate) {
 
     // Méthodes publiques

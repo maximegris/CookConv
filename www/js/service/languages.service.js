@@ -5,6 +5,7 @@
 
   LanguagesFactory.$inject = ['$q', '$log', '$cordovaSQLite'];
 
+  /* @ngInject */
   function LanguagesFactory($q, $log, $cordovaSQLite) {
 
     // Méthodes publiques

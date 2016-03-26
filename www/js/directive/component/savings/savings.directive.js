@@ -4,6 +4,7 @@
 
   savings.$inject = [];
 
+  /* @ngInject */
   function savings() {
 
     var directive = {
@@ -23,6 +24,7 @@
    */
   SavingsController.$inject = ['SavingsFactory'];
 
+  /* @ngInject */
   function SavingsController(SavingsFactory) {
 
     var vm = this;
