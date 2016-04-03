@@ -1,7 +1,11 @@
 # CookConv
 Volume to weight (and weight to volume) converter.
 
+## Init database
+* Install SQLlite
+* Launch command in promt (windows)
+sqlite3 cookconv.db ".read [path_to_SQL]init.sql"
+The bd file MUST be in www repository
+
 ## TODO
-- Create a "active" function fire [goal : init the controller / best practice]
-- Replace rootScope (current selection, language) by service variable
 - PRO version
