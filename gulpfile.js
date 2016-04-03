@@ -1,19 +1,11 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
-var bower = require('bower');
-var shell = require('gulp-shell');
 var runSequence = require('run-sequence');
 var del = require('del');
-var concat = require('gulp-concat');
-var sass = require('gulp-sass');
-var cleanCSS = require('gulp-clean-css');
-var rename = require('gulp-rename');
-var jshint = require('gulp-jshint'); // Lint your javascript
 var stylish = require('jshint-stylish'); // Lint your javascript
+
+var cleanCSS = require('gulp-clean-css'); // Minify CSS
 var templateCache = require('gulp-angular-templatecache'); //HTML templates transformation
-var ngAnnotate = require('gulp-ng-annotate'); // Enable ng-strict-di (injection)
-var useref = require('gulp-useref'); // Concatenate js and css files
-var connect = require('gulp-connect'); // Run a webserver (with Livereload)
+var plugins = require('gulp-load-plugins')(); // Load gulp plugins
 
 var args = require('yargs')
 .alias('b', 'build')
@@ -52,36 +44,82 @@ var paths = {
   useref: ['./www/*.html']
 };
 
-gulp.task('default', ['build']);
+gulp.task('default', ['compilation']);
 
 // no-op = empty function
 gulp.task('noop', function() {});
 
-gulp.task('sassFiles', function(done) {
+// clean repository
+gulp.task('clean', function (done) {
+	return del([project.dist + '/**']).then(paths => {
+		gulp.on('end', done);
+	});
+});
+
+gulp.task('reload:css', ['scss'],  function() {
+	gulp.src(paths.css)
+		.pipe(plugins.connect.reload());
+});
+
+gulp.task('reload:js', ['js'],  function() {
+	gulp.src(paths.jsapp)
+		.pipe(plugins.connect.reload());
+});
+
+gulp.task('reload:html', ['html'],  function() {
+	gulp.src(paths.tpl)
+		.pipe(plugins.connect.reload());
+});
+
+gulp.task('watch', ['useref'],  function() {
+  gulp.watch(paths.sass, ['reload:css']);
+  gulp.watch(paths.jsapp, ['reload:js']);
+	gulp.watch(paths.assets, ['assets']);
+  gulp.watch(paths.tpl, ['reload:html']);
+  gulp.watch(paths.useref, ['useref']);
+});
+
+gulp.task('connect', [], function() {
+  plugins.connect.server({
+    root: project.target,
+    livereload: true
+  });
+});
+
+gulp.task('useref', ['scss', 'js', 'html', 'assets', 'ionicdeps', 'db'], function (done) {
+	gulp.src(paths.useref)
+	.pipe(plugins.plumber())
+	.pipe(plugins.useref())
+	.pipe(gulp.dest(project.dist))
+	.on('end', done);
+});
+
+gulp.task('scss', function(done) {
   gulp.src(paths.sass)
-    .pipe(sass())
+		.pipe(plugins.plumber())
+    .pipe(plugins.sass())
     .pipe(gulp.dest('./www/css/'))
     .pipe(cleanCSS())
-    .pipe(rename({ extname: '.min.css' }))
+    .pipe(plugins.rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
 });
 
-gulp.task('jsFiles', function(done) {
+gulp.task('js', function(done) {
 gulp.src(paths.jsapp)
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish))
-    //.pipe(jshint.reporter('fail'))
-	.pipe(ngAnnotate({single_quotes: true}))
+	.pipe(plugins.plumber())
+  .pipe(plugins.jshint())
+  .pipe(plugins.jshint.reporter(stylish))
+	.pipe(plugins.ngAnnotate({single_quotes: true}))
 	.pipe(gulp.dest(project.dist + '/dist_js/app'))
 	.on('end', done);
 });
 
 gulp.task('ionicdeps', function(done) {
-gulp.src(paths.ionicfonts)
-	.pipe(gulp.dest('./www/dist/lib/ionic/fonts'));
-gulp.src(paths.ionicstyle)
-	.pipe(gulp.dest('./www/dist/lib/ionic/css')).on('end', done);
+	gulp.src(paths.ionicfonts)
+	  .pipe(gulp.dest('./www/dist/lib/ionic/fonts'));
+	gulp.src(paths.ionicstyle)
+	  .pipe(gulp.dest('./www/dist/lib/ionic/css')).on('end', done);
 });
 
 gulp.task('assets', function(done) {
@@ -90,60 +128,35 @@ gulp.src(paths.assets)
 	.on('end', done);
 });
 
-gulp.task('templatecache', function (done) {
+gulp.task('db', function(done) {
+	gulp.src('./www/**.sqlite')
+		.pipe(gulp.dest('./www/dist/'))
+		.on('end', done);
+});
+
+gulp.task('html', function (done) {
 	gulp.src(paths.tpl)
+	.pipe(plugins.plumber())
+	.pipe(plugins.htmlhint({
+			"doctype-first": false,
+		}))
+	.pipe(plugins.htmlhint.reporter())
 	.pipe(templateCache({standalone:true}))
 	.pipe(gulp.dest('./www/js'))
 	.on('end', done);
 });
 
-gulp.task('clean', function (done) {
-	return del([project.dist + '/**']).then(paths => {
-		gulp.on('end', done);
-	});
-});
-
-gulp.task('useref', ['sassFiles', 'jsFiles',  'ionicdeps', 'assets', 'templatecache'], function (done) {
-	gulp.src(paths.useref)
-	.pipe(useref())
-	.pipe(gulp.dest(project.dist))
-	.on('end', done);
-});
-
-gulp.task('watch', [],  function() {
-  gulp.watch(paths.sass, ['useref']);
-  gulp.watch(paths.jsapp, ['useref']);
-	gulp.watch(paths.assets, ['useref']);
-  gulp.watch(paths.tpl, ['useref']);
-  gulp.watch(paths.useref, ['useref']);
-});
-
-gulp.task('connect', [], function() {
-  connect.server({
-    root: project.target,
-    livereload: true
-  });
-});
-
-gulp.task('build', function (done) {
-  runSequence(
-    'clean',
-    'useref',
-    run ? 'noop' : 'watch',
-    run ? 'noop' : 'connect',
-    run ? (release ? 'ionic:release': 'ionic:debug' ) : 'noop',
-    done);
+// Tache principale
+gulp.task('compilation', function (done) {
+	runSequence(
+		'clean',
+		run ? 'useref' : 'watch',
+		run ? 'noop' : 'connect',
+		run ? (release ? 'ionic:release': 'ionic:debug' ) : 'noop',
+	done);
 });
 
   // ionic run wrapper
-	// ionic run wrapper
-gulp.task('ionic:release', 	shell.task([ 'ionic run ' + run + ' --release' ]));
+gulp.task('ionic:release', 	plugins.shell.task([ 'ionic run ' + run + ' --release' ]));
 
-gulp.task('ionic:debug', shell.task([ 'ionic run ' + run ]));
-
-gulp.task('install', function() {
-  return bower.commands.install()
-    .on('log', function(data) {
-      gutil.log('bower', gutil.colors.cyan(data.id), data.message);
-    });
-});
+gulp.task('ionic:debug', plugins.shell.task([ 'ionic run ' + run ]));
