@@ -10,48 +10,45 @@
     <link href="css/ionic.app.min.css" type="text/css" rel="stylesheet">
     <!-- endbuild -->
 
-    <script type="text/javascript" src="cordova.js"></script>
-
+    <!-- build:js dist_js/vendor.js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <script src="lib/angular-translate.min.js"></script>
+    <script src="lib/angular-translate-loader-static-files.min.js"></script>
+    <!-- endbuild -->
+    <script src="cordova.js"></script>
   </head>
   <body ng-app="starter" ng-strict-di>
 
     <application></application>
 
-    <!-- build:js dist_js/vendor.js -->
-    <script type="text/javascript" src="lib/ionic/js/ionic.bundle.js"></script>
-    <script type="text/javascript" src="lib/ngCordova/dist/ng-cordova.min.js"></script>
-    <script type="text/javascript" src="lib/angular-translate.min.js"></script>
-    <script type="text/javascript" src="lib/angular-translate-loader-static-files.min.js"></script>
-    <!-- endbuild -->
-
     <!-- build:js dist_js/app.js -->
-    <script type="text/javascript" src="dist/dist_js/app/app.js"></script>
+    <script src="dist/dist_js/app/app.js"></script>
 
-    <script type="text/javascript" src="dist/dist_js/app/config/app/app.ionic.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/config/app/app.routes.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/config/app/app.translate.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/config/db.config.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/config/constants.js"></script>
+    <script src="dist/dist_js/app/config/app/app.ionic.js"></script>
+    <script src="dist/dist_js/app/config/app/app.routes.js"></script>
+    <script src="dist/dist_js/app/config/app/app.translate.js"></script>
+    <script src="dist/dist_js/app/config/constants.js"></script>
 
-    <script type="text/javascript" src="dist/dist_js/app/service/db.service.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/service/ingredients.service.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/service/types.service.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/service/languages.service.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/service/calculator.service.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/service/savings.service.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/service/settings.service.js"></script>
+    <script src="dist/dist_js/app/service/db.service.js"></script>
+    <script src="dist/dist_js/app/service/ingredients.service.js"></script>
+    <script src="dist/dist_js/app/service/types.service.js"></script>
+    <script src="dist/dist_js/app/service/languages.service.js"></script>
+    <script src="dist/dist_js/app/service/calculator.service.js"></script>
+    <script src="dist/dist_js/app/service/savings.service.js"></script>
+    <script src="dist/dist_js/app/service/settings.service.js"></script>
 
-    <script type="text/javascript" src="dist/dist_js/app/directive/common/appversion.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/directive/common/hidetabs.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/directive/common/pageloader.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/directive/component/application.directive.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/directive/component/calculator/calculator.directive.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/directive/component/savings/savings.directive.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/directive/component/settings/settings.directive.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/directive/component/settings/lang/settings.lang.directive.js"></script>
-    <script type="text/javascript" src="dist/dist_js/app/directive/component/settings/ingredients/settings.ingredients.directive.js"></script>
+    <script src="dist/dist_js/app/directive/common/appversion.js"></script>
+    <script src="dist/dist_js/app/directive/common/hidetabs.js"></script>
+    <script src="dist/dist_js/app/directive/common/pageloader.js"></script>
+    <script src="dist/dist_js/app/directive/component/application.directive.js"></script>
+    <script src="dist/dist_js/app/directive/component/calculator/calculator.directive.js"></script>
+    <script src="dist/dist_js/app/directive/component/savings/savings.directive.js"></script>
+    <script src="dist/dist_js/app/directive/component/settings/settings.directive.js"></script>
+    <script src="dist/dist_js/app/directive/component/settings/lang/settings.lang.directive.js"></script>
+    <script src="dist/dist_js/app/directive/component/settings/ingredients/settings.ingredients.directive.js"></script>
 
-    <script type="text/javascript" src="dist/dist_js/app/templates.js"></script>
+    <script src="dist/dist_js/app/templates.js"></script>
     <!-- endbuild -->
 
   </body>

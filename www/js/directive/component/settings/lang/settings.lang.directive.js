@@ -54,7 +54,7 @@
 
               if ($translate.use() !== vm.current.lang) {
                 $translate.use(vm.current.lang);
-                SettingsFactory.setSettings(success[0]);
+                SettingsFactory.setLocalSettings(success[0]);
                 CalculatorFactory.init(success[1], success[2]);
               }
 

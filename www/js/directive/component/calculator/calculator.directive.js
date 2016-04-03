@@ -1,4 +1,4 @@
-(function(angular) {
+(function(angular, undefined) {
   'use strict';
   angular.module('directives').directive('calculator', calculator);
 
@@ -22,10 +22,10 @@
   /**
    * Injection de dépendances.
    */
-  CalculatorController.$inject = ['$scope', '$rootScope', '$cordovaSplashscreen', '$ionicPopup', 'CalculatorFactory', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
+  CalculatorController.$inject = ['$scope', '$rootScope', '$cordovaSplashscreen', '$ionicPlatform', '$ionicPopup', 'CalculatorFactory', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_'];
 
   /* @ngInject */
-  function CalculatorController($scope, $rootScope, $cordovaSplashscreen, $ionicPopup, CalculatorFactory, SavingsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
+  function CalculatorController($scope, $rootScope, $cordovaSplashscreen, $ionicPlatform, $ionicPopup, CalculatorFactory, SavingsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
 
     var vm = this;
 
@@ -42,14 +42,15 @@
 
     function activate() {
 
-      vm.ingredients = CalculatorFactory.getIngredients();
-      vm.types = CalculatorFactory.getTypes();
-      vm.converter = CalculatorFactory.getConverter();
+      $ionicPlatform.ready(function() {
+        vm.ingredients = CalculatorFactory.getIngredients();
+        vm.types = CalculatorFactory.getTypes();
+        vm.converter = CalculatorFactory.getConverter();
 
-      if (window.cordova) {
-        $cordovaSplashscreen.hide();
-      }
-
+        if (window.cordova) {
+          $cordovaSplashscreen.hide();
+        }
+      });
     }
 
     // Fonctions privées

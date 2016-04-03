@@ -1,4 +1,4 @@
-(function(angular, undefined) {
+(function(ionic, angular, undefined) {
   'use strict';
 
   angular.module('starter')
@@ -45,4 +45,4 @@
   }
 
 
-})(angular);
+})(ionic, angular);

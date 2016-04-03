@@ -1,4 +1,4 @@
-(function() {
+(function(angular, undefined) {
   'use strict';
 
   angular.module('services').factory('CalculatorFactory', CalculatorFactory);
@@ -61,4 +61,4 @@
     }
 
   }
-})();
+})(angular);

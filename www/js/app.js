@@ -1,6 +1,8 @@
 // Initialisation des modules
-(function(angular, undefined) {
+(function(ionic, angular, cordova, undefined) {
   'use strict';
+
+  window._start = false;
 
   angular.module('constants', []);
   angular.module('db.config', []);
@@ -9,41 +11,60 @@
   angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'directives', 'templates'])
     .run(runApplication);
 
-  runApplication.$inject = ['$ionicPlatform', '$cordovaSplashscreen'];
+  runApplication.$inject = ['$ionicPlatform', '$cordovaSplashscreen', '$cordovaSQLite', '$state', '$ionicHistory', '$location'];
 
   /* @ngInject */
-  function runApplication($ionicPlatform, $cordovaSplashscreen) {
+  function runApplication($ionicPlatform, $cordovaSplashscreen, $cordovaSQLite, $state, $ionicHistory, $location) {
 
     $ionicPlatform.ready(function() {
 
-      if (window.cordova) {
-        $cordovaSplashscreen.show();
-      }
+      if (cordova && window.plugins.sqlDB && window.sqlitePlugin) {
 
-      if (window.cordova && window.sqlitePlugin) {
-        //window.sqlitePlugin.deleteDatabase({
-        //  name: "db.cookconv.db",
-        //  location: 1
-        //});
-        window._db = window.sqlitePlugin.openDatabase({
-          name: "db.cookconv.db",
-          location: 2,
-          androidLockWorkaround: 1
+        window.plugins.sqlDB.copy("cookconv.sqlite", 1, function() {
+          openDB();
+        }, function(e) {
+          //console.log("Error Code = " + JSON.stringify(e));
+          openDB();
         });
       } else {
-        window._db = window.openDatabase("db.cookconv.db", '1.0', 'My app', 5 * 1024 * 1024);
+        openDB();
       }
 
-      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+      if (cordova && cordova.plugins && cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         cordova.plugins.Keyboard.disableScroll(true);
 
       }
       if (window.StatusBar) {
-        StatusBar.styleLightContent();
+        window.StatusBar.styleLightContent();
       }
 
+      $ionicPlatform.registerBackButtonAction(function(event) {
+        var path = $location.path();
+        if (path === "/tab/calculator") {
+          ionic.Platform.exitApp();
+        } else {
+          $ionicHistory.goBack();
+        }
+      }, 100);
+
     });
+
+    /**
+     * Open Database.
+     */
+    function openDB() {
+      if (cordova) {
+        window._db = $cordovaSQLite.openDB({
+          name: "cookconv.sqlite",
+          location: 1
+        });
+      } else {
+        window._db = window.openDatabase("cookconv.sqlite", '1.0', 'My app', 5 * 1024 * 1024);
+      }
+      $state.go("tab.calculator");
+    }
   }
 
-})(angular);
+
+})(ionic, angular, window.cordova);

@@ -1,4 +1,4 @@
-(function(angular, undefined) {
+(function(ionic, angular, undefined) {
   'use strict';
 
   angular.module('starter').config(stateConfig);
@@ -9,24 +9,27 @@
   function stateConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
     // setup an abstract state for the tabs directive
+      .state('init', {
+        url: '/',
+        template: ''
+      })
       .state('tab', {
-      url: '/tab',
-      abstract: true,
-      templateUrl: 'tabs.html',
-      resolve: {
-        dbReady: dbReady
-      }
-    })
-
-    // Each tab has its own nav history stack:
-    .state('tab.calculator', {
-      url: '/calculator',
-      views: {
-        'tab-calculator': {
-          template: '<calculator></calculator>'
+        url: '/tab',
+        abstract: true,
+        templateUrl: 'tabs.html',
+        resolve: {
+          dbReady: dbReady
         }
-      }
-    })
+      })
+      // Each tab has its own nav history stack:
+      .state('tab.calculator', {
+        url: '/calculator',
+        views: {
+          'tab-calculator': {
+            template: '<calculator></calculator>'
+          }
+        }
+      })
 
     .state('tab.savings', {
         url: '/savings',
@@ -67,23 +70,18 @@
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/calculator');
 
-    function dbReady(DBFactory, CalculatorFactory, SettingsFactory, $translate) {
-      // (1) init the DB
-      return DBFactory.initDB()
-        .then(function(success) {
-          return DBFactory.getContextApplication(success, $translate.use());
-        }, function(error) {
-          alert('Failed initDB : ' + JSON.stringify(error));
-        })
-        .then(function(success) {
+    function dbReady($ionicPlatform, DBFactory, CalculatorFactory, SettingsFactory, $translate) {
 
-          SettingsFactory.setSettings(success[0]);
-          CalculatorFactory.init(success[1], success[2]);
-
+      return DBFactory.getContextApplication(true, $translate.use())
+        .then(function(success) {
+          if (success) {
+            SettingsFactory.setLocalSettings(success[0]);
+            CalculatorFactory.init(success[1], success[2]);
+          }
         }, function(error) {
           alert('Failed getContextApplication: ' + JSON.stringify(error));
         });
     }
   }
 
-})(angular);
+})(ionic, angular);

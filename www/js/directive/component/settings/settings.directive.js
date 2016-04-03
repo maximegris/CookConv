@@ -34,7 +34,7 @@
 
     // Méthodes privées
     function activate() {
-      vm.settings = SettingsFactory.getSettings();
+      vm.settings = SettingsFactory.getLocalSettings();
     }
 
     //TODO Désactiver les boutons de la version PRO par défaut

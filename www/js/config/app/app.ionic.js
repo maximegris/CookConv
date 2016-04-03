@@ -1,4 +1,4 @@
-(function(angular, undefined) {
+(function(ionic, angular, undefined) {
   'use strict';
 
   angular.module('starter')
@@ -22,4 +22,4 @@
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
   }
 
-})(angular);
+})(ionic, angular);
