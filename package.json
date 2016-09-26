@@ -1,7 +1,7 @@
 {
-  "name": "CookConv",
-  "version": "1.1.0",
-  "description": "Volume to weight (and weight to volume) converter",
+  "name": "cookconv",
+  "version": "1.2.0",
+  "description": "Phone utils when change phone/reset ROM",
   "dependencies": {
     "gulp": "^3.9.1"
   },
@@ -39,12 +39,13 @@
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
-    "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard",
     "cordova-plugin-splashscreen",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-whitelist",
     "cordova-sqlite-storage",
-    "cordova-plugin-app-version",
-    "cordova-plugin-dbcopy"
+    "cordova-plugin-dbcopy",
+    "cordova-plugin-code-push"
   ],
   "cordovaPlatforms": [
     "android"

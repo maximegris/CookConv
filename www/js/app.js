@@ -18,6 +18,8 @@
 
     $ionicPlatform.ready(function() {
 
+      codePush.sync(null, { updateDialog: true, installMode: InstallMode.IMMEDIATE });
+
       if (cordova && window.plugins.sqlDB && window.sqlitePlugin) {
 
         window.plugins.sqlDB.copy("cookconv.sqlite", 1, function() {

@@ -92,6 +92,8 @@
       "ionic" : true,
       "angular" : true,
       "module": true,
-      "_db" : true
+      "_db" : true,
+      "codePush" : true,
+      "InstallMode" : true
     }
 }
