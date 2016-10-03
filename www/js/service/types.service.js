@@ -1,52 +1,46 @@
 // Factory des types
-(function(angular, undefined) {
-  'use strict';
+(function (angular, undefined) {
+  'use strict'
 
-  angular.module('services').factory('TypesFactory', TypesFactory);
+  angular.module('services').factory('TypesFactory', TypesFactory)
 
-  TypesFactory.$inject = ['$q', '$log', '$cordovaSQLite'];
+  TypesFactory.$inject = ['$q', '$log', '$cordovaSQLite']
 
   /* @ngInject */
   function TypesFactory($q, $log, $cordovaSQLite) {
-
     // Méthodes publiques
-    var getTypes = function(language) {
+    var getTypes = function (language) {
+      var q = $q.defer()
 
-      var q = $q.defer();
+      var _types = []
 
-      var _types = [];
-
-      var dbQuery = "SELECT id, code, name_" + language + ", type, rapport FROM types ORDER BY id";
+      var dbQuery = 'SELECT id, code, name_' + language + ', type, rapport FROM types ORDER BY id'
 
       $cordovaSQLite.execute(window._db, dbQuery)
-        .then(function(res) {
+        .then(function (res) {
           if (res.rows.length > 0) {
             for (var i = 0; i < res.rows.length; i++) {
               _types.push({
                 id: res.rows.item(i).id,
                 code: res.rows.item(i).code,
-                name: res.rows.item(i)["name_" + language],
+                name: res.rows.item(i)['name_' + language],
                 type: res.rows.item(i).type,
                 rapport: res.rows.item(i).rapport
-              });
+              })
             }
           }
 
-          q.resolve(_types);
+          q.resolve(_types)
+        }, function (err) {
+          window.alert('Error get types : ' + JSON.stringify(err))
+        })
 
-        }, function(err) {
-          alert("Error get types : " + JSON.stringify(err));
-        });
-
-      return q.promise;
-
-    };
+      return q.promise
+    }
 
     // Public interface
     return {
       getTypes: getTypes
-    };
-
+    }
   }
-
-})(angular);
+})(angular)

@@ -1,9 +1,9 @@
-(function(ionic, angular, undefined) {
-  'use strict';
+(function (ionic, angular, undefined) {
+  'use strict'
 
-  angular.module('starter').config(stateConfig);
+  angular.module('starter').config(stateConfig)
 
-  stateConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+  stateConfig.$inject = ['$stateProvider', '$urlRouterProvider']
 
   /* @ngInject */
   function stateConfig($stateProvider, $urlRouterProvider) {
@@ -30,8 +30,7 @@
           }
         }
       })
-
-    .state('tab.savings', {
+      .state('tab.savings', {
         url: '/savings',
         views: {
           'tab-savings': {
@@ -55,7 +54,6 @@
             template: '<settings-lang><settings-lang>'
           }
         }
-
       })
       .state('tab.settings-ingredients', {
 
@@ -65,23 +63,21 @@
             template: '<settings-ingredients><settings-ingredients>'
           }
         }
-      });
+      })
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/calculator');
+    $urlRouterProvider.otherwise('/tab/calculator')
 
     function dbReady($ionicPlatform, DBFactory, CalculatorFactory, SettingsFactory, $translate) {
-
       return DBFactory.getContextApplication(true, $translate.use())
-        .then(function(success) {
+        .then(function (success) {
           if (success) {
-            SettingsFactory.setLocalSettings(success[0]);
-            CalculatorFactory.init(success[1], success[2]);
+            SettingsFactory.setLocalSettings(success[0])
+            CalculatorFactory.init(success[1], success[2])
           }
-        }, function(error) {
-          alert('Failed getContextApplication: ' + JSON.stringify(error));
-        });
+        }, function (error) {
+          window.alert('Failed getContextApplication: ' + JSON.stringify(error))
+        })
     }
   }
-
-})(ionic, angular);
+})(ionic, angular)

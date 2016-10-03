@@ -1,0 +1,23 @@
+{
+  "extends": "standard",
+  "plugins": [
+    "standard",
+    "promise"
+  ],
+  "globals": {
+    "ionic": false,
+    "angular": false,
+    "cordova": false,
+    "window": false,
+    "codePush" : false,
+    "InstallMode": false,
+    "CLIEngine": false
+  },
+  "rules": {
+    "handle-callback-err": 0,
+    "no-shadow-restricted-names": 0,
+    "space-before-function-paren": ["error", { "anonymous": "always", "named": "never" }],
+    "camelcase": 1,
+    "no-unused-vars" : 1
+  }
+}

@@ -1,10 +1,10 @@
-(function(ionic, angular, undefined) {
-  'use strict';
+(function (ionic, angular, undefined) {
+  'use strict'
 
   angular.module('starter')
-    .config(translateConfig);
+    .config(translateConfig)
 
-  translateConfig.$inject = ['$translateProvider'];
+  translateConfig.$inject = ['$translateProvider']
 
   /* @ngInject */
   function translateConfig($translateProvider) {
@@ -37,12 +37,10 @@
         'zh': 'zh',
         'zh_*': 'zh',
         'ZH_*': 'zh',
-        'Zh_*': 'zh',
+        'Zh_*': 'zh'
       })
       .determinePreferredLanguage()
       .fallbackLanguage('en')
-      .useSanitizeValueStrategy('escapeParameters');
+      .useSanitizeValueStrategy('escapeParameters')
   }
-
-
-})(ionic, angular);
+})(ionic, angular)

@@ -1,24 +1,20 @@
-(function(angular, undefined) {
+(function (angular, undefined) {
+  'use strict'
 
-  'use strict';
+  angular.module('directives').directive('appVersion', appVersion)
 
-
-  angular.module('directives').directive('appVersion', appVersion);
-
-  appVersion.$inject = [];
+  appVersion.$inject = []
 
   /* @ngInject */
   function appVersion() {
-
-    return function(scope, elm) {
+    return function (scope, elm) {
       if (window.cordova) {
-        cordova.getAppVersion(function(version) {
-          elm.text(version);
-        });
+        cordova.getAppVersion(function (version) {
+          elm.text(version)
+        })
       } else {
-        elm.text("browser.version-1.0.0");
+        elm.text('browser.version-1.0.0')
       }
-    };
+    }
   }
-
-})(angular);
+})(angular)
