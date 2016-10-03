@@ -87,4 +87,4 @@
       resetIngredients: resetIngredients
     }
   }
-})(angular)
+})(angular);

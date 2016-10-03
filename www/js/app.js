@@ -63,4 +63,4 @@
       $state.go('tab.calculator')
     }
   }
-})(ionic, angular, window.cordova)
+})(ionic, angular, window.cordova);

@@ -78,4 +78,4 @@
       getCurrentLanguage: getCurrentLanguage
     }
   }
-})(angular)
+})(angular);

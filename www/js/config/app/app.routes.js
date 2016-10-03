@@ -80,4 +80,4 @@
         })
     }
   }
-})(ionic, angular)
+})(ionic, angular);

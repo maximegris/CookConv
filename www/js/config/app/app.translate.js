@@ -43,4 +43,4 @@
       .fallbackLanguage('en')
       .useSanitizeValueStrategy('escapeParameters')
   }
-})(ionic, angular)
+})(ionic, angular);

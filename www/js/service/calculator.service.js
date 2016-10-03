@@ -58,4 +58,4 @@
       return _types
     }
   }
-})(angular)
+})(angular);

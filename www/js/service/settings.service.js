@@ -43,4 +43,4 @@
       return q.promise
     }
   }
-})(angular)
+})(angular);

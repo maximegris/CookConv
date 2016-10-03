@@ -21,4 +21,4 @@
     $ionicConfigProvider.tabs.position('bottom')
     $ionicConfigProvider.backButton.previousTitleText(false).text('')
   }
-})(ionic, angular)
+})(ionic, angular);

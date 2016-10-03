@@ -43,4 +43,4 @@
       getTypes: getTypes
     }
   }
-})(angular)
+})(angular);

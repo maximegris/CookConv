@@ -185,4 +185,4 @@
       }
     }
   }
-})(angular)
+})(angular);

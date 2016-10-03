@@ -47,4 +47,4 @@
       getContextApplication: getContextApplication
     }
   }
-})(angular)
+})(angular);

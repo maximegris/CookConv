@@ -26,4 +26,4 @@
   function ApplicationController() {
 
   }
-})(angular)
+})(angular);

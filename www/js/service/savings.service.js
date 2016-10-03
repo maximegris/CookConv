@@ -76,4 +76,4 @@
       removeSaving: removeSaving
     }
   }
-})(angular)
+})(angular);
