@@ -17,9 +17,6 @@
     return directive
   }
 
-  /**
-   * IoC
-   */
   ApplicationController.$inject = []
 
   /* @ngInject */

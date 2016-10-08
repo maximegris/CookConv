@@ -1,4 +1,3 @@
-// Factory des sauvergardes
 (function (angular, undefined) {
   'use strict'
 
@@ -8,8 +7,14 @@
 
   /* @ngInject */
   function SavingsFactory($q, $log, $cordovaSQLite, $translate) {
-    // Méthodes publiques
-    var getSavings = function () {
+    return {
+      getSavings: getSavings,
+      addSaving: addSaving,
+      removeSaving: removeSaving,
+      resetSavings: resetSavings
+    }
+
+    function getSavings() {
       var q = $q.defer()
 
       var _savings = []
@@ -33,13 +38,13 @@
           q.resolve(_savings)
         },
         function (err) {
-          window.alert('Error get savings : ' + JSON.stringify(err))
+          q.reject(err)
         })
 
       return q.promise
     }
 
-    var addSaving = function (_saving) {
+    function addSaving(_saving) {
       var q = $q.defer()
 
       var dbQuery = 'INSERT INTO savings(ingredient, from_value, from_type, to_value, to_type) VALUES (?,?,?,?,?)'
@@ -47,14 +52,14 @@
       $cordovaSQLite.execute(window._db, dbQuery, [_saving.ingredient, _saving.fromVal, _saving.fromType, _saving.toVal, _saving.toType])
         .then(function () {
           q.resolve()
-        }, function (error) {
-          q.reject(error)
+        }, function (err) {
+          q.reject(err)
         })
 
       return q.promise
     }
 
-    var removeSaving = function (_saving) {
+    function removeSaving(_saving) {
       var q = $q.defer()
 
       var dbQuery = 'DELETE FROM savings WHERE id = ?'
@@ -62,18 +67,26 @@
       $cordovaSQLite.execute(window._db, dbQuery, [_saving.id])
         .then(function () {
           q.resolve()
-        }, function (error) {
-          q.reject(error)
+        }, function (err) {
+          q.reject(err)
         })
 
       return q.promise
     }
 
-    // Public interface
-    return {
-      getSavings: getSavings,
-      addSaving: addSaving,
-      removeSaving: removeSaving
+    function resetSavings() {
+      var q = $q.defer()
+
+      var dbQuery = 'DELETE FROM savings'
+
+      $cordovaSQLite.execute(window._db, dbQuery)
+        .then(function () {
+          q.resolve()
+        }, function (err) {
+          q.reject(err)
+        })
+
+      return q.promise
     }
   }
 })(angular);

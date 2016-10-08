@@ -17,48 +17,66 @@
     return directive
   }
 
-  /**
-   * Injection de dépendances.
-   */
-  SettingsController.$inject = ['$rootScope', 'SettingsFactory', 'IngredientsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_']
+  SettingsController.$inject = ['$scope', '$rootScope', '$translate', '$ionicPopup', 'SettingsFactory', 'IngredientsFactory', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_']
 
   /* @ngInject */
-  function SettingsController($rootScope, SettingsFactory, IngredientsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
+  function SettingsController($scope, $rootScope, $translate, $ionicPopup, SettingsFactory, IngredientsFactory, SavingsFactory, _LOADING_SPINNER_START_, _LOADING_SPINNER_END_) {
     var vm = this
-    var pro = false
+    vm.modalConfirmReset = modalConfirmReset
 
     activate()
 
-    // Méthodes privées
     function activate() {
       vm.settings = SettingsFactory.getLocalSettings()
     }
 
-    // TODO Désactiver les boutons de la version PRO par défaut
-    function versionPro(action) {
-      if (pro) {
-        switch (action) {
-          case 'INGREDIENTS':
-            openViewManageIngredients()
-            break
-          case 'RESET':
-            resetApplication()
-            break
-          default:
-            break
-        }
-      }
-    }
-
-    function openViewManageIngredients() {
-      window.location.href = '#/tab/settings/ingredients'
+    function modalConfirmReset() {
+      var confirmPopup = $ionicPopup.show({
+        template: '{{ \'REINIT_APP_CONFIRMATION\' | translate }}',
+        cssClass: 'hide-popup-head',
+        scope: $scope,
+        buttons: [{
+          text: $translate.instant('CANCEL'),
+          type: 'button-dark',
+          onTap: function (e) {
+            $scope.reset = false
+          }
+        }, {
+          text: '<b>OK</b>',
+          type: 'button-positive',
+          onTap: function (e) {
+            $scope.reset = true
+          }
+        }]
+      })
+      confirmPopup.then(resetApplication)
     }
 
     function resetApplication() {
-      $rootScope.$broadcast(_LOADING_SPINNER_START_)
+      if ($scope.reset) {
+        $rootScope.$broadcast(_LOADING_SPINNER_START_)
 
-      IngredientsFactory.resetIngredients().then(function () {
-        $rootScope.$broadcast(_LOADING_SPINNER_END_)
+        IngredientsFactory.resetIngredients().then(function () {
+          SavingsFactory.resetSavings().then(function () {
+            $rootScope.$broadcast(_LOADING_SPINNER_END_)
+            modalReinitDone()
+          })
+        })
+      }
+    }
+
+    function modalReinitDone() {
+      var confirmPopup = $ionicPopup.show({
+        template: '{{ \'REINIT_APP_DONE\' | translate }}',
+        cssClass: 'hide-popup-head',
+        scope: $scope,
+        buttons: [{
+          text: '<b>OK</b>',
+          type: 'button-positive'
+        }]
+      })
+      confirmPopup.then(function () {
+
       })
     }
   }

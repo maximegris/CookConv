@@ -23,9 +23,13 @@
   "SELECT_UNIT" : "选择计量单位",
   "SELECT_UNIT_LABEL" :"当前计量单位 : ",
   "VERSION_APP" : "本程序版本",
-  "MANAGE_PART" : "管理我的配料表 (PRO)",
+  "MANAGE_PART" : "管理我的配料表",
   "MANAGE_INGREDIENTS" : "配料管理",
   "MANAGE_INGREDIENTS_LABEL" : "添加 删除 编辑",
   "REINIT_APP" :"程序初始化",
-  "REINIT_APP_LABEL" : "的个人信息删除"
+  "REINIT_APP_LABEL" : "的个人信息删除",
+  "REINIT_APP_CONFIRMATION" : "这将删除所有个人数据。你想继续吗？",
+  "REINIT_APP_DONE" : "删除的数据",
+
+  "CANCEL": "取消"
 }

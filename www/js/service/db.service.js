@@ -1,4 +1,3 @@
-// Définition du service de DB
 (function (angular, undefined) {
   'use strict'
 
@@ -8,43 +7,41 @@
 
   /* @ngInject */
   function DBFactory($ionicPlatform, $q, $log, $cordovaSQLite, IngredientsFactory, TypesFactory, LanguagesFactory, SettingsFactory) {
-    // Methodes privees
-    var getContextApplication = function (init, lang) {
+    return {
+      getContextApplication: getContextApplication
+    }
+
+    function getContextApplication(init, lang) {
       var q = $q.defer()
 
       if (init) {
-        // On initialise la table settings avec la base langue
+        // Init table settings with language info
         LanguagesFactory.updateCurrentLanguage(lang)
           .then(function () {
             return $q.all([SettingsFactory.getSettings(), IngredientsFactory.getIngredients(lang), TypesFactory.getTypes(lang)])
-          }, function () {
-            window.alert('Error init language')
+          }, function (err) {
+            q.reject(err)
           })
           .then(function (result) {
             q.resolve(result)
-          }, function () {
-            window.alert('Error init context')
+          }, function (err) {
+            q.reject(err)
           })
       } else {
         LanguagesFactory.getCurrentLanguage()
           .then(function (_current) {
             return $q.all([SettingsFactory.getSettings(), IngredientsFactory.getIngredients(_current.current_lang), TypesFactory.getTypes(_current.current_lang)])
-          }, function () {
-            window.alert('Error init language')
+          }, function (err) {
+            q.reject(err)
           })
           .then(function (result) {
             q.resolve(result)
-          }, function () {
-            window.alert('Error init context')
+          }, function (err) {
+            q.reject(err)
           })
       }
 
       return q.promise
-    }
-
-    // Public interface
-    return {
-      getContextApplication: getContextApplication
     }
   }
 })(angular);

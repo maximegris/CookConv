@@ -15,19 +15,19 @@
     <div id="criteria-list">
       <div class="row">
         <div class="col">
-          <button class="button button-block button-dark" ng-click="calcvm.showIngredient()">
+          <button class="button button-block button-dark" ng-click="calcvm.modalIngredient()">
             {{calcvm.converter.ingredient.name}}
           </button>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <button class="button button-block button-dark" ng-click="calcvm.showFromType()">
+          <button class="button button-block button-dark" ng-click="calcvm.modalFromType()">
             {{ 'FROM' | translate }} {{calcvm.converter.from_type.name}}
           </button>
         </div>
         <div class="col">
-          <button class="button button-block button-dark" ng-click="calcvm.showToType()">
+          <button class="button button-block button-dark" ng-click="calcvm.modalToType()">
             {{ 'TO' | translate }} {{calcvm.converter.to_type.name}}
           </button>
         </div>

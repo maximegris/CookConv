@@ -17,9 +17,6 @@
     return directive
   }
 
-  /**
-   * Injection de dépendances.
-   */
   SettingsLangController.$inject = ['$scope', '$rootScope', '$translate', 'LanguagesFactory', 'SettingsFactory', 'CalculatorFactory', 'DBFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_']
 
   /* @ngInject */
@@ -28,9 +25,7 @@
 
     activate()
 
-    // Fonctions privées
     function activate() {
-      // Chargement des données
       vm.current = {
         lang: $translate.use()
       }

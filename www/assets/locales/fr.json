@@ -23,9 +23,13 @@
   "SELECT_UNIT" : "Choisir l'unité de mesure",
   "SELECT_UNIT_LABEL" :"Unité courante : ",
   "VERSION_APP" : "Version de l'application",
-  "MANAGE_PART" : "Gérer ma liste d'ingrédients (PRO)",
+  "MANAGE_PART" : "Gérer ma liste d'ingrédients",
   "MANAGE_INGREDIENTS" : "Gestion des ingrédients",
   "MANAGE_INGREDIENTS_LABEL" : "Ajouter, modifier, supprimer",
   "REINIT_APP" :"Réinitialiser l'application",
-  "REINIT_APP_LABEL" : "Suppression des données personnelles"
+  "REINIT_APP_LABEL" : "Suppression des données personnelles",
+  "REINIT_APP_CONFIRMATION" : "Cette action supprimera toutes vos données personnelles. Souhaitez-vous continuer ?",
+  "REINIT_APP_DONE" : "Données supprimées",
+
+  "CANCEL": "Annuler"
 }

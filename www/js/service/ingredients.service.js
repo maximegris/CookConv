@@ -1,4 +1,3 @@
-// Factory des ingrédients
 (function (angular, undefined) {
   'use strict'
 
@@ -8,8 +7,13 @@
 
   /* @ngInject */
   function IngredientsFactory($q, $log, $translate, $cordovaSQLite) {
-    // Méthodes publiques
-    var getIngredients = function (language) {
+    return {
+      getIngredients: getIngredients,
+      getIngredientsByRef: getIngredientsByRef,
+      resetIngredients: resetIngredients
+    }
+
+    function getIngredients(language) {
       var q = $q.defer()
 
       var _ingredients = []
@@ -30,13 +34,13 @@
 
           q.resolve(_ingredients)
         }, function (err) {
-          window.alert('Error Get ingredients : ' + JSON.stringify(err))
+          q.reject(err)
         })
 
       return q.promise
     }
 
-    var getIngredientsByRef = function (ref) {
+    function getIngredientsByRef(ref) {
       var q = $q.defer()
 
       var _ingredients = []
@@ -57,16 +61,14 @@
 
           q.resolve(_ingredients)
         }, function (err) {
-          window.alert('Error Get ingredients By Ref : ' + JSON.stringify(err))
+          q.reject(err)
         })
 
       return q.promise
     }
 
-    var resetIngredients = function () {
+    function resetIngredients() {
       var q = $q.defer()
-
-      var _ingredients = []
 
       var dbQuery = 'DELETE FROM ingredients WHERE ref <> "1"'
 
@@ -74,17 +76,10 @@
         .then(function (res) {
           q.resolve()
         }, function (err) {
-          window.alert('Error Reset ingredients : ' + JSON.stringify(err))
+          q.reject(err)
         })
 
       return q.promise
-    }
-
-    // Public interface
-    return {
-      getIngredients: getIngredients,
-      getIngredientsByRef: getIngredientsByRef,
-      resetIngredients: resetIngredients
     }
   }
 })(angular);

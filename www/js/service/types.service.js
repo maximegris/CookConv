@@ -1,4 +1,3 @@
-// Factory des types
 (function (angular, undefined) {
   'use strict'
 
@@ -8,8 +7,11 @@
 
   /* @ngInject */
   function TypesFactory($q, $log, $cordovaSQLite) {
-    // Méthodes publiques
-    var getTypes = function (language) {
+    return {
+      getTypes: getTypes
+    }
+
+    function getTypes(language) {
       var q = $q.defer()
 
       var _types = []
@@ -32,15 +34,10 @@
 
           q.resolve(_types)
         }, function (err) {
-          window.alert('Error get types : ' + JSON.stringify(err))
+          q.reject(err)
         })
 
       return q.promise
-    }
-
-    // Public interface
-    return {
-      getTypes: getTypes
     }
   }
 })(angular);

@@ -9,11 +9,11 @@
   function SettingsFactory($q, $log, $cordovaSQLite) {
     var _settings = {}
 
-    return ({
+    return {
       getSettings: getSettings,
       getLocalSettings: getLocalSettings,
       setLocalSettings: setLocalSettings
-    })
+    }
 
     function getLocalSettings() {
       return _settings
@@ -36,8 +36,8 @@
             current_lang_label: res.rows.item(0).current_lang_label,
             db_version: res.rows.item(0).db_version
           })
-        }, function (error) {
-          q.reject(error)
+        }, function (err) {
+          q.reject(err)
         })
 
       return q.promise

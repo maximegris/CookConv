@@ -17,9 +17,6 @@
     return directive
   }
 
-  /**
-   * Injection de dépendances.
-   */
   SavingsController.$inject = ['SavingsFactory']
 
   /* @ngInject */
@@ -29,9 +26,7 @@
 
     activate()
 
-    // Fonctions privées
     function activate() {
-      // Chargement données
       SavingsFactory.getSavings().then(function (_savings) {
         vm.savings = _savings
       })

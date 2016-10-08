@@ -23,9 +23,13 @@
   "SELECT_UNIT" : "Seleccionar la unidad de medida",
   "SELECT_UNIT_LABEL" :"Unidad actual : ",
   "VERSION_APP" : "Versión de la aplicación",
-  "MANAGE_PART" : "Gestionar mi lista de ingredientes (PRO)",
+  "MANAGE_PART" : "Gestionar mi lista de ingredientes",
   "MANAGE_INGREDIENTS" : "Gestión de ingredientes",
   "MANAGE_INGREDIENTS_LABEL" : "Añadir Modificar Eliminar",
   "REINIT_APP" :"Reiniciar la aplicación",
-  "REINIT_APP_LABEL" : "Supresión de los datos personales"
+  "REINIT_APP_LABEL" : "Supresión de los datos personales",
+  "REINIT_APP_CONFIRMATION" : "Esto eliminará todos sus datos personales. ¿Quieres continuar?",
+  "REINIT_APP_DONE" : "Datos eliminados",
+
+  "CANCEL": "Cancelar"
 }

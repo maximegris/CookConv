@@ -17,19 +17,16 @@
     return directive
   }
 
-  /**
-   * Injection de dépendances.
-   */
-  SettingsIngredientsController.$inject = ['Ingredients']
+  SettingsIngredientsController.$inject = ['IngredientsFactory']
 
   /* @ngInject */
-  function SettingsIngredientsController(Ingredients) {
+  function SettingsIngredientsController(IngredientsFactory) {
     var vm = this
 
     activate()
 
     function activate() {
-      Ingredients.getIngredientsByRef('1').then(function (_ingredients) {
+      IngredientsFactory.getIngredientsByRef('1').then(function (_ingredients) {
         vm.ingredients = _ingredients
       })
     }

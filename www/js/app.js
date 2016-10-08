@@ -1,4 +1,3 @@
-// Initialisation des modules
 (function (ionic, angular, cordova, undefined) {
   'use strict'
 

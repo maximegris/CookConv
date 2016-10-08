@@ -23,9 +23,13 @@
   "SELECT_UNIT" : "Choose a unit of measurement",
   "SELECT_UNIT_LABEL" :"Current unit : ",
   "VERSION_APP" : "Application version",
-  "MANAGE_PART" : "Manage my list of ingredients (PRO)",
+  "MANAGE_PART" : "Manage my list of ingredients",
   "MANAGE_INGREDIENTS" : "Ingredient management",
   "MANAGE_INGREDIENTS_LABEL" : "Add Edit Delete",
   "REINIT_APP" :"Reset application",
-  "REINIT_APP_LABEL" : "Deletion of personal details"
+  "REINIT_APP_LABEL" : "Deletion of personal details",
+  "REINIT_APP_CONFIRMATION" : "This will delete all your personal data. Would you like to continue ?",
+  "REINIT_APP_DONE" : "Deleted data",
+
+  "CANCEL": "Cancel"
 }

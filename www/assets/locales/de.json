@@ -23,9 +23,13 @@
   "SELECT_UNIT" : "Maßeinheit auswählen",
   "SELECT_UNIT_LABEL" :"Gebrauchseinheit : ",
   "VERSION_APP" : "Version der Applikation",
-  "MANAGE_PART" : "Die Liste meiner Zutaten verwalten (PRO)",
+  "MANAGE_PART" : "Die Liste meiner Zutaten verwalten",
   "MANAGE_INGREDIENTS" : "Verwaltung der Zutaten",
   "MANAGE_INGREDIENTS_LABEL" : "Hinzufügen Ändern Löschen",
   "REINIT_APP" :"Die Applikation reinitialisieren",
-  "REINIT_APP_LABEL" : "Löschung von persönlichen Daten"
+  "REINIT_APP_LABEL" : "Löschung von persönlichen Daten",
+  "REINIT_APP_CONFIRMATION" : "Dadurch werden alle Ihre persönlichen Daten löschen. Möchten Sie fortfahren?",
+  "REINIT_APP_DONE" : "gelöschte Daten",
+
+  "CANCEL": "Stornieren"
 }

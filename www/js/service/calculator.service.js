@@ -11,7 +11,7 @@
     var _ingredients
     var _types
 
-    return ({
+    return {
       init: init,
       getConverter: getConverter,
       setConverter: setConverter,
@@ -19,7 +19,7 @@
       getTypeTo: getTypeTo,
       getIngredients: getIngredients,
       getTypes: getTypes
-    })
+    }
 
     function init(ingredients, types) {
       _ingredients = ingredients

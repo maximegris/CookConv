@@ -7,8 +7,13 @@
 
   /* @ngInject */
   function LanguagesFactory($q, $log, $cordovaSQLite) {
-    // Méthodes publiques
-    var getLanguages = function () {
+    return {
+      getLanguages: getLanguages,
+      updateCurrentLanguage: updateCurrentLanguage,
+      getCurrentLanguage: getCurrentLanguage
+    }
+
+    function getLanguages() {
       var q = $q.defer()
 
       var _languages = []
@@ -27,13 +32,13 @@
           }
           q.resolve(_languages)
         }, function (err) {
-          window.alert('Error get types : ' + JSON.stringify(err))
+          q.reject(err)
         })
 
       return q.promise
     }
 
-    var updateCurrentLanguage = function (language) {
+    function updateCurrentLanguage(language) {
       var q = $q.defer()
 
       var dbQuery = 'UPDATE settings SET current_lang = ?, current_lang_label = (SELECT label FROM languages WHERE code = ?)'
@@ -48,7 +53,7 @@
       return q.promise
     }
 
-    var getCurrentLanguage = function () {
+    function getCurrentLanguage() {
       var q = $q.defer()
 
       var _current = {
@@ -65,17 +70,10 @@
           q.resolve(_current)
         },
         function (err) {
-          window.alert('Error get types : ' + JSON.stringify(err))
+          q.reject(err)
         })
 
       return q.promise
-    }
-
-    // Public interface
-    return {
-      getLanguages: getLanguages,
-      updateCurrentLanguage: updateCurrentLanguage,
-      getCurrentLanguage: getCurrentLanguage
     }
   }
 })(angular);

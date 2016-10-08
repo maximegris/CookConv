@@ -17,9 +17,6 @@
     return directive
   }
 
-  /**
-   * Injection de dépendances.
-   */
   CalculatorController.$inject = ['$scope', '$rootScope', '$cordovaSplashscreen', '$ionicPlatform', '$ionicPopup', 'CalculatorFactory', 'SavingsFactory', '_LOADING_SPINNER_START_', '_LOADING_SPINNER_END_']
 
   /* @ngInject */
@@ -30,9 +27,9 @@
     vm.inverseVal = inverseVal
     vm.removeValCalc = removeValCalc
     vm.saveConverter = saveConverter
-    vm.showFromType = showFromType
-    vm.showIngredient = showIngredient
-    vm.showToType = showToType
+    vm.modalFromType = modalFromType
+    vm.modalIngredient = modalIngredient
+    vm.modalToType = modalToType
     vm.calculateConversion = calculateConversion
 
     activate()
@@ -49,7 +46,6 @@
       })
     }
 
-    // Fonctions privées
     function calculateConversion() {
       if (vm.converter) {
         var _from_val = vm.converter.from
@@ -60,8 +56,6 @@
         if (_from_val === '0') {
           vm.converter.to = '0'
         } else {
-          // On compare les types des mesures pour savoir comment on effectue le calcul de conversion
-          // Utilisation de Math.floor & facteur pour afficher correctement les valeurs (meme toutes petites soient elles)
           if (_from.type === _to.type) {
             vm.converter.to = (Math.floor(1000 * (_from_val * _to.rapport / _from.rapport)) / 1000).toString()
           } else if (_from.type === 'poids') {
@@ -71,7 +65,7 @@
           }
         }
 
-        // On sauvegarde l'état courant de l'objet
+        // Persist current state to keep value after tab changed
         CalculatorFactory.setConverter(vm.converter)
       }
     }
@@ -122,7 +116,7 @@
       calculateConversion()
     }
 
-    function showFromType() {
+    function modalFromType() {
       var confirmPopup = $ionicPopup.show({
         templateUrl: 'modal/popup-from.html',
         cssClass: 'hide-popup-head',
@@ -137,7 +131,7 @@
       })
     }
 
-    function showToType() {
+    function modalToType() {
       var confirmPopup = $ionicPopup.show({
         templateUrl: 'modal/popup-to.html',
         cssClass: 'hide-popup-head',
@@ -152,7 +146,7 @@
       })
     }
 
-    function showIngredient() {
+    function modalIngredient() {
       var confirmPopup = $ionicPopup.show({
         templateUrl: 'modal/popup-ingredient.html',
         cssClass: 'hide-popup-head',

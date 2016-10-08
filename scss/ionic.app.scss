@@ -37,9 +37,14 @@ http://forum.ionicframework.com/t/flickering-when-navigating-via-tabs-on-android
 }
 
 .popup {
-  .list {
-    label.item.item-radio {
-      font-size: 14px;
+  .popup-body {
+    text-align: center;
+    .list {
+        text-align: left;
+
+        label.item.item-radio {
+        font-size: 14px;
+        }
     }
   }
 }
@@ -70,14 +75,10 @@ http://forum.ionicframework.com/t/flickering-when-navigating-via-tabs-on-android
 #from-to {
 
   margin-top: 5px;
-
-
-
   input {
     background-color: $light;
 
   }
-
   .input-label-calc {
     padding: 0;
     background-color: $light;

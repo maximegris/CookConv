@@ -9744,8 +9744,12 @@ http://forum.ionicframework.com/t/flickering-when-navigating-via-tabs-on-android
 .item-input {
   padding: 2px 0px 2px 16px; }
 
-.popup .list label.item.item-radio {
-  font-size: 14px; }
+.popup .popup-body {
+  text-align: center; }
+  .popup .popup-body .list {
+    text-align: left; }
+    .popup .popup-body .list label.item.item-radio {
+      font-size: 14px; }
 
 .hide-popup-head .popup-head {
   display: none; }
