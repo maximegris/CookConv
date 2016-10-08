@@ -1,7 +1,7 @@
 {
   "name": "cookconv",
   "version": "1.2.0",
-  "description": "Phone utils when change phone/reset ROM",
+  "description": "Volume to weight (and weight to volume) converter.",
   "dependencies": {
     "gulp": "^3.9.1"
   },

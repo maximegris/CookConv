@@ -6,6 +6,3 @@ Volume to weight (and weight to volume) converter.
 * Launch command in promt (windows)
 sqlite3 cookconv.db ".read [path_to_SQL]init.sql"
 The bd file MUST be in www repository
-
-## TODO
-- PRO version
