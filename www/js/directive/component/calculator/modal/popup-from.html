@@ -1,0 +1,4 @@
+<ion-list>
+  <ion-radio ng-model="calcvm.converter.from_type" ng-repeat="type in calcvm.types track by type.id" ng-value="type" ng-change="calcvm.calculateConversion()" name="{{type.id}}"> {{type.name}}
+  </ion-radio>
+</ion-list>

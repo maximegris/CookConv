@@ -1,0 +1,95 @@
+<ion-view view-title="{{ 'VIEW_CALCULATOR' | translate }}" hide-tabs="false">
+  <ion-content class="padding has-header" >
+    <div id="from-to" class="list">
+      <label class="item item-input">
+        <span class="input-label-calc" translate="FROM"></span>
+        <input type="text" class="right" ng-model="calcvm.converter.from" name="from" disabled>
+        <span class="input-label-calc center">{{calcvm.converter.from_type.code}}</span>
+      </label>
+      <label class="item item-input">
+        <span class="input-label-calc" translate="TO"></span>
+        <input type="text" class="right" ng-model="calcvm.converter.to" name="to" disabled>
+        <span class="input-label-calc center">{{calcvm.converter.to_type.code}}</span>
+      </label>
+    </div>
+    <div id="criteria-list">
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-dark" ng-click="calcvm.modalIngredient()">
+            {{calcvm.converter.ingredient.name}}
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-dark" ng-click="calcvm.modalFromType()">
+            <span translate="FROM"></span> <span>{{calcvm.converter.from_type.name}}</span>
+          </button>
+        </div>
+        <div class="col">
+          <button class="button button-block button-dark" ng-click="calcvm.modalToType()">
+            <span translate="TO"></span> <span>{{calcvm.converter.to_type.name}}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="calculator-key">
+      <div class="row">
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('1')">1</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('2')">2</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('3')">3</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-assertive ion-ios-arrow-thin-left" ng-click="calcvm.removeValCalc(0)"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('4')">4</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('5')">5</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('6')">6</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-assertive" ng-click="calcvm.removeValCalc(1)">AC</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('7')">7</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('8')">8</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('9')">9</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-assertive" ng-click="calcvm.inverseVal()" translate="INV"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('.')">.</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-outline button-dark" ng-click="calcvm.addValCalc('0')">0</a>
+        </div>
+        <div class="col">
+          <a class="button button-block " disabled>&nbsp;</a>
+        </div>
+        <div class="col">
+          <a class="button button-block button-balanced" ng-click="calcvm.saveConverter()" translate="SAVE"></a>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

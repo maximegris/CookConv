@@ -40,7 +40,7 @@
     <access origin="https://codepush.azurewebsites.net" />
     <access origin="https://codepush.blob.core.windows.net" />
     <access origin="https://codepushupdates.azureedge.net" />
-    <preference name="CodePushDeploymentKey" value="API-KEY" />
+    <preference name="CodePushDeploymentKey" value="<API-KEY>" />
   </platform>
   <icon src="resources\android\icon\drawable-xhdpi-icon.png"/>
   <splash src="resources/splash.png"/>

@@ -1,0 +1,4 @@
+<ion-list>
+  <ion-radio ng-model="calcvm.converter.ingredient" ng-repeat="ingredient in calcvm.ingredients track by ingredient.id" ng-value="ingredient" ng-change="calcvm.calculateConversion()" name="{{ingredient.id}}"> {{ingredient.name}}
+  </ion-radio>
+</ion-list>

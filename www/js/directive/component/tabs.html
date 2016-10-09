@@ -1,0 +1,11 @@
+<ion-tabs ng-class="{'tabs-item-hide': $root.hideTabs}" class="tabs-icon-top tabs-color-active-positive">
+  <ion-tab title="{{ 'TAB_TITLE_CALCULATOR' | translate }}" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" ui-sref="tab.calculator">
+    <ion-nav-view name="tab-calculator"></ion-nav-view>
+  </ion-tab>
+  <ion-tab title="{{ 'TAB_TITLE_SAVINGS' | translate }}" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" ui-sref="tab.savings">
+    <ion-nav-view name="tab-savings"></ion-nav-view>
+  </ion-tab>
+  <ion-tab title="{{ 'TAB_TITLE_PARAMETERS' | translate }}" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" ui-sref="tab.settings">
+    <ion-nav-view name="tab-settings"></ion-nav-view>
+  </ion-tab>
+</ion-tabs>

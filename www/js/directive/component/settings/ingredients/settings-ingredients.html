@@ -1,0 +1,21 @@
+<ion-view view-title="{{ 'VIEW_INGREDIENTS' | translate }}" hide-tabs="true">
+  <ion-content class="has-header">
+    <ion-list id="list-ingredients">
+      <ion-item class="item-remove-animate item-button-right" collection-repeat="ingredient in ingredientsvm.ingredients track by ingredient.id" type="item-text-wrap">
+        <strong><div id="ingredient">{{ingredient.name}}</div></strong>
+        <span translate="MASSE_VOLUMIQUE"></span> <i class="ion-arrow-right-c"></i> <span>{{ingredient.masse_volumique}}</span>
+        <div class="buttons">
+          <button class="button button-dark" ng-click="ingredientsvm.editIngredient($index, ingredient)">
+            <i class="icon ion-edit" ></i>
+          </button>
+          <button class="button button-assertive" ng-click="ingredientsvm.removeIngredient($index, ingredient)">
+            <i class="icon ion-trash-a" ></i>
+          </button>      
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+    <ion-footer-bar class="bar-calm" align-title="center">
+        <h1 class="title" translate="ADD_INGREDIENT" ng-click="ingredientsvm.createIngredient()"></h1>
+    </ion-footer-bar>
+</ion-view>
