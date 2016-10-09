@@ -16,7 +16,7 @@
       .state('tab', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'tabs.html',
+        templateUrl: 'directive/component/tabs.html',
         resolve: {
           dbReady: dbReady
         }
@@ -68,15 +68,15 @@
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/calculator')
 
-    function dbReady($ionicPlatform, DBFactory, CalculatorFactory, SettingsFactory, $translate) {
+    function dbReady($ionicPlatform, $translate, $log, DBFactory, CalculatorFactory, SettingsFactory) {
       return DBFactory.getContextApplication(true, $translate.use())
         .then(function (success) {
           if (success) {
             SettingsFactory.setLocalSettings(success[0])
             CalculatorFactory.init(success[1], success[2])
           }
-        }, function (error) {
-          window.alert('Failed getContextApplication: ' + JSON.stringify(error))
+        }, function (err) {
+          $log.error('Failed getContextApplication: ' + JSON.stringify(err))
         })
     }
   }

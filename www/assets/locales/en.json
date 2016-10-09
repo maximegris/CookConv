@@ -31,5 +31,9 @@
   "REINIT_APP_CONFIRMATION" : "This will delete all your personal data. Would you like to continue ?",
   "REINIT_APP_DONE" : "Deleted data",
 
+  "ADD_INGREDIENT" : "Add ingredient",
+  "NAME" : "Name",
+  "MASSE_VOLUMIQUE" : "Density",
+
   "CANCEL": "Cancel"
 }

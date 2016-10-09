@@ -39,8 +39,8 @@ var paths = {
   'sass': ['./scss/*.scss', './scss/**/*.scss'],
   'jsapp': ['./www/js/**/*.js', '!./www/js/vendor/**/*.js', '!./www/lib/ngCordova/dist/ng-cordova.min.js'],
   'assets': ['./www/assets/**'],
-  'tpl': ['./www/templates/**/*.html'],
-  'useref': ['./www/*.html']
+  'tpl': ['./www/js/**/*.html'],
+  'useref': ['./www/index.html']
 }
 
 gulp.task('default', ['compilation'])

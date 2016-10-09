@@ -8,7 +8,7 @@
   function calculator() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'tab-calculator.html',
+      templateUrl: 'directive/component/calculator/tab-calculator.html',
       controller: CalculatorController,
       controllerAs: 'calcvm',
       bindToController: true // because the scope is isolated
@@ -48,20 +48,20 @@
 
     function calculateConversion() {
       if (vm.converter) {
-        var _from_val = vm.converter.from
+        var _fromVal = vm.converter.from
         var _from = vm.converter.from_type
         var _to = vm.converter.to_type
         var _ingredient = vm.converter.ingredient
 
-        if (_from_val === '0') {
+        if (_fromVal === '0') {
           vm.converter.to = '0'
         } else {
           if (_from.type === _to.type) {
-            vm.converter.to = (Math.floor(1000 * (_from_val * _to.rapport / _from.rapport)) / 1000).toString()
+            vm.converter.to = (Math.floor(1000 * (_fromVal * _to.rapport / _from.rapport)) / 1000).toString()
           } else if (_from.type === 'poids') {
-            vm.converter.to = (Math.floor(1000 * (_from_val * _to.rapport / (_from.rapport * _ingredient.masse_volumique))) / 1000).toString()
+            vm.converter.to = (Math.floor(1000 * (_fromVal * _to.rapport / (_from.rapport * _ingredient.masse_volumique))) / 1000).toString()
           } else {
-            vm.converter.to = (Math.floor(1000 * (_from_val * _to.rapport * _ingredient.masse_volumique / _from.rapport)) / 1000).toString()
+            vm.converter.to = (Math.floor(1000 * (_fromVal * _to.rapport * _ingredient.masse_volumique / _from.rapport)) / 1000).toString()
           }
         }
 
@@ -106,10 +106,10 @@
     }
 
     function inverseVal() {
-      var tmp_type = vm.converter.from_type
+      var _tmpType = vm.converter.from_type
 
       vm.converter.from_type = vm.converter.to_type
-      vm.converter.to_type = tmp_type
+      vm.converter.to_type = _tmpType
 
       vm.converter.from = vm.converter.to.toString()
 
@@ -118,7 +118,7 @@
 
     function modalFromType() {
       var confirmPopup = $ionicPopup.show({
-        templateUrl: 'modal/popup-from.html',
+        templateUrl: 'directive/component/calculator/modal/popup-from.html',
         cssClass: 'hide-popup-head',
         scope: $scope,
         buttons: [{
@@ -133,7 +133,7 @@
 
     function modalToType() {
       var confirmPopup = $ionicPopup.show({
-        templateUrl: 'modal/popup-to.html',
+        templateUrl: 'directive/component/calculator/modal/popup-to.html',
         cssClass: 'hide-popup-head',
         scope: $scope,
         buttons: [{
@@ -148,7 +148,7 @@
 
     function modalIngredient() {
       var confirmPopup = $ionicPopup.show({
-        templateUrl: 'modal/popup-ingredient.html',
+        templateUrl: 'directive/component/calculator/modal/popup-ingredient.html',
         cssClass: 'hide-popup-head',
         scope: $scope,
         buttons: [{

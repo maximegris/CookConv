@@ -44,12 +44,12 @@
       return q.promise
     }
 
-    function addSaving(_saving) {
+    function addSaving(record) {
       var q = $q.defer()
 
       var dbQuery = 'INSERT INTO savings(ingredient, from_value, from_type, to_value, to_type) VALUES (?,?,?,?,?)'
 
-      $cordovaSQLite.execute(window._db, dbQuery, [_saving.ingredient, _saving.fromVal, _saving.fromType, _saving.toVal, _saving.toType])
+      $cordovaSQLite.execute(window._db, dbQuery, [record.ingredient, record.fromVal, record.fromType, record.toVal, record.toType])
         .then(function () {
           q.resolve()
         }, function (err) {
@@ -59,12 +59,12 @@
       return q.promise
     }
 
-    function removeSaving(_saving) {
+    function removeSaving(record) {
       var q = $q.defer()
 
       var dbQuery = 'DELETE FROM savings WHERE id = ?'
 
-      $cordovaSQLite.execute(window._db, dbQuery, [_saving.id])
+      $cordovaSQLite.execute(window._db, dbQuery, [record.id])
         .then(function () {
           q.resolve()
         }, function (err) {

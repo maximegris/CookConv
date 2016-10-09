@@ -8,7 +8,7 @@
   function savings() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'tab-savings.html',
+      templateUrl: 'directive/component/savings/tab-savings.html',
       controller: SavingsController,
       controllerAs: 'savingsvm',
       bindToController: true // because the scope is isolated

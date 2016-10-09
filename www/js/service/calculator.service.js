@@ -18,7 +18,9 @@
       getTypeFrom: getTypeFrom,
       getTypeTo: getTypeTo,
       getIngredients: getIngredients,
-      getTypes: getTypes
+      setIngredients: setIngredients,
+      getTypes: getTypes,
+      setYpes: setTypes
     }
 
     function init(ingredients, types) {
@@ -54,8 +56,16 @@
       return _ingredients
     }
 
+    function setIngredients(ingredients) {
+      _ingredients = ingredients
+    }
+
     function getTypes() {
       return _types
+    }
+
+    function setTypes(types) {
+      _types = types
     }
   }
 })(angular);

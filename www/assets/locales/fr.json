@@ -29,7 +29,11 @@
   "REINIT_APP" :"Réinitialiser l'application",
   "REINIT_APP_LABEL" : "Suppression des données personnelles",
   "REINIT_APP_CONFIRMATION" : "Cette action supprimera toutes vos données personnelles. Souhaitez-vous continuer ?",
-  "REINIT_APP_DONE" : "Données supprimées",
+  "REINIT_APP_DONE" : "Données supprimées", 
+
+  "ADD_INGREDIENT" : "Ajouter un ingrédient",
+  "NAME" : "Nom",
+  "MASSE_VOLUMIQUE" : "Masse volumique",
 
   "CANCEL": "Annuler"
 }

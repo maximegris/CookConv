@@ -9819,3 +9819,12 @@ http://forum.ionicframework.com/t/flickering-when-navigating-via-tabs-on-android
 
 #list-savings #ingredient {
   width: 150px; }
+
+#list-savings .buttons {
+  height: 54px; }
+
+#list-ingredients .buttons {
+  height: 54px; }
+
+#list-ingredients #ingredient {
+  width: 150px; }

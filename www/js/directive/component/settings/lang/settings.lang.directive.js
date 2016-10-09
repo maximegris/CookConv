@@ -8,7 +8,7 @@
   function settingsLang() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'settings/settings-lang.html',
+      templateUrl: 'directive/component/settings/lang/settings-lang.html',
       controller: SettingsLangController,
       controllerAs: 'langvm',
       bindToController: true // because the scope is isolated

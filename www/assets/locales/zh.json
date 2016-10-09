@@ -31,5 +31,9 @@
   "REINIT_APP_CONFIRMATION" : "这将删除所有个人数据。你想继续吗？",
   "REINIT_APP_DONE" : "删除的数据",
 
+  "ADD_INGREDIENT" : "添加成分",
+  "NAME" : "名",
+  "MASSE_VOLUMIQUE" : "密度",
+  
   "CANCEL": "取消"
 }

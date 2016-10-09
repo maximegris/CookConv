@@ -31,5 +31,9 @@
   "REINIT_APP_CONFIRMATION" : "Dadurch werden alle Ihre persönlichen Daten löschen. Möchten Sie fortfahren?",
   "REINIT_APP_DONE" : "gelöschte Daten",
 
+  "ADD_INGREDIENT" : "In Zutat",
+  "NAME" : "Name",
+  "MASSE_VOLUMIQUE" : "Dichte",
+
   "CANCEL": "Stornieren"
 }

@@ -31,5 +31,9 @@
   "REINIT_APP_CONFIRMATION" : "Isto irá apagar todos os seus dados pessoais. Gostaria de continuar?",
   "REINIT_APP_DONE" : "Dados apagados",
 
+  "ADD_INGREDIENT" : "Adicionar ingrediente",
+  "NAME" : "Nome",
+  "MASSE_VOLUMIQUE" : "Densidade",
+  
   "CANCEL": "Cancelar"
 }

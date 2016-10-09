@@ -8,7 +8,7 @@
   function settings() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'tab-settings.html',
+      templateUrl: 'directive/component/settings/tab-settings.html',
       controller: SettingsController,
       controllerAs: 'settingsvm',
       bindToController: true // because the scope is isolated
@@ -28,24 +28,26 @@
 
     function activate() {
       vm.settings = SettingsFactory.getLocalSettings()
+      vm.reset = false
     }
 
     function modalConfirmReset() {
+      vm.reset = false
       var confirmPopup = $ionicPopup.show({
-        template: '{{ \'REINIT_APP_CONFIRMATION\' | translate }}',
+        template: '<span translate="REINIT_APP_CONFIRMATION"></span>',
         cssClass: 'hide-popup-head',
         scope: $scope,
         buttons: [{
           text: $translate.instant('CANCEL'),
           type: 'button-dark',
           onTap: function (e) {
-            $scope.reset = false
+            vm.reset = false
           }
         }, {
           text: '<b>OK</b>',
           type: 'button-positive',
           onTap: function (e) {
-            $scope.reset = true
+            vm.reset = true
           }
         }]
       })
@@ -53,7 +55,8 @@
     }
 
     function resetApplication() {
-      if ($scope.reset) {
+      console.log(vm.reset)
+      if (vm.reset) {
         $rootScope.$broadcast(_LOADING_SPINNER_START_)
 
         IngredientsFactory.resetIngredients().then(function () {
@@ -67,7 +70,7 @@
 
     function modalReinitDone() {
       var confirmPopup = $ionicPopup.show({
-        template: '{{ \'REINIT_APP_DONE\' | translate }}',
+        template: '<span translate="REINIT_APP_DONE"></span>',
         cssClass: 'hide-popup-head',
         scope: $scope,
         buttons: [{

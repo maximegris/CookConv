@@ -8,7 +8,7 @@
   function application() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'app.html',
+      templateUrl: 'directive/component/app.html',
       controller: ApplicationController,
       controllerAs: 'appvm',
       bindToController: true // because the scope is isolated
