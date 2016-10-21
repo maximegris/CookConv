@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 
-var fs = require('fs')
-var path = require('path')
 var CLIEngine = require('eslint').CLIEngine
-var async = require('async')
 
 var eslint = new CLIEngine({
   'useEslintrc': true

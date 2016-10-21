@@ -13,7 +13,7 @@ var path = require('path')
 
 var rootdir = process.argv[2]
 
-function addPlatformBodyTag (indexPath, platform) {
+function addPlatformBodyTag(indexPath, platform) {
   // add the platform class to the body tag
   try {
     var platformClass = 'platform-' + platform

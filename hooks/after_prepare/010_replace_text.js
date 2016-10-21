@@ -31,7 +31,7 @@ if (rootdir) {
   // replaced.  Replace files that have been copied via the prepare step.
   var filestoreplace = [
     // android
-    'platforms/android/assets/www/index.html',
+    'platforms/android/assets/www/index.html'
     // ios
     // others
   ]

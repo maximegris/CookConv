@@ -6,50 +6,19 @@
     <title>CookConv</title>
     <meta http-equiv="Content-Security-Policy" content="default-src https://codepush.azurewebsites.net 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *" />
 
-    <!-- build:css dist_css/styles.css -->
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/ionic.app.min.css" type="text/css" rel="stylesheet">
-    <!-- endbuild -->
 
-    <!-- build:js dist_js/vendor.js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
-    <script src="lib/angular-translate/angular-translate.min.js"></script>
-    <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
-    <!-- endbuild -->
+    <script src="lib/register.js"></script>
+    <!--<script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>-->
     <script src="cordova.js"></script>
   </head>
   <body ng-app="starter" ng-strict-di>
 
     <application></application>
 
-    <!-- build:js dist_js/app.js -->
-    <script src="dist/dist_js/app/app.js"></script>
-
-    <script src="dist/dist_js/app/config/app/app.ionic.js"></script>
-    <script src="dist/dist_js/app/config/app/app.routes.js"></script>
-    <script src="dist/dist_js/app/config/app/app.translate.js"></script>
-    <script src="dist/dist_js/app/config/constants.js"></script>
-
-    <script src="dist/dist_js/app/service/db.service.js"></script>
-    <script src="dist/dist_js/app/service/ingredients.service.js"></script>
-    <script src="dist/dist_js/app/service/types.service.js"></script>
-    <script src="dist/dist_js/app/service/languages.service.js"></script>
-    <script src="dist/dist_js/app/service/calculator.service.js"></script>
-    <script src="dist/dist_js/app/service/savings.service.js"></script>
-    <script src="dist/dist_js/app/service/settings.service.js"></script>
-
-    <script src="dist/dist_js/app/directive/common/appversion.js"></script>
-    <script src="dist/dist_js/app/directive/common/hidetabs.js"></script>
-    <script src="dist/dist_js/app/directive/common/pageloader.js"></script>
-    <script src="dist/dist_js/app/directive/component/application.directive.js"></script>
-    <script src="dist/dist_js/app/directive/component/calculator/calculator.directive.js"></script>
-    <script src="dist/dist_js/app/directive/component/savings/savings.directive.js"></script>
-    <script src="dist/dist_js/app/directive/component/settings/settings.directive.js"></script>
-    <script src="dist/dist_js/app/directive/component/settings/lang/settings.lang.directive.js"></script>
-    <script src="dist/dist_js/app/directive/component/settings/ingredients/settings.ingredients.directive.js"></script>
-
-    <script src="dist/dist_js/app/templates.js"></script>
-    <!-- endbuild -->
+    <script src="bundle.js"></script>
 
   </body>
 </html>
