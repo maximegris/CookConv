@@ -3,6 +3,13 @@
   "version": "1.2.0",
   "description": "Volume to weight (and weight to volume) converter.",
   "main": "index.js",
+  "author": "Picotin",
+  "license": "",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maximegris/CookConv.git"
+  },
   "scripts": {
     "serve": "gulp serve",
     "build": "gulp build",
@@ -69,11 +76,5 @@
     "angular",
     "webpack",
     "es6"
-  ],
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "author": "Formo",
-  "license": ""
+  ]
 }
